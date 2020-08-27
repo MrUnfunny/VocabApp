@@ -1,0 +1,48 @@
+name: my_vocab
+description: A new Flutter application.
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+
+  flutter_svg: any
+  cupertino_icons: ^0.1.3
+  font_awesome_flutter: ^8.8.1
+
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+  assets:
+    - Assets/Vectors/bookReading.svg
+    - Assets/Vectors/welcomeBack.svg
+    - Assets/Vectors/SignUp.svg
+    - Assets/Vectors/googleLogo.svg
+    - Assets/images/profile.jpg
+
+  fonts:
+    - family: Montserrat
+    
+      fonts:
+        - asset: Assets/Fonts/Montserrat-Regular.ttf
+          weight: 300
+        - asset: Assets/Fonts/Montserrat-Light.ttf
+          weight: 400
+        - asset: Assets/Fonts/Montserrat-Medium.ttf
+          weight: 500
+        - asset: Assets/Fonts/Montserrat-Bold.ttf
+          weight: 600
+        - asset: Assets/Fonts/Montserrat-Black.ttf
+          weight: 700
+        - asset: Assets/Fonts/Montserrat-ExtraBold.ttf
+          weight: 800
