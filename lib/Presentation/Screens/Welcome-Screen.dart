@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:my_vocab/Physical/AssetWidgets/Button.dart';
-import 'package:my_vocab/Physical/Screens/Sign-In-Screen.dart';
-import 'package:my_vocab/Physical/Screens/Sign-Up-Screen.dart';
-import 'package:my_vocab/Utilities/Constants.dart';
+import 'package:my_vocab/Presentation/AssetWidgets/Button.dart';
+import 'package:my_vocab/Presentation/Screens/Sign-In-Screen.dart';
+import 'package:my_vocab/Presentation/Screens/Sign-Up-Screen.dart';
+import 'package:my_vocab/Domain/Constants.dart';
 
 const SVGName = 'Assets/Vectors/bookReading.svg';
 
