@@ -8,13 +8,11 @@ import 'package:my_vocab/Presentation/Screens/HomeScreen.dart';
 import 'package:my_vocab/Presentation/Screens/Sign-In-Screen.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:my_vocab/Presentation/AssetWidgets/BottomBarTextField.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
+import 'package:my_vocab/services/auth/auth.dart';
 
 const SignUpSVG = 'Assets/Vectors/SignUp.svg';
 const googleLogo = 'Assets/Vectors/googleLogo.svg';
-
-enum authProblems { UserNotFound, PasswordNotValid, NetworkError }
 
 class SignUpScreen extends StatefulWidget {
   static String id = "SignUp_Screen";
@@ -24,8 +22,6 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
-  final _auth = FirebaseAuth.instance;
-
   String email, password;
   bool loading = false;
 
@@ -110,41 +106,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       setState(() {
                         loading = true;
                       });
-                      try {
-                        final user = await _auth.createUserWithEmailAndPassword(
-                            email: email, password: password);
-                        if (user != null) {
-                          Navigator.pushReplacementNamed(context, HomePage.id);
-                          setState(() {
-                            loading = false;
-                          });
-                        }
-                      } catch (e) {
-                        setState(() {
-                          loading = false;
-                        });
-                        authProblems errorType;
-                        if (Platform.isAndroid) {
-                          switch (e.message) {
-                            case 'There is no user record corresponding to this identifier. The user may have been deleted.':
-                              errorType = authProblems.UserNotFound;
-                              break;
-                            case 'The password is invalid or the user does not have a password.':
-                              errorType = authProblems.PasswordNotValid;
-                              break;
-                            case 'A network error (such as timeout, interrupted connection or unreachable host) has occurred.':
-                              errorType = authProblems.NetworkError;
-                              break;
-                            // ...
-                            default:
-                              print('Case ${e.message} is not yet implemented');
-                          }
-                          AlertDialog(
-                            title: Text("ERROR"),
-                            content: Text("$errorType"),
-                          );
-                        }
-                      }
+                      await Auth().signUp(
+                          email: email, password: password, context: context);
+                      setState(() {
+                        loading = false;
+                      });
                     }),
               ),
               SizedBox(

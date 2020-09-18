@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:my_vocab/Presentation/AssetWidgets/BottomBarTextField.dart';
@@ -7,6 +8,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:my_vocab/Domain/Constants.dart';
 import 'package:my_vocab/Presentation/Screens/HomeScreen.dart';
 import 'package:my_vocab/Presentation/Screens/Sign-Up-Screen.dart';
+import 'package:my_vocab/services/auth/auth.dart';
 
 const SVGName = 'Assets/Vectors/welcomeBack.svg';
 const googleLogo = 'Assets/Vectors/googleLogo.svg';
@@ -110,31 +112,11 @@ class _SignInScreenState extends State<SignInScreen> {
                     setState(() {
                       loading = true;
                     });
-
-                    try {
-                      final user = await _auth.signInWithEmailAndPassword(
-                          email: email, password: password);
-                      if (user != null) {
-                        Navigator.pushReplacementNamed(context, HomePage.id);
-                        setState(() {
-                          loading = false;
-                        });
-                      }
-                    } catch (e) {
-                      setState(() {
-                        loading = false;
-                      });
-                      AlertDialog(
-                        title: Text("Error"),
-                        content: Text("Error $e has occurred!"),
-                        actions: [
-                          RaisedButton(
-                            onPressed: () => Navigator.pop(context),
-                            child: Text("Okay"),
-                          ),
-                        ],
-                      );
-                    }
+                    await Auth().signIn(
+                        email: email, password: password, context: context);
+                    setState(() {
+                      loading = false;
+                    });
                   },
                 ),
               ),
