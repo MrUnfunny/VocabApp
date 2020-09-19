@@ -34,18 +34,8 @@ class Auth {
   }
 
   _showDialog({@required error, @required BuildContext context}) {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text("Error"),
-        content: Text(error.message),
-        actions: [
-          FlatButton(
-            onPressed: () => Navigator.pop(context),
-            child: Text('Ok'),
-          )
-        ],
-      ),
-    );
+    final SnackBar snackBar =
+        SnackBar(content: Text("ERROR: ${error.message}"));
+    Scaffold.of(context).showSnackBar(snackBar);
   }
 }

@@ -9,6 +9,8 @@ import 'package:my_vocab/Domain/Constants.dart';
 import 'package:my_vocab/Presentation/Screens/HomeScreen.dart';
 import 'package:my_vocab/Presentation/Screens/Sign-Up-Screen.dart';
 import 'package:my_vocab/services/auth/auth.dart';
+import 'package:my_vocab/services/validators/email.dart';
+import 'package:my_vocab/services/validators/password.dart';
 
 const SVGName = 'Assets/Vectors/welcomeBack.svg';
 const googleLogo = 'Assets/Vectors/googleLogo.svg';
@@ -29,135 +31,160 @@ class _SignInScreenState extends State<SignInScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ModalProgressHUD(
-        inAsyncCall: loading,
-        child: SafeArea(
-          child: ListView(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 20.0, right: 30.0),
-                child: GestureDetector(
-                  child: Text(
-                    "Sign Up",
-                    style: kSmallTextStyle,
-                    textAlign: TextAlign.end,
-                  ),
-                  onTap: () {
-                    Navigator.pushReplacementNamed(context, SignUpScreen.id);
-                  },
-                ),
-              ),
-              SizedBox(
-                height: 30.0,
-              ),
-              Center(
-                child: SvgPicture.asset(
-                  SVGName,
-                  width: 400.0,
-                ),
-              ),
-              BottomBarTextField(
-                text: "Enter your email",
-                icon: Icon(
-                  FontAwesomeIcons.envelope,
-                  color: Color(0xffff4f18),
-                ),
-                verMargin: 30.0,
-                horMargin: 30.0,
-                inputType: TextInputType.emailAddress,
-                isPassword: false,
-                onChanged: (value) => email = value,
-              ),
-              BottomBarTextField(
-                text: "Enter your password",
-                icon: Icon(
-                  FontAwesomeIcons.lock,
-                  color: Color(0xffff4f18),
-                ),
-                verMargin: 0.0,
-                horMargin: 30.0,
-                isPassword: true,
-                onChanged: (value) => password = value,
-              ),
-              SizedBox(
-                height: 10.0,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(right: 30.0, top: 10.0),
-                child: Text(
-                  "Forgot Password",
-                  textAlign: TextAlign.end,
-                  style: kSmallTextStyle.copyWith(
-                      color: Color(0xffff4f18), fontWeight: FontWeight.w500),
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.symmetric(vertical: 25.0, horizontal: 100.0),
-                child: FlatButton(
-                  padding: EdgeInsets.symmetric(vertical: 10.0),
-                  color: Color(0xffff4f18),
-                  child: Text(
-                    "Sign In",
-                    style: TextStyle(
-                      fontFamily: 'Montserrat',
-                      fontSize: 18.0,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.white,
+      body: Builder(
+        builder: (context) => ModalProgressHUD(
+          inAsyncCall: loading,
+          child: SafeArea(
+            child: ListView(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 20.0, right: 30.0),
+                  child: GestureDetector(
+                    child: Text(
+                      "Sign Up",
+                      style: kSmallTextStyle,
+                      textAlign: TextAlign.end,
                     ),
+                    onTap: () {
+                      Navigator.pushReplacementNamed(context, SignUpScreen.id);
+                    },
                   ),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(50.0),
+                ),
+                SizedBox(
+                  height: 30.0,
+                ),
+                Center(
+                  child: SvgPicture.asset(
+                    SVGName,
+                    width: 400.0,
                   ),
-                  onPressed: () async {
-                    setState(() {
-                      loading = true;
-                    });
-                    await Auth().signIn(
-                        email: email, password: password, context: context);
-                    setState(() {
-                      loading = false;
-                    });
+                ),
+                BottomBarTextField(
+                  text: "Enter your email",
+                  icon: Icon(
+                    FontAwesomeIcons.envelope,
+                    color: Color(0xffff4f18),
+                  ),
+                  verMargin: 30.0,
+                  horMargin: 30.0,
+                  inputType: TextInputType.emailAddress,
+                  isPassword: false,
+                  validator: (value) {
+                    if (value != null) return Email.validate(value);
+                    return true;
+                  },
+                  errorText: "Invalid Email",
+                  onChanged: (value) {
+                    email = value;
+                    if (mounted)
+                      setState(() {
+                        print(value);
+                      });
                   },
                 ),
-              ),
-              SizedBox(
-                height: 2.0,
-              ),
-              Text(
-                "Or Sign In via",
-                textAlign: TextAlign.center,
-                style: kSmallTextStyle,
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  vertical: 10.0,
+                BottomBarTextField(
+                  text: "Enter your password",
+                  icon: Icon(
+                    FontAwesomeIcons.lock,
+                    color: Color(0xffff4f18),
+                  ),
+                  verMargin: 0.0,
+                  horMargin: 30.0,
+                  isPassword: true,
+                  onChanged: (value) {
+                    password = value;
+                    if (mounted)
+                      setState(() {
+                        print(value);
+                      });
+                  },
                 ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    GestureDetector(
-                      child: Icon(
-                        FontAwesomeIcons.facebook,
-                        size: 40.0,
-                        color: Colors.blue.shade700,
+                SizedBox(
+                  height: 10.0,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(right: 30.0, top: 10.0),
+                  child: Text(
+                    "Forgot Password",
+                    textAlign: TextAlign.end,
+                    style: kSmallTextStyle.copyWith(
+                        color: Color(0xffff4f18), fontWeight: FontWeight.w500),
+                  ),
+                ),
+                Container(
+                  margin:
+                      EdgeInsets.symmetric(vertical: 25.0, horizontal: 100.0),
+                  child: FlatButton(
+                    padding: EdgeInsets.symmetric(vertical: 10.0),
+                    color: Color(0xffff4f18),
+                    child: Text(
+                      "Sign In",
+                      style: TextStyle(
+                        fontFamily: 'Montserrat',
+                        fontSize: 18.0,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.white,
                       ),
                     ),
-                    SizedBox(
-                      width: 10.0,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(50.0),
                     ),
-                    GestureDetector(
-                      child: Padding(
-                        padding: const EdgeInsets.only(top: 5.0),
-                        child: SvgPicture.asset(
-                          googleLogo,
-                          width: 37.0,
+                    onPressed: () async {
+                      setState(() {
+                        loading = true;
+                      });
+                      if (Email.validate(email) && Password.validate(password))
+                        await Auth().signIn(
+                            email: email, password: password, context: context);
+                      else
+                        Scaffold.of(context).showSnackBar(SnackBar(
+                            content:
+                                Text("Please enter valid Email and Password")));
+                      setState(() {
+                        loading = false;
+                      });
+                    },
+                  ),
+                ),
+                SizedBox(
+                  height: 2.0,
+                ),
+                Text(
+                  "Or Sign In via",
+                  textAlign: TextAlign.center,
+                  style: kSmallTextStyle,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 10.0,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      GestureDetector(
+                        child: Icon(
+                          FontAwesomeIcons.facebook,
+                          size: 40.0,
+                          color: Colors.blue.shade700,
                         ),
                       ),
-                    ),
-                  ],
+                      SizedBox(
+                        width: 10.0,
+                      ),
+                      GestureDetector(
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 5.0),
+                          child: SvgPicture.asset(
+                            googleLogo,
+                            width: 37.0,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

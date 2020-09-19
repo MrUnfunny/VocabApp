@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_vocab/services/validators/email.dart';
 
 class BottomBarTextField extends StatefulWidget {
   final String text;
@@ -8,6 +9,8 @@ class BottomBarTextField extends StatefulWidget {
   final TextInputType inputType;
   final bool isPassword;
   final Function onChanged;
+  final Function validator;
+  final String errorText;
 
   BottomBarTextField(
       {this.icon,
@@ -16,6 +19,8 @@ class BottomBarTextField extends StatefulWidget {
       this.inputType,
       this.isPassword = false,
       this.text,
+      this.validator,
+      this.errorText,
       @required this.onChanged});
 
   @override
@@ -26,15 +31,31 @@ class _BottomBarTextFieldState extends State<BottomBarTextField> {
   bool iconVisibility = false;
   bool visibleIcon = false;
 
+  TextEditingController controller = TextEditingController();
+
+  @override
+  void dispose() {
+    super.dispose();
+    controller.clear();
+    controller.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.symmetric(
           horizontal: widget.horMargin, vertical: widget.verMargin),
       child: TextFormField(
-        onChanged: this.widget.onChanged,
+        controller: controller,
+        onChanged: (value) {
+          this.widget.onChanged(value);
+        },
         decoration: InputDecoration(
           hintText: widget.text,
+          errorText:
+              (widget.validator != null && !widget.validator(controller?.text))
+                  ? widget.errorText
+                  : null,
           prefixIcon: this.widget.icon,
           suffix: (iconVisibility)
               ? (visibleIcon)
