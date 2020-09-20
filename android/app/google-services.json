@@ -15,6 +15,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "187241455481-d5bsdtfjhdk8qkg7hpi4t2029965vs6n.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "mohitsingh.my_vocab",
+            "certificate_hash": "3ac60f0d593f8293e2d3a304f4005c1640c9533e"
+          }
+        },
+        {
+          "client_id": "187241455481-df2bfe0namg21nnj9109c4d4p144cd29.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "mohitsingh.my_vocab",
+            "certificate_hash": "3adbf32e931f1ef7b30c00505831a920abc3b554"
+          }
+        },
+        {
           "client_id": "187241455481-fvd5ekrvsl0fjied72ej7848nsfjutm4.apps.googleusercontent.com",
           "client_type": 3
         }
