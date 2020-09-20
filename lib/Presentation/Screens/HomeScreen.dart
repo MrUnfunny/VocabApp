@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:my_vocab/Presentation/AssetWidgets/SearchBar.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:my_vocab/Presentation/AssetWidgets/CustomizedCard.dart';
+import 'package:my_vocab/services/auth/auth.dart';
 
 class HomePage extends StatelessWidget {
   static const id = 'Home_Page';
@@ -27,8 +28,7 @@ class HomePage extends StatelessWidget {
                   Container(
                     child: IconButton(
                         onPressed: () {
-                          _auth.signOut();
-                          Navigator.pop(context);
+                          Auth().signOut(context: context);
                         },
                         icon: Icon(
                           FontAwesomeIcons.list,

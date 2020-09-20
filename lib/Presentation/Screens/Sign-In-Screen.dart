@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -24,8 +23,6 @@ class SignInScreen extends StatefulWidget {
 
 class _SignInScreenState extends State<SignInScreen> {
   String email, password;
-
-  final _auth = FirebaseAuth.instance;
   bool loading = false;
 
   @override
@@ -147,42 +144,41 @@ class _SignInScreenState extends State<SignInScreen> {
                     },
                   ),
                 ),
-                SizedBox(
-                  height: 2.0,
-                ),
                 Text(
                   "Or Sign In via",
                   textAlign: TextAlign.center,
                   style: kSmallTextStyle,
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 10.0,
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      GestureDetector(
-                        child: Icon(
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    IconButton(
+                        icon: Icon(
                           FontAwesomeIcons.facebook,
                           size: 40.0,
                           color: Colors.blue.shade700,
                         ),
-                      ),
-                      SizedBox(
-                        width: 10.0,
-                      ),
-                      GestureDetector(
-                        child: Padding(
-                          padding: const EdgeInsets.only(top: 5.0),
-                          child: SvgPicture.asset(
-                            googleLogo,
-                            width: 37.0,
-                          ),
+                        onPressed: null),
+                    SizedBox(
+                      width: 10.0,
+                    ),
+                    GestureDetector(
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 10.0),
+                        child: SvgPicture.asset(
+                          googleLogo,
+                          width: 37.0,
                         ),
                       ),
-                    ],
-                  ),
+                      onTap: () async {
+                        final user =
+                            await Auth().signInWithGoogle(context: context);
+                        if (user != null) {
+                          Navigator.pushReplacementNamed(context, HomePage.id);
+                        }
+                      },
+                    ),
+                  ],
                 ),
               ],
             ),

@@ -1,10 +1,7 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:my_vocab/Domain/Constants.dart';
-import 'package:my_vocab/Presentation/Screens/HomeScreen.dart';
 import 'package:my_vocab/Presentation/Screens/Sign-In-Screen.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:my_vocab/Presentation/AssetWidgets/BottomBarTextField.dart';
@@ -143,43 +140,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           loading = false;
                         });
                       }),
-                ),
-                SizedBox(
-                  height: 2.0,
-                ),
-                Text(
-                  "Or Register via",
-                  textAlign: TextAlign.center,
-                  style: kSmallTextStyle,
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 10.0,
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      GestureDetector(
-                        child: Icon(
-                          FontAwesomeIcons.facebook,
-                          size: 40.0,
-                          color: Colors.blue.shade700,
-                        ),
-                      ),
-                      SizedBox(
-                        width: 10.0,
-                      ),
-                      GestureDetector(
-                        child: Padding(
-                          padding: const EdgeInsets.only(top: 5.0),
-                          child: SvgPicture.asset(
-                            googleLogo,
-                            width: 37.0,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
                 ),
               ],
             ),
