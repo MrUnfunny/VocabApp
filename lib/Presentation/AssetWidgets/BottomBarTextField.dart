@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:my_vocab/services/validators/email.dart';
 
 class BottomBarTextField extends StatefulWidget {
   final String text;

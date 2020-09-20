@@ -90,6 +90,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   ),
                   verMargin: 0.0,
                   horMargin: 30.0,
+                  inputType: TextInputType.visiblePassword,
                   isPassword: true,
                   onChanged: (value) {
                     password = value;

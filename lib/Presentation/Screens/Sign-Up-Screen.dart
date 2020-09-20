@@ -82,6 +82,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   },
                 ),
                 BottomBarTextField(
+                  inputType: TextInputType.visiblePassword,
                   text: "Enter your password",
                   icon: Icon(
                     FontAwesomeIcons.lock,
