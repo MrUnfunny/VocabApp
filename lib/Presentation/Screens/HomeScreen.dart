@@ -4,11 +4,29 @@ import 'package:flutter/material.dart';
 import 'package:my_vocab/Presentation/AssetWidgets/SearchBar.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:my_vocab/Presentation/AssetWidgets/CustomizedCard.dart';
+import 'package:my_vocab/Presentation/Screens/Welcome-Screen.dart';
 import 'package:my_vocab/services/auth/auth.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   static const id = 'Home_Page';
-  final _auth = FirebaseAuth.instance;
+
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  @override
+  @override
+  void initState() {
+    super.initState();
+    init();
+  }
+
+  init() {
+    // final _auth = FirebaseAuth.instance;
+    // final user = _auth.currentUser;
+    // if (user == null) Navigator.pushReplacementNamed(context, WelcomeScreen.id);
+  }
 
   @override
   Widget build(BuildContext context) {

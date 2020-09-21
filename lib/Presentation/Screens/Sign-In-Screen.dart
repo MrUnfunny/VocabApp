@@ -153,12 +153,19 @@ class _SignInScreenState extends State<SignInScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     IconButton(
-                        icon: Icon(
-                          FontAwesomeIcons.facebook,
-                          size: 40.0,
-                          color: Colors.blue.shade700,
-                        ),
-                        onPressed: null),
+                      icon: Icon(
+                        FontAwesomeIcons.facebook,
+                        size: 40.0,
+                        color: Colors.blue.shade700,
+                      ),
+                      onPressed: () async {
+                        final user =
+                            await Auth().signInWithFacebook(context: context);
+                        if (user != null)
+                          Navigator.pushReplacementNamed(context, HomePage.id);
+                        print("Exception occurred: User is null");
+                      },
+                    ),
                     SizedBox(
                       width: 10.0,
                     ),

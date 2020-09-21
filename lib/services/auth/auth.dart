@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_login_facebook/flutter_login_facebook.dart';
 import 'package:my_vocab/Presentation/Screens/HomeScreen.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
@@ -38,9 +39,10 @@ class Auth {
     try {
       final GoogleSignIn googleSignIn = GoogleSignIn();
       final GoogleSignInAccount account = await googleSignIn.signIn();
-      final GoogleSignInAuthentication auth = await account.authentication;
+      final GoogleSignInAuthentication googleAuth =
+          await account.authentication;
       final OAuthCredential creds = GoogleAuthProvider.credential(
-          accessToken: auth.accessToken, idToken: auth.idToken);
+          accessToken: googleAuth.accessToken, idToken: googleAuth.idToken);
       final UserCredential user = await _auth.signInWithCredential(creds);
       return user.user;
     } catch (e) {
@@ -50,16 +52,54 @@ class Auth {
     }
   }
 
+  signInWithFacebook({@required BuildContext context}) async {
+    try {
+      final fb = FacebookLogin();
+
+      final res = await fb.logIn(permissions: [
+        FacebookPermission.publicProfile,
+        FacebookPermission.email,
+      ]);
+
+      switch (res.status) {
+        case FacebookLoginStatus.Success:
+          final FacebookAccessToken accessToken = res.accessToken;
+          final OAuthCredential credentials =
+              FacebookAuthProvider.credential(accessToken.token);
+          final UserCredential user =
+              await _auth.signInWithCredential(credentials);
+          return user;
+
+          break;
+        case FacebookLoginStatus.Cancel:
+          print("Exception @facebookLogin ${res.status}");
+          break;
+        case FacebookLoginStatus.Error:
+          _showDialog(
+              context: context, error: "Failed to Sign In via Facebook");
+          print("Exception @facebookLogin ${res.status}");
+          break;
+      }
+    } catch (e) {
+      _showDialog(error: e, context: context);
+      return null;
+    }
+  }
+
   signOut({BuildContext context}) async {
-    await GoogleSignIn().signOut();
-    _auth.signOut();
-    Navigator.pop(context);
+    try {
+      await GoogleSignIn().signOut();
+      _auth.signOut();
+      Navigator.pop(context);
+    } catch (e) {
+      print('Exception @signout: $e');
+    }
   }
 
   _showDialog({@required error, @required BuildContext context}) {
-    final errorMessage =
-        (error.message != null) ? error.message : "UnIdentified Error";
-    final SnackBar snackBar = SnackBar(content: Text("ERROR: $errorMessage"));
+    if (error.runtimeType != String)
+      error = (error?.message != null) ? error?.message : "UnIdentified Error";
+    final SnackBar snackBar = SnackBar(content: Text("ERROR: $error"));
     Scaffold.of(context).showSnackBar(snackBar);
   }
 }
