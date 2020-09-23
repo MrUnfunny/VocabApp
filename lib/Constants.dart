@@ -13,3 +13,5 @@ const kLargeTextStyle = TextStyle(
   fontSize: 20.0,
   color: Color(0xffff4f18),
 );
+
+const kBackgroundColor = Color(0xffbbd5d5);

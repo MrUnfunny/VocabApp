@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:my_vocab/Domain/Constants.dart';
+import 'package:my_vocab/Constants.dart';
 import 'package:my_vocab/Presentation/Screens/Sign-In-Screen.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:my_vocab/Presentation/AssetWidgets/BottomBarTextField.dart';

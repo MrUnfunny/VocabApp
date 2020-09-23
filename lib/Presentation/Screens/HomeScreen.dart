@@ -1,11 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:my_vocab/Presentation/AssetWidgets/SearchBar.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:my_vocab/Presentation/AssetWidgets/CustomizedCard.dart';
+import 'package:my_vocab/Presentation/AssetWidgets/SearchBar.dart';
 import 'package:my_vocab/Presentation/Screens/Welcome-Screen.dart';
-import 'package:my_vocab/services/auth/auth.dart';
 
 class HomePage extends StatefulWidget {
   static const id = 'Home_Page';
@@ -23,59 +21,48 @@ class _HomePageState extends State<HomePage> {
   }
 
   init() {
-    // final _auth = FirebaseAuth.instance;
-    // final user = _auth.currentUser;
-    // if (user == null) Navigator.pushReplacementNamed(context, WelcomeScreen.id);
+    final _auth = FirebaseAuth.instance;
+    final user = _auth.currentUser;
+    if (user == null) Navigator.pushReplacementNamed(context, WelcomeScreen.id);
   }
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-        primaryColor: Color(0xff333839),
+    return Scaffold(
+      drawer: Drawer(
+        elevation: 20.0,
       ),
-      home: Scaffold(
-        drawer: Drawer(
-          elevation: 20.0,
-        ),
-        body: SafeArea(
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: Column(
             children: [
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Container(
-                    child: IconButton(
-                        onPressed: () {
-                          Auth().signOut(context: context);
-                        },
-                        icon: Icon(
-                          FontAwesomeIcons.list,
-                        )),
-                    padding: EdgeInsets.only(left: 10.0),
-                  ),
                   Container(
                     margin:
                         EdgeInsets.symmetric(horizontal: 10.0, vertical: 30.0),
                     child: Text(
-                      "Hey There!",
+                      "Vocabulary",
                       style: TextStyle(
-                          fontFamily: 'Montserrat',
-                          fontWeight: FontWeight.w700,
-                          fontSize: 30.0,
-                          color: Color(0xff272d2f)),
+                        fontFamily: 'Montserrat',
+                        fontWeight: FontWeight.w700,
+                        fontSize: 30.0,
+                      ),
                     ),
                   ),
                   Container(
-                    padding: EdgeInsets.only(left: 120),
+                    padding: EdgeInsets.only(right: 16.0),
                     child: CircleAvatar(
                       radius: 20.0,
-                      backgroundColor: Colors.black12,
+                      backgroundColor: Theme.of(context).accentColor,
                     ),
                   )
                 ],
               ),
               SearchBar(),
-              CustomCard()
+              CustomCard(),
             ],
           ),
         ),
