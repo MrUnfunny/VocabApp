@@ -97,7 +97,9 @@ class Auth {
   }
 
   _showDialog({@required error, @required BuildContext context}) {
-    if (error.runtimeType != String)
+    if (error.runtimeType == NoSuchMethodError)
+      error = "UnIdentified Error!";
+    else if (error.runtimeType != String)
       error = (error?.message != null) ? error?.message : "UnIdentified Error";
     final SnackBar snackBar = SnackBar(content: Text("ERROR: $error"));
     Scaffold.of(context).showSnackBar(snackBar);

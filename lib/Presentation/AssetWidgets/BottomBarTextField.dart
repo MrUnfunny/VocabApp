@@ -66,7 +66,7 @@ class _BottomBarTextFieldState extends State<BottomBarTextField> {
                       },
                       child: Icon(
                         Icons.visibility,
-                        color: Color(0xffff4f18),
+                        color: Theme.of(context).primaryColor,
                       ),
                     )
                   : GestureDetector(
@@ -77,7 +77,7 @@ class _BottomBarTextFieldState extends State<BottomBarTextField> {
                       },
                       child: Icon(
                         Icons.visibility_off,
-                        color: Color(0xffff4f18),
+                        color: Theme.of(context).primaryColor,
                       ),
                     )
               : null,

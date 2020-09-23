@@ -60,7 +60,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   text: "Enter your email",
                   icon: Icon(
                     FontAwesomeIcons.envelope,
-                    color: Color(0xffff4f18),
+                    color: Theme.of(context).primaryColor,
                   ),
                   verMargin: 30.0,
                   horMargin: 30.0,
@@ -83,7 +83,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   text: "Enter your password",
                   icon: Icon(
                     FontAwesomeIcons.lock,
-                    color: Color(0xffff4f18),
+                    color: Theme.of(context).primaryColor,
                   ),
                   verMargin: 0.0,
                   horMargin: 30.0,
@@ -106,7 +106,8 @@ class _SignInScreenState extends State<SignInScreen> {
                     "Forgot Password",
                     textAlign: TextAlign.end,
                     style: kSmallTextStyle.copyWith(
-                        color: Color(0xffff4f18), fontWeight: FontWeight.w500),
+                        color: Theme.of(context).primaryColor,
+                        fontWeight: FontWeight.w500),
                   ),
                 ),
                 Container(
@@ -114,7 +115,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       EdgeInsets.symmetric(vertical: 25.0, horizontal: 100.0),
                   child: FlatButton(
                     padding: EdgeInsets.symmetric(vertical: 10.0),
-                    color: Color(0xffff4f18),
+                    color: Theme.of(context).primaryColor,
                     child: Text(
                       "Sign In",
                       style: TextStyle(
