@@ -14,6 +14,7 @@ class WelcomeScreen extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: ListView(
+          padding: EdgeInsets.symmetric(horizontal: 8.0),
           children: <Widget>[
             SizedBox(
               height: 100.0,

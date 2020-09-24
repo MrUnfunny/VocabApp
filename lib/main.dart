@@ -1,14 +1,18 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:my_vocab/Presentation/Screens/HomeScreen.dart';
 import 'package:my_vocab/Presentation/Screens/Sign-In-Screen.dart';
 import 'package:my_vocab/Presentation/Screens/Sign-Up-Screen.dart';
 import 'package:my_vocab/Presentation/Screens/Welcome-Screen.dart';
 
+bool isLoggedIn = false;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  await DotEnv().load('.env');
 
   await precachePicture(
       ExactAssetPicture(
@@ -36,7 +40,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData.light().copyWith(
         primaryColor: Color(0xffff4f18),
       ),
-      initialRoute: WelcomeScreen.id,
+      initialRoute: (FirebaseAuth.instance.currentUser != null)
+          ? HomePage.id
+          : WelcomeScreen.id,
       routes: {
         SignInScreen.id: (context) => SignInScreen(),
         WelcomeScreen.id: (context) => WelcomeScreen(),

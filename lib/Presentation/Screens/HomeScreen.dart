@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:my_vocab/Presentation/AssetWidgets/CustomizedCard.dart';
 import 'package:my_vocab/Presentation/AssetWidgets/SearchBar.dart';
 import 'package:my_vocab/Presentation/Screens/Welcome-Screen.dart';
+import 'package:my_vocab/services/auth/auth.dart';
 
 class HomePage extends StatefulWidget {
   static const id = 'Home_Page';
@@ -52,11 +53,17 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                   ),
-                  Container(
-                    padding: EdgeInsets.only(right: 16.0),
-                    child: CircleAvatar(
-                      radius: 20.0,
-                      backgroundColor: Theme.of(context).accentColor,
+                  GestureDetector(
+                    onTap: () {
+                      print("Signed Out");
+                      Auth().signOut(context: context);
+                    },
+                    child: Container(
+                      padding: EdgeInsets.only(right: 16.0),
+                      child: CircleAvatar(
+                        radius: 20.0,
+                        backgroundColor: Theme.of(context).accentColor,
+                      ),
                     ),
                   )
                 ],

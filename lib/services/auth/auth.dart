@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_login_facebook/flutter_login_facebook.dart';
 import 'package:my_vocab/Presentation/Screens/HomeScreen.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:my_vocab/Presentation/Screens/Welcome-Screen.dart';
 
 class Auth {
   final _auth = FirebaseAuth.instance;
@@ -86,11 +87,11 @@ class Auth {
     }
   }
 
-  signOut({BuildContext context}) async {
+  signOut({@required BuildContext context}) async {
     try {
-      await GoogleSignIn().signOut();
+      GoogleSignIn().signOut();
       _auth.signOut();
-      Navigator.pop(context);
+      Navigator.pushReplacementNamed(context, WelcomeScreen.id);
     } catch (e) {
       print('Exception @signout: $e');
     }
