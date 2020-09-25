@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 
-class _Api {
+class _OwlBotApi {
   Future<http.Response> get({@required word}) {
     final url = _getUrl(word);
     return http.get(url, headers: _getHeaders());
@@ -21,4 +21,4 @@ class _Api {
   }
 }
 
-final api = _Api();
+final owlbotApi = _OwlBotApi();

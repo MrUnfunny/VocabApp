@@ -19,6 +19,7 @@ dependencies:
   google_sign_in: ^4.5.3
   flutter_login_facebook: ^0.2.1
   flutter_dotenv: ^2.1.0
+  equatable: ^1.2.5
 
 dev_dependencies:
   flutter_test:

@@ -1,12 +1,13 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:my_vocab/services/api/api.dart';
+import 'package:my_vocab/services/Models/dictionary.dart';
+import 'package:my_vocab/services/api/owlBotApi.dart';
 
-class Dictionary {
+class Meaning {
   getMeaning({@required word}) async {
-    final meaningResponse = await api.get(word: word);
-    final meaningJson = jsonDecode(meaningResponse.body);
-    print(meaningJson);
+    final meaningResponse = await owlbotApi.get(word: word);
+    final meaning = Dictionary.fromJson(jsonDecode(meaningResponse.body));
+    print(meaning);
   }
 }
