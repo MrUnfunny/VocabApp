@@ -9,8 +9,8 @@ class SearchBar extends StatelessWidget {
       onTap: () => myShowSearch(context),
       child: Container(
         decoration: BoxDecoration(
-          color: kBackgroundColor.withOpacity(0.2),
           borderRadius: BorderRadius.circular(10.0),
+          border: Border.all(width: 0.5, color: Colors.black12),
         ),
         child: Row(
           children: [
@@ -41,11 +41,10 @@ class Search extends SearchDelegate {
     return super.appBarTheme(context).copyWith(
         primaryColor: Theme.of(context).primaryColor,
         textTheme: super.appBarTheme(context).textTheme.copyWith(
-            headline6: super
-                .appBarTheme(context)
-                .textTheme
-                .headline6
-                .copyWith(fontWeight: FontWeight.normal, color: Colors.white)));
+            headline6: super.appBarTheme(context).textTheme.headline6.copyWith(
+                  fontWeight: FontWeight.normal,
+                  color: Colors.white,
+                )));
   }
 
   @override
@@ -76,7 +75,6 @@ class Search extends SearchDelegate {
 
   @override
   Widget buildLeading(BuildContext context) {
-    // TODO: implement buildLeading
     return BackButton(color: Colors.white);
   }
 }

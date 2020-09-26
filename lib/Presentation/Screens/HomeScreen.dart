@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:my_vocab/Constants.dart';
 import 'package:my_vocab/Presentation/AssetWidgets/CustomizedCard.dart';
 import 'package:my_vocab/Presentation/AssetWidgets/SearchBar.dart';
 import 'package:my_vocab/Presentation/Screens/Welcome-Screen.dart';
@@ -30,13 +31,14 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey[100],
       drawer: Drawer(
         elevation: 20.0,
       ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: Column(
+          child: ListView(
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -49,7 +51,7 @@ class _HomePageState extends State<HomePage> {
                       style: TextStyle(
                         fontFamily: 'Montserrat',
                         fontWeight: FontWeight.w700,
-                        fontSize: 30.0,
+                        fontSize: 32.0,
                       ),
                     ),
                   ),
@@ -59,10 +61,14 @@ class _HomePageState extends State<HomePage> {
                       Auth().signOut(context: context);
                     },
                     child: Container(
-                      padding: EdgeInsets.only(right: 16.0),
                       child: CircleAvatar(
                         radius: 20.0,
-                        backgroundColor: Theme.of(context).accentColor,
+                        backgroundImage: (Auth().getProfilePhoto() == null)
+                            ? AssetImage('Assets/images/profile.png')
+                            : NetworkImage(Auth().getProfilePhoto()),
+                        backgroundColor: Colors.transparent,
+                        onBackgroundImageError: (exception, stackTrace) =>
+                            print("$exception \n $stackTrace"),
                       ),
                     ),
                   )

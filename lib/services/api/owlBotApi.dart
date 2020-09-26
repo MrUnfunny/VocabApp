@@ -6,7 +6,6 @@ class _OwlBotApi {
   Future<http.Response> get({@required word}) {
     final url = _getUrl(word);
     final headers = _getHeaders();
-    print("url is : $url, $word, headers is $headers");
 
     return http.get(url, headers: headers);
   }

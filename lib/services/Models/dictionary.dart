@@ -5,21 +5,21 @@ import 'package:my_vocab/services/Models/definition.dart';
 @immutable
 class Dictionary extends Equatable {
   final String word;
-  final String pronounciation;
+  final String pronunciation;
   final List<Definition> definitions;
 
   Dictionary({
     this.word,
-    this.pronounciation,
+    this.pronunciation,
     this.definitions,
   });
 
-  List<Object> get props => [word, pronounciation, definitions];
+  List<Object> get props => [word, pronunciation, definitions];
 
   factory Dictionary.fromJson(json) {
     return Dictionary(
       word: json['word'],
-      pronounciation: json['pronunciation'],
+      pronunciation: json['pronunciation'],
       definitions: List<Definition>.from(
         json['definitions'].map(
           (definition) => Definition.fromJson(definition),

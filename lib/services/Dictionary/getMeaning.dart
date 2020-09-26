@@ -12,5 +12,6 @@ class Meaning {
     for (var val in meaning.definitions) {
       print(val.props);
     }
+    return meaning;
   }
 }

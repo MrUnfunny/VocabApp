@@ -14,4 +14,10 @@ const kLargeTextStyle = TextStyle(
   color: Color(0xffff4f18),
 );
 
+const kCustomCardWordTextStyle = TextStyle(
+  color: Colors.white,
+  fontSize: 17.0,
+  fontFamily: "Montserrat",
+);
+
 const kBackgroundColor = Color(0xffbbd5d5);

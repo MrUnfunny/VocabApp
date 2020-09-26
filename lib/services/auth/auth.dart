@@ -97,6 +97,11 @@ class Auth {
     }
   }
 
+  String getProfilePhoto() {
+    final String imageUrl = FirebaseAuth.instance.currentUser.photoURL;
+    return imageUrl;
+  }
+
   _showDialog({@required error, @required BuildContext context}) {
     if (error.runtimeType == NoSuchMethodError)
       error = "UnIdentified Error!";

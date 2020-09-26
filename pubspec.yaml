@@ -33,7 +33,7 @@ flutter:
     - Assets/Vectors/welcomeBack.svg
     - Assets/Vectors/SignUp.svg
     - Assets/Vectors/googleLogo.svg
-    - Assets/images/profile.jpg
+    - Assets/images/profile.png
 
   fonts:
     - family: Montserrat
