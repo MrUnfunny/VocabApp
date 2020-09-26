@@ -19,7 +19,7 @@ class Dictionary extends Equatable {
   factory Dictionary.fromJson(json) {
     return Dictionary(
       word: json['word'],
-      pronounciation: json['pronounciation'],
+      pronounciation: json['pronunciation'],
       definitions: List<Definition>.from(
         json['definitions'].map(
           (definition) => Definition.fromJson(definition),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_vocab/Constants.dart';
+import 'package:my_vocab/services/Dictionary/getMeaning.dart';
 
 class SearchBar extends StatelessWidget {
   @override
@@ -36,15 +37,35 @@ myShowSearch(context) {
 
 class Search extends SearchDelegate {
   @override
+  ThemeData appBarTheme(BuildContext context) {
+    return super.appBarTheme(context).copyWith(
+        primaryColor: Theme.of(context).primaryColor,
+        textTheme: super.appBarTheme(context).textTheme.copyWith(
+            headline6: super
+                .appBarTheme(context)
+                .textTheme
+                .headline6
+                .copyWith(fontWeight: FontWeight.normal, color: Colors.white)));
+  }
+
+  @override
   List<Widget> buildActions(BuildContext context) {
-    // TODO: implement buildActions
-    FlatButton(onPressed: null, child: null);
+    return [
+      IconButton(
+        icon: Icon(
+          Icons.search,
+          color: Colors.white,
+        ),
+        onPressed: () => Meaning().getMeaning(word: query),
+      )
+    ];
   }
 
   @override
   Widget buildResults(BuildContext context) {
     // TODO: implement buildResults
-    return null;
+    final res = Meaning().getMeaning(word: query);
+    return Container();
   }
 
   @override
@@ -56,6 +77,6 @@ class Search extends SearchDelegate {
   @override
   Widget buildLeading(BuildContext context) {
     // TODO: implement buildLeading
-    return BackButton();
+    return BackButton(color: Colors.white);
   }
 }

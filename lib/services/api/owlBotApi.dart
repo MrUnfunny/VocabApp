@@ -5,18 +5,19 @@ import 'package:http/http.dart' as http;
 class _OwlBotApi {
   Future<http.Response> get({@required word}) {
     final url = _getUrl(word);
-    return http.get(url, headers: _getHeaders());
+    final headers = _getHeaders();
+    print("url is : $url, $word, headers is $headers");
+
+    return http.get(url, headers: headers);
   }
 
-  _getUrl(path) async {
-    String url = "${DotEnv().env['API_URL']}$path)}";
+  _getUrl(path) {
+    String url = "${DotEnv().env['API_URL']}$path";
     return Uri.parse(url);
   }
 
   _getHeaders() {
-    Map<String, dynamic> headers = {
-      "Authorization": "Token ${DotEnv().env['API_TOKEN']}"
-    };
+    final headers = {"Authorization": "Token ${DotEnv().env['API_TOKEN']}"};
     return headers;
   }
 }

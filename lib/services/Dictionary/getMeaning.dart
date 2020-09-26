@@ -8,6 +8,9 @@ class Meaning {
   getMeaning({@required word}) async {
     final meaningResponse = await owlbotApi.get(word: word);
     final meaning = Dictionary.fromJson(jsonDecode(meaningResponse.body));
-    print(meaning);
+    print(meaning.props);
+    for (var val in meaning.definitions) {
+      print(val.props);
+    }
   }
 }

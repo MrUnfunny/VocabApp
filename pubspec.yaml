@@ -28,6 +28,7 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
+    - .env
     - Assets/Vectors/bookReading.svg
     - Assets/Vectors/welcomeBack.svg
     - Assets/Vectors/SignUp.svg
