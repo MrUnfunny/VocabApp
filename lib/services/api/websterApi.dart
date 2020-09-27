@@ -10,9 +10,9 @@ class _WebsterApi {
     );
   }
 
-  _getUrl(path) async {
+  _getUrl(path) {
     String url =
-        "${DotEnv().env['THESAURUS_API_URL']}$path?key=${DotEnv().env['THESAURUS_API_KEY']})}";
+        "${DotEnv().env['THESAURUS_API_URL']}$path?key=${DotEnv().env['THESAURUS_API_KEY']}";
     return Uri.parse(url);
   }
 }

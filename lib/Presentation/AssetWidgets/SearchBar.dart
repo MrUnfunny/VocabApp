@@ -1,6 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:my_vocab/Constants.dart';
 import 'package:my_vocab/services/Dictionary/getMeaning.dart';
+import 'package:my_vocab/services/api/datamuseApi.dart';
+import 'package:http/http.dart';
 
 class SearchBar extends StatelessWidget {
   @override
@@ -69,12 +73,41 @@ class Search extends SearchDelegate {
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    // TODO: implement buildSuggestions
+    if (query != null)
+      return ListView.builder(
+        itemBuilder: (context, index) {
+          return ListTile(
+            title: FutureBuilder(
+              builder: (context, AsyncSnapshot<List<String>> snapshot) {
+                if (snapshot.hasData) return Text(snapshot.data[index]);
+                return Center(
+                  child: Container(),
+                );
+              },
+              future: searchListFuture(query),
+            ),
+          );
+        },
+        itemCount: 20,
+      );
     return Container();
   }
 
   @override
   Widget buildLeading(BuildContext context) {
     return BackButton(color: Colors.white);
+  }
+}
+
+Future<List<String>> searchListFuture(String query) async {
+  try {
+    final Response res = await datamuseApi.get(params: {"s": query, "max": 20});
+    final resJson = jsonDecode(res.body);
+    final List<String> resList =
+        List.from(resJson.map((value) => value['word']));
+    return resList;
+  } catch (e) {
+    print("@Error at datamuse api: $e");
+    return null;
   }
 }
