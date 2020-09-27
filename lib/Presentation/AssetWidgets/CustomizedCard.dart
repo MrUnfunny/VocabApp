@@ -63,12 +63,12 @@ class CustomCard extends StatelessWidget {
                         Text(
                           "Save to Favorites",
                           style: kCustomCardWordTextStyle.copyWith(
-                              fontWeight: FontWeight.w600),
+                              fontWeight: FontWeight.w600, fontSize: 14.0),
                         ),
                         Text(
                           "Expand Details",
                           style: kCustomCardWordTextStyle.copyWith(
-                              fontWeight: FontWeight.w600),
+                              fontWeight: FontWeight.w600, fontSize: 14.0),
                         ),
                       ],
                     )

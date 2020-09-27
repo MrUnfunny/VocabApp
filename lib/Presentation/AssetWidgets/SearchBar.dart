@@ -84,7 +84,7 @@ class Search extends SearchDelegate {
                   child: Container(),
                 );
               },
-              future: searchListFuture(query),
+              future: searchListFuture(query.trim()),
             ),
           );
         },
@@ -101,11 +101,15 @@ class Search extends SearchDelegate {
 
 Future<List<String>> searchListFuture(String query) async {
   try {
-    final Response res = await datamuseApi.get(params: {"s": query, "max": 20});
-    final resJson = jsonDecode(res.body);
-    final List<String> resList =
-        List.from(resJson.map((value) => value['word']));
-    return resList;
+    if (query != '' && query != null) {
+      final Response res =
+          await datamuseApi.get(params: {"s": query, "max": 20});
+      final resJson = jsonDecode(res.body);
+      final List<String> resList =
+          List.from(resJson.map((value) => value['word']));
+      return resList;
+    }
+    return null;
   } catch (e) {
     print("@Error at datamuse api: $e");
     return null;
