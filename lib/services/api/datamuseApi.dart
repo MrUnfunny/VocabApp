@@ -1,10 +1,9 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 
 class _DataMuseApi {
   Future<http.Response> get({word, Map<String, dynamic> params}) {
-    final url = _getUrl(path: 'sug', params: params);
+    final url = _getUrl(path: 'words', params: params);
     print("URL is: $url");
     return http.get(
       url,

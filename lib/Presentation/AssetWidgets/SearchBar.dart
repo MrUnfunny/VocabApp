@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:my_vocab/Constants.dart';
+import 'package:my_vocab/Presentation/Screens/WordDetailScreen.dart';
 import 'package:my_vocab/services/Dictionary/getMeaning.dart';
 import 'package:my_vocab/services/api/datamuseApi.dart';
 import 'package:http/http.dart';
@@ -59,7 +60,13 @@ class Search extends SearchDelegate {
           Icons.search,
           color: Colors.white,
         ),
-        onPressed: () => Meaning().getMeaning(word: query),
+        onPressed: () => Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+              builder: (context) => WordDetailScreen(
+                    word: query.trim(),
+                  )),
+        ),
       )
     ];
   }
@@ -77,9 +84,17 @@ class Search extends SearchDelegate {
       return ListView.builder(
         itemBuilder: (context, index) {
           return ListTile(
+            onTap: () => Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => WordDetailScreen(
+                        word: query.trim(),
+                      )),
+            ),
             title: FutureBuilder(
               builder: (context, AsyncSnapshot<List<String>> snapshot) {
-                if (snapshot.hasData) return Text(snapshot.data[index]);
+                if (snapshot.hasData && index < snapshot.data.length - 1)
+                  return Text(snapshot.data[index]);
                 return Center(
                   child: Container(),
                 );
@@ -103,7 +118,7 @@ Future<List<String>> searchListFuture(String query) async {
   try {
     if (query != '' && query != null) {
       final Response res =
-          await datamuseApi.get(params: {"s": query, "max": 20});
+          await datamuseApi.get(params: {"sp": "$query*", "max": 20});
       final resJson = jsonDecode(res.body);
       final List<String> resList =
           List.from(resJson.map((value) => value['word']));
