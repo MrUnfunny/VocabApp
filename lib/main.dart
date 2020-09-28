@@ -4,9 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:my_vocab/Presentation/Screens/HomeScreen.dart';
-import 'package:my_vocab/Presentation/Screens/Sign-In-Screen.dart';
-import 'package:my_vocab/Presentation/Screens/Sign-Up-Screen.dart';
+import 'package:my_vocab/Presentation/Screens/SignInScreen.dart';
+import 'package:my_vocab/Presentation/Screens/SignUpScreen.dart';
 import 'package:my_vocab/Presentation/Screens/Welcome-Screen.dart';
+import 'package:my_vocab/Presentation/Screens/WordDetailScreen.dart';
 
 bool isLoggedIn = false;
 void main() async {
@@ -48,6 +49,7 @@ class MyApp extends StatelessWidget {
         WelcomeScreen.id: (context) => WelcomeScreen(),
         SignUpScreen.id: (context) => SignUpScreen(),
         HomePage.id: (context) => HomePage(),
+        WordDetailScreen.id: (context) => WordDetailScreen(),
       },
     );
   }

@@ -20,6 +20,7 @@ dependencies:
   flutter_login_facebook: ^0.2.1
   flutter_dotenv: ^2.1.0
   equatable: ^1.2.5
+  provider: ^4.3.2+2
 
 dev_dependencies:
   flutter_test:
