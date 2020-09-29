@@ -83,18 +83,21 @@ class Search extends SearchDelegate {
     if (query != null)
       return ListView.builder(
         itemBuilder: (context, index) {
+          String queryWord;
           return ListTile(
             onTap: () => Navigator.pushReplacement(
               context,
               MaterialPageRoute(
                   builder: (context) => WordDetailScreen(
-                        word: query.trim(),
+                        word: queryWord.trim(),
                       )),
             ),
             title: FutureBuilder(
               builder: (context, AsyncSnapshot<List<String>> snapshot) {
-                if (snapshot.hasData && index < snapshot.data.length - 1)
+                if (snapshot.hasData && index < snapshot.data.length - 1) {
+                  queryWord = snapshot.data[index];
                   return Text(snapshot.data[index]);
+                }
                 return Center(
                   child: Container(),
                 );

@@ -6,6 +6,7 @@ import 'package:my_vocab/services/api/owlBotApi.dart';
 
 class Meaning {
   getMeaning({@required word}) async {
+    print("@getting meaning for $word");
     final meaningResponse = await owlbotApi.get(word: word);
     final meaning = Dictionary.fromJson(jsonDecode(meaningResponse.body));
     print(meaning.props);
