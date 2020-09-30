@@ -1,10 +1,10 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:my_vocab/Constants.dart';
-import 'package:my_vocab/Presentation/Screens/WordDetailScreen.dart';
-import 'package:my_vocab/services/Dictionary/getMeaning.dart';
-import 'package:my_vocab/services/api/datamuseApi.dart';
+import 'package:my_vocab/constants.dart';
+import 'package:my_vocab/Presentation/Screens/word_detail_screen.dart';
+import 'package:my_vocab/services/Dictionary/get_meaning.dart';
+import 'package:my_vocab/services/api/datamuse_api.dart';
 import 'package:http/http.dart';
 
 class SearchBar extends StatelessWidget {

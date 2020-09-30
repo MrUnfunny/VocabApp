@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:my_vocab/services/Models/definition.dart';
+import 'package:my_vocab/services/model/definition.dart';
 
 @immutable
 class Dictionary extends Equatable {

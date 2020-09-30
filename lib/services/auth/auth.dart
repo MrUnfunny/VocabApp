@@ -1,9 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_login_facebook/flutter_login_facebook.dart';
-import 'package:my_vocab/Presentation/Screens/HomeScreen.dart';
+import 'package:my_vocab/Presentation/Screens/home_screen.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:my_vocab/Presentation/Screens/Welcome-Screen.dart';
+import 'package:my_vocab/Presentation/Screens/welcome_screen.dart';
 
 class Auth {
   final _auth = FirebaseAuth.instance;

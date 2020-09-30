@@ -7,6 +7,12 @@ const kSmallTextStyle = TextStyle(
   color: Color(0xddF54A16),
 );
 
+const kAppBarStyle = TextStyle(
+  fontFamily: 'Montserrat',
+  fontWeight: FontWeight.w700,
+  fontSize: 32.0,
+);
+
 const kLargeTextStyle = TextStyle(
   fontFamily: "Montserrat",
   fontWeight: FontWeight.w600,

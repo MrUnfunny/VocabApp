@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
-import 'package:my_vocab/services/Models/dictionary.dart';
-import 'package:my_vocab/services/api/owlBotApi.dart';
+import 'package:my_vocab/services/model/dictionary.dart';
+import 'package:my_vocab/services/api/owl_bot_api.dart';
 
 class WordDetailProvider extends ChangeNotifier {
   bool loading = true;

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:my_vocab/Constants.dart';
-import 'package:my_vocab/services/Dictionary/getMeaning.dart';
+import 'package:my_vocab/constants.dart';
+import 'package:my_vocab/services/Dictionary/get_meaning.dart';
+import 'package:my_vocab/services/Dictionary/get_word_of_the_day.dart';
 
 class CustomCard extends StatelessWidget {
   @override
@@ -43,7 +44,7 @@ class CustomCard extends StatelessWidget {
                       height: 20,
                     ),
                     Text(
-                      "${snapshot.data.word.toUpperCase()}",
+                      "${snapshot.data['word'].toUpperCase()}",
                       style: kCustomCardWordTextStyle.copyWith(
                           fontWeight: FontWeight.w600, fontSize: 18.0),
                     ),
@@ -51,7 +52,7 @@ class CustomCard extends StatelessWidget {
                       height: 10,
                     ),
                     Text(
-                      snapshot.data.definitions[1].definition,
+                      snapshot.data['meaning'],
                       style: kCustomCardWordTextStyle.copyWith(fontSize: 16.0),
                     ),
                     SizedBox(
@@ -85,6 +86,7 @@ class CustomCard extends StatelessWidget {
 }
 
 getMeaningOfWordFuture() async {
-  final res = await Meaning().getMeaning(word: 'Abstract');
+  // final res = await Meaning().getMeaning(word: 'Abstract');
+  final res = await WordOfTheDay().getMeaning();
   return res;
 }
