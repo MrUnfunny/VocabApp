@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
-import 'package:my_vocab/constants.dart';
+import 'package:my_vocab/Presentation/AssetWidgets/detail_screen_app_bar.dart';
 import 'package:my_vocab/services/Dictionary/get_meaning.dart';
 import 'package:my_vocab/services/model/dictionary.dart';
 
@@ -13,9 +13,11 @@ class WordDetailScreen extends StatefulWidget {
   _WordDetailScreenState createState() => _WordDetailScreenState();
 }
 
-class _WordDetailScreenState extends State<WordDetailScreen> {
+class _WordDetailScreenState extends State<WordDetailScreen>
+    with TickerProviderStateMixin {
   Dictionary wordDetail;
   bool loading = false;
+  TabController _tabController;
 
   @override
   void setState(fn) {
@@ -24,8 +26,15 @@ class _WordDetailScreenState extends State<WordDetailScreen> {
 
   @override
   void initState() {
+    _tabController = TabController(length: 3, vsync: this);
     super.initState();
     // init();
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
   }
 
   init() async {
@@ -42,293 +51,80 @@ class _WordDetailScreenState extends State<WordDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final sliverList = <Widget>[
-      SliverToBoxAdapter(
-        child: Container(
-          height: 200,
-          color: Theme.of(context).primaryColor,
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
+    return ModalProgressHUD(
+      inAsyncCall: loading,
+      child: Scaffold(
+        backgroundColor: Theme.of(context).primaryColor,
+        body: Padding(
+          padding: const EdgeInsets.only(top: 16.0),
+          child: SafeArea(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Stack(
-                  children: [
-                    Align(
-                        alignment: Alignment.bottomLeft,
-                        child: BackButton(color: Colors.white)),
-                    Align(
-                      alignment: Alignment.topRight,
-                      child: Text(
-                        "Abstract",
-                        style: kAppBarStyle,
+                DetailScreenAppBar(),
+                Expanded(
+                  child: Container(
+                    child: Column(
+                      children: [
+                        TabBar(
+                          labelColor: Theme.of(context).primaryColor,
+                          unselectedLabelColor: Colors.grey,
+                          indicatorColor: Color(0xddF54A16),
+                          indicatorWeight: 2.0,
+                          controller: _tabController,
+                          tabs: [
+                            Tab(
+                              text: "MEANING",
+                            ),
+                            Tab(
+                              text: "EXAMPLE",
+                            ),
+                            Tab(
+                              text: "TRANSLATION",
+                            ),
+                          ],
+                        ),
+                        Expanded(
+                          child: Container(
+                            child: TabBarView(
+                                controller: _tabController,
+                                children: [
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(8.0),
+                                    ),
+                                  ),
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(8.0),
+                                      color: Colors.blueGrey,
+                                    ),
+                                  ),
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(8.0),
+                                      color: Colors.greenAccent,
+                                    ),
+                                  ),
+                                ]),
+                          ),
+                        ),
+                      ],
+                    ),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(30),
+                        topRight: Radius.circular(30),
                       ),
                     ),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                        decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: Border.all(color: Colors.white)),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Icon(Icons.bookmark_border),
-                        )),
-                    Icon(Icons.volume_up),
-                    Icon(Icons.content_copy)
-                  ],
-                ),
+                    margin: EdgeInsets.only(top: 32),
+                  ),
+                )
               ],
             ),
           ),
         ),
-      ),
-      SliverToBoxAdapter(
-        child: Padding(
-          padding: const EdgeInsets.all(28.0),
-          child: Center(child: Text('i')),
-        ),
-      ),
-      SliverToBoxAdapter(
-        child: Padding(
-          padding: const EdgeInsets.all(28.0),
-          child: Center(child: Text('i')),
-        ),
-      ),
-      SliverToBoxAdapter(
-        child: Padding(
-          padding: const EdgeInsets.all(28.0),
-          child: Center(child: Text('i')),
-        ),
-      ),
-      SliverToBoxAdapter(
-        child: Padding(
-          padding: const EdgeInsets.all(28.0),
-          child: Center(child: Text('i')),
-        ),
-      ),
-      SliverToBoxAdapter(
-        child: Padding(
-          padding: const EdgeInsets.all(28.0),
-          child: Center(child: Text('i')),
-        ),
-      ),
-      SliverToBoxAdapter(
-        child: Padding(
-          padding: const EdgeInsets.all(28.0),
-          child: Center(child: Text('i')),
-        ),
-      ),
-      SliverToBoxAdapter(
-        child: Padding(
-          padding: const EdgeInsets.all(28.0),
-          child: Center(child: Text('i')),
-        ),
-      ),
-      SliverToBoxAdapter(
-        child: Padding(
-          padding: const EdgeInsets.all(28.0),
-          child: Center(child: Text('i')),
-        ),
-      ),
-      SliverToBoxAdapter(
-        child: Padding(
-          padding: const EdgeInsets.all(28.0),
-          child: Center(child: Text('i')),
-        ),
-      ),
-      SliverToBoxAdapter(
-        child: Padding(
-          padding: const EdgeInsets.all(28.0),
-          child: Center(child: Text('i')),
-        ),
-      ),
-      SliverToBoxAdapter(
-        child: Padding(
-          padding: const EdgeInsets.all(28.0),
-          child: Center(child: Text('i')),
-        ),
-      ),
-      SliverToBoxAdapter(
-        child: Padding(
-          padding: const EdgeInsets.all(28.0),
-          child: Center(child: Text('i')),
-        ),
-      ),
-      SliverToBoxAdapter(
-        child: Padding(
-          padding: const EdgeInsets.all(28.0),
-          child: Center(child: Text('i')),
-        ),
-      ),
-      SliverToBoxAdapter(
-        child: Padding(
-          padding: const EdgeInsets.all(28.0),
-          child: Center(child: Text('i')),
-        ),
-      ),
-      SliverToBoxAdapter(
-        child: Padding(
-          padding: const EdgeInsets.all(28.0),
-          child: Center(child: Text('i')),
-        ),
-      ),
-      SliverToBoxAdapter(
-        child: Padding(
-          padding: const EdgeInsets.all(28.0),
-          child: Center(child: Text('i')),
-        ),
-      ),
-      SliverToBoxAdapter(
-        child: Padding(
-          padding: const EdgeInsets.all(28.0),
-          child: Center(child: Text('i')),
-        ),
-      ),
-      SliverToBoxAdapter(
-        child: Padding(
-          padding: const EdgeInsets.all(28.0),
-          child: Center(child: Text('i')),
-        ),
-      ),
-      SliverToBoxAdapter(
-        child: Padding(
-          padding: const EdgeInsets.all(28.0),
-          child: Center(child: Text('i')),
-        ),
-      ),
-      SliverToBoxAdapter(
-        child: Padding(
-          padding: const EdgeInsets.all(28.0),
-          child: Center(child: Text('i')),
-        ),
-      ),
-      SliverToBoxAdapter(
-        child: Padding(
-          padding: const EdgeInsets.all(28.0),
-          child: Center(child: Text('i')),
-        ),
-      ),
-      SliverToBoxAdapter(
-        child: Padding(
-          padding: const EdgeInsets.all(28.0),
-          child: Center(child: Text('i')),
-        ),
-      ),
-      SliverToBoxAdapter(
-        child: Padding(
-          padding: const EdgeInsets.all(28.0),
-          child: Center(child: Text('i')),
-        ),
-      ),
-      SliverToBoxAdapter(
-        child: Padding(
-          padding: const EdgeInsets.all(28.0),
-          child: Center(child: Text('i')),
-        ),
-      ),
-      SliverToBoxAdapter(
-        child: Padding(
-          padding: const EdgeInsets.all(28.0),
-          child: Center(child: Text('i')),
-        ),
-      ),
-      SliverToBoxAdapter(
-        child: Padding(
-          padding: const EdgeInsets.all(28.0),
-          child: Center(child: Text('i')),
-        ),
-      ),
-      SliverToBoxAdapter(
-        child: Padding(
-          padding: const EdgeInsets.all(28.0),
-          child: Center(child: Text('i')),
-        ),
-      ),
-      SliverToBoxAdapter(
-        child: Padding(
-          padding: const EdgeInsets.all(28.0),
-          child: Center(child: Text('i')),
-        ),
-      ),
-      SliverToBoxAdapter(
-        child: Padding(
-          padding: const EdgeInsets.all(28.0),
-          child: Center(child: Text('i')),
-        ),
-      ),
-      SliverToBoxAdapter(
-        child: Padding(
-          padding: const EdgeInsets.all(28.0),
-          child: Center(child: Text('i')),
-        ),
-      ),
-      SliverToBoxAdapter(
-        child: Padding(
-          padding: const EdgeInsets.all(28.0),
-          child: Center(child: Text('i')),
-        ),
-      ),
-      SliverToBoxAdapter(
-        child: Padding(
-          padding: const EdgeInsets.all(28.0),
-          child: Center(child: Text('i')),
-        ),
-      ),
-      SliverToBoxAdapter(
-        child: Padding(
-          padding: const EdgeInsets.all(28.0),
-          child: Center(child: Text('i')),
-        ),
-      ),
-      SliverToBoxAdapter(
-        child: Padding(
-          padding: const EdgeInsets.all(28.0),
-          child: Center(child: Text('i')),
-        ),
-      ),
-      SliverToBoxAdapter(
-        child: Padding(
-          padding: const EdgeInsets.all(28.0),
-          child: Center(child: Text('i')),
-        ),
-      ),
-      SliverToBoxAdapter(
-        child: Padding(
-          padding: const EdgeInsets.all(28.0),
-          child: Center(child: Text('i')),
-        ),
-      ),
-      SliverToBoxAdapter(
-        child: Padding(
-          padding: const EdgeInsets.all(28.0),
-          child: Center(child: Text('i')),
-        ),
-      ),
-      SliverToBoxAdapter(
-        child: Padding(
-          padding: const EdgeInsets.all(28.0),
-          child: Center(child: Text('i')),
-        ),
-      ),
-      SliverToBoxAdapter(
-        child: Padding(
-          padding: const EdgeInsets.all(28.0),
-          child: Center(child: Text('i')),
-        ),
-      ),
-    ];
-
-    return ModalProgressHUD(
-      inAsyncCall: loading,
-      child: Scaffold(
-        body: SafeArea(
-            child: CustomScrollView(
-          slivers: sliverList,
-        )),
       ),
     );
   }

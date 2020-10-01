@@ -64,7 +64,7 @@ class Search extends SearchDelegate {
           context,
           MaterialPageRoute(
               builder: (context) => WordDetailScreen(
-                    word: query.trim(),
+                    word: query?.trim(),
                   )),
         ),
       )
@@ -89,7 +89,7 @@ class Search extends SearchDelegate {
               context,
               MaterialPageRoute(
                   builder: (context) => WordDetailScreen(
-                        word: queryWord.trim(),
+                        word: queryWord?.trim(),
                       )),
             ),
             title: FutureBuilder(
@@ -102,7 +102,7 @@ class Search extends SearchDelegate {
                   child: Container(),
                 );
               },
-              future: searchListFuture(query.trim()),
+              future: searchListFuture(query?.trim()),
             ),
           );
         },

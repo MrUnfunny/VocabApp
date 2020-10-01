@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:my_vocab/Presentation/AssetWidgets/action_card.dart';
 import 'package:my_vocab/constants.dart';
-import 'package:my_vocab/services/Dictionary/get_meaning.dart';
 import 'package:my_vocab/services/Dictionary/get_word_of_the_day.dart';
 
 class CustomCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 10.0),
+      padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 16.0),
       margin: EdgeInsets.symmetric(vertical: 20.0),
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
@@ -61,15 +61,21 @@ class CustomCard extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
-                          "Save to Favorites",
-                          style: kCustomCardWordTextStyle.copyWith(
-                              fontWeight: FontWeight.w600, fontSize: 14.0),
+                        ActionCard(
+                          icon: Icons.border_inner,
+                          onPressed: null,
                         ),
-                        Text(
-                          "Expand Details",
-                          style: kCustomCardWordTextStyle.copyWith(
-                              fontWeight: FontWeight.w600, fontSize: 14.0),
+                        ActionCard(
+                          icon: Icons.content_copy,
+                          onPressed: null,
+                        ),
+                        ActionCard(
+                          icon: Icons.favorite_border,
+                          onPressed: null,
+                        ),
+                        ActionCard(
+                          icon: Icons.bookmark_border,
+                          onPressed: null,
                         ),
                       ],
                     )
