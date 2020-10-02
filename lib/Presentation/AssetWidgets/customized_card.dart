@@ -92,7 +92,6 @@ class CustomCard extends StatelessWidget {
 }
 
 getMeaningOfWordFuture() async {
-  // final res = await Meaning().getMeaning(word: 'Abstract');
   final res = await WordOfTheDay().getMeaning();
   return res;
 }

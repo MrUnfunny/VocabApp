@@ -4,7 +4,10 @@ import '../../constants.dart';
 import 'action_card.dart';
 
 class DetailScreenAppBar extends StatelessWidget {
+  final String word;
+
   const DetailScreenAppBar({
+    this.word,
     Key key,
   }) : super(key: key);
 
@@ -22,7 +25,7 @@ class DetailScreenAppBar extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "Abstract",
+                    "${word[0].toUpperCase()}${word.substring(1)}",
                     style: kAppBarStyle.copyWith(
                         color: Colors.white, fontSize: 40),
                   ),
