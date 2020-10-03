@@ -22,6 +22,7 @@ dependencies:
   equatable: ^1.2.5
   provider: ^4.3.2+2
   intl: ^0.16.1
+  fluttertoast: ^7.1.1
 
 dev_dependencies:
   flutter_test:

@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_login_facebook/flutter_login_facebook.dart';
-import 'package:my_vocab/Presentation/Screens/home-screen/home_screen.dart';
+import 'package:my_vocab/Presentation/Screens/home-screen/screen.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:my_vocab/Presentation/Screens/welcome_screen.dart';
 
