@@ -27,3 +27,9 @@ const kCustomCardWordTextStyle = TextStyle(
 );
 
 const kBackgroundColor = Color(0xffbbd5d5);
+
+const kMeaningTextStyle = TextStyle(
+    fontFamily: 'Montserrat',
+    fontWeight: FontWeight.w500,
+    fontSize: 16,
+    color: Colors.black);

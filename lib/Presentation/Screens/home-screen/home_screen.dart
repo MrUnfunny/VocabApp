@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:my_vocab/Presentation/AssetWidgets/customized_card.dart';
+import 'package:my_vocab/Presentation/Screens/home-screen/customized_card.dart';
 import 'package:my_vocab/Presentation/AssetWidgets/search_bar.dart';
 import 'package:my_vocab/Presentation/AssetWidgets/custom_app_bar.dart';
 import 'package:my_vocab/Presentation/Screens/welcome_screen.dart';

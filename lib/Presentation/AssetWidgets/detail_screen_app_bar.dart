@@ -24,11 +24,12 @@ class DetailScreenAppBar extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
-                    "${word[0].toUpperCase()}${word.substring(1)}",
-                    style: kAppBarStyle.copyWith(
-                        color: Colors.white, fontSize: 40),
-                  ),
+                  if (word != null)
+                    Text(
+                      "${word[0].toUpperCase()}${word.substring(1)}",
+                      style: kAppBarStyle.copyWith(
+                          color: Colors.white, fontSize: 40),
+                    ),
                   Padding(
                     padding: const EdgeInsets.only(left: 10),
                     child: Icon(

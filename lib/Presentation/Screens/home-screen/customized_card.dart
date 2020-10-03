@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_vocab/Presentation/AssetWidgets/action_card.dart';
+import 'package:my_vocab/Presentation/Screens/word-detail/screen.dart';
 import 'package:my_vocab/constants.dart';
 import 'package:my_vocab/services/Dictionary/get_word_of_the_day.dart';
 
@@ -63,7 +64,14 @@ class CustomCard extends StatelessWidget {
                       children: [
                         ActionCard(
                           icon: Icons.border_inner,
-                          onPressed: null,
+                          onPressed: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => WordDetailScreen(
+                                word: snapshot.data['word'],
+                              ),
+                            ),
+                          ),
                         ),
                         ActionCard(
                           icon: Icons.content_copy,

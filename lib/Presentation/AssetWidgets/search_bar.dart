@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:my_vocab/constants.dart';
-import 'package:my_vocab/Presentation/Screens/word_detail_screen.dart';
+import 'package:my_vocab/Presentation/Screens/word-detail/screen.dart';
 import 'package:my_vocab/services/Dictionary/get_meaning.dart';
 import 'package:my_vocab/services/api/datamuse_api.dart';
 import 'package:http/http.dart';
@@ -63,19 +63,13 @@ class Search extends SearchDelegate {
         onPressed: () => Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-              builder: (context) => WordDetailScreen(
-                    word: query?.trim(),
-                  )),
+            builder: (context) => WordDetailScreen(
+              word: query?.trim(),
+            ),
+          ),
         ),
       )
     ];
-  }
-
-  @override
-  Widget buildResults(BuildContext context) {
-    // TODO: implement buildResults
-    final res = Meaning().getMeaning(word: query);
-    return Container();
   }
 
   @override
@@ -114,6 +108,11 @@ class Search extends SearchDelegate {
   @override
   Widget buildLeading(BuildContext context) {
     return BackButton(color: Colors.white);
+  }
+
+  @override
+  Widget buildResults(BuildContext context) {
+    return null;
   }
 }
 
