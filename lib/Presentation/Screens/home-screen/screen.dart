@@ -6,7 +6,6 @@ import 'package:my_vocab/Presentation/AssetWidgets/search_bar.dart';
 import 'package:my_vocab/Presentation/AssetWidgets/custom_app_bar.dart';
 import 'package:my_vocab/Presentation/Screens/welcome_screen.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:my_vocab/constants.dart';
 
 class HomePage extends StatefulWidget {
   static const id = 'Home_Page';
