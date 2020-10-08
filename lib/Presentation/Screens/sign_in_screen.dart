@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -102,12 +103,18 @@ class _SignInScreenState extends State<SignInScreen> {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(right: 30.0, top: 10.0),
-                  child: Text(
-                    "Forgot Password",
-                    textAlign: TextAlign.end,
-                    style: kSmallTextStyle.copyWith(
-                        color: Theme.of(context).primaryColor,
-                        fontWeight: FontWeight.w500),
+                  child: GestureDetector(
+                    onTap: () {
+                      FirebaseAuth.instance
+                          .sendPasswordResetEmail(email: email);
+                    },
+                    child: Text(
+                      "Forgot Password",
+                      textAlign: TextAlign.end,
+                      style: kSmallTextStyle.copyWith(
+                          color: Theme.of(context).primaryColor,
+                          fontWeight: FontWeight.w500),
+                    ),
                   ),
                 ),
                 Container(
