@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:my_vocab/Presentation/AssetWidgets/action_card.dart';
 import 'package:my_vocab/Presentation/Screens/word-detail/screen.dart';
 import 'package:my_vocab/constants.dart';
@@ -63,7 +65,24 @@ class CustomCard extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         ActionCard(
-                          icon: Icons.border_inner,
+                          icon: Icons.favorite_border,
+                          onPressed: null,
+                        ),
+                        ActionCard(
+                          icon: Icons.content_copy,
+                          onPressed: () {
+                            Clipboard.setData(
+                                ClipboardData(text: snapshot.data['word']));
+                            Fluttertoast.showToast(
+                                msg: 'Text Copied To Clipboard');
+                          },
+                        ),
+                        ActionCard(
+                          icon: Icons.bookmark_border,
+                          onPressed: null,
+                        ),
+                        ActionCard(
+                          icon: Icons.open_in_new_outlined,
                           onPressed: () => Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -72,18 +91,6 @@ class CustomCard extends StatelessWidget {
                               ),
                             ),
                           ),
-                        ),
-                        ActionCard(
-                          icon: Icons.content_copy,
-                          onPressed: null,
-                        ),
-                        ActionCard(
-                          icon: Icons.favorite_border,
-                          onPressed: null,
-                        ),
-                        ActionCard(
-                          icon: Icons.bookmark_border,
-                          onPressed: null,
                         ),
                       ],
                     )

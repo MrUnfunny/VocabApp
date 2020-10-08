@@ -15,7 +15,6 @@ dependencies:
   firebase_core: ^0.5.0
   flutter_dotenv: ^2.1.0
   flutter_login_facebook: ^0.2.1
-
   flutter_svg: any
   fluttertoast: ^7.1.1
   font_awesome_flutter: ^8.8.1

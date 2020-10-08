@@ -49,7 +49,7 @@ class WordCard extends StatelessWidget {
             style: TextStyle(
                 fontFamily: 'Montserrat',
                 fontSize: 22,
-                fontWeight: FontWeight.bold,
+                fontWeight: FontWeight.w600,
                 color: Theme.of(context).primaryColor),
           ),
           SizedBox(
