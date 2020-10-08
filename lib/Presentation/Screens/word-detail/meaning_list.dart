@@ -45,7 +45,8 @@ class MeaningList extends StatelessWidget {
                                       color: Theme.of(context).primaryColor),
                                 ),
                                 TextSpan(
-                                  text: "  ${wordDefinition.definition}",
+                                  text:
+                                      "  ${wordDefinition.definition[0].toUpperCase()}${wordDefinition.definition.substring(1)}",
                                   style: kMeaningTextStyle,
                                 )
                               ],

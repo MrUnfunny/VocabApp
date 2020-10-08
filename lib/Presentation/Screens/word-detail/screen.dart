@@ -1,7 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:my_vocab/Presentation/AssetWidgets/detail_screen_app_bar.dart';
 import 'package:my_vocab/Presentation/Screens/word-detail/realted_words.dart';
 import 'package:my_vocab/services/Dictionary/get_meaning.dart';
+import 'package:my_vocab/services/api/datamuse_api.dart';
 import 'package:my_vocab/services/model/dictionary.dart';
 
 import 'meaning_list.dart';
@@ -20,6 +23,10 @@ class _WordDetailScreenState extends State<WordDetailScreen>
   bool loading = false;
   TabController _tabController;
   Future<Dictionary> wordDetailsFuture;
+
+  String synonyms;
+  String antonyms;
+  String rhymes;
 
   @override
   void setState(fn) {
@@ -46,10 +53,37 @@ class _WordDetailScreenState extends State<WordDetailScreen>
 
     final Dictionary wordDetail = await Meaning().getMeaning(word: widget.word);
 
+    List<String> rhymeList = [], synList = [], antList = [];
+
+    final rhymeRes =
+        await datamuseApi.get(params: {'rel_rhy': widget.word, "max": 10});
+    final synRes =
+        await datamuseApi.get(params: {'rel_syn': widget.word, "max": 10});
+    final antRes =
+        await datamuseApi.get(params: {'rel_ant': widget.word, "max": 10});
+
+    final rhymeJson = jsonDecode(rhymeRes.body);
+    final synJson = jsonDecode(synRes.body);
+    final antJson = jsonDecode(antRes.body);
+
+    for (var value in rhymeJson) {
+      rhymeList.add(value['word']);
+    }
+    for (var value in synJson) {
+      synList.add(value['word']);
+    }
+    for (var value in antJson) {
+      antList.add(value['word']);
+    }
+
     setState(() {
       loading = false;
     });
-    return wordDetail;
+    return wordDetail.copyWith(
+      rhymes: rhymeList,
+      synonynms: synList,
+      antonyms: antList,
+    );
   }
 
   @override
@@ -74,6 +108,7 @@ class _WordDetailScreenState extends State<WordDetailScreen>
                         child: Column(
                           children: [
                             TabBar(
+                              indicatorSize: TabBarIndicatorSize.tab,
                               labelColor: Theme.of(context).primaryColor,
                               unselectedLabelColor: Colors.grey,
                               indicatorColor: Color(0xddF54A16),
@@ -100,16 +135,19 @@ class _WordDetailScreenState extends State<WordDetailScreen>
                                       controller: _tabController,
                                       children: [
                                         Container(
+                                          margin: EdgeInsets.only(top: 16.0),
                                           child: MeaningList(
                                             wordDetail: snapshot.data,
                                           ),
                                         ),
                                         Container(
+                                          margin: EdgeInsets.only(top: 16.0),
                                           child: RelatedWords(
-                                            word: widget.word,
+                                            wordDetail: snapshot.data,
                                           ),
                                         ),
                                         Container(
+                                          margin: EdgeInsets.only(top: 16.0),
                                           decoration: BoxDecoration(
                                             borderRadius:
                                                 BorderRadius.circular(8.0),

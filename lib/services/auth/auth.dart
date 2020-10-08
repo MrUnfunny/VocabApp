@@ -40,6 +40,12 @@ class Auth {
     try {
       final GoogleSignIn googleSignIn = GoogleSignIn();
       final GoogleSignInAccount account = await googleSignIn.signIn();
+      if (account == null) {
+        final SnackBar snackBar =
+            SnackBar(content: Text("ERROR: Sign In cancelled by user"));
+        Scaffold.of(context).showSnackBar(snackBar);
+        return null;
+      }
       final GoogleSignInAuthentication googleAuth =
           await account.authentication;
       final OAuthCredential creds = GoogleAuthProvider.credential(
