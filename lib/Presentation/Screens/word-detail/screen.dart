@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:my_vocab/Presentation/AssetWidgets/detail_screen_app_bar.dart';
 import 'package:my_vocab/Presentation/Screens/word-detail/realted_words.dart';
+import 'package:my_vocab/constants.dart';
 import 'package:my_vocab/services/Dictionary/get_meaning.dart';
 import 'package:my_vocab/services/api/datamuse_api.dart';
 import 'package:my_vocab/services/model/dictionary.dart';
@@ -52,6 +53,7 @@ class _WordDetailScreenState extends State<WordDetailScreen>
     });
 
     final Dictionary wordDetail = await Meaning().getMeaning(word: widget.word);
+    if (wordDetail == null) return null;
 
     List<String> rhymeList = [], synList = [], antList = [];
 
@@ -96,6 +98,17 @@ class _WordDetailScreenState extends State<WordDetailScreen>
           child: FutureBuilder<Dictionary>(
             future: wordDetailsFuture,
             builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.done &&
+                  snapshot.data == null) {
+                return Center(
+                  child: Text(
+                    "MEANING NOT FOUND",
+                    style: kLargeTextStyle.copyWith(
+                      color: Colors.white,
+                    ),
+                  ),
+                );
+              }
               if (snapshot.hasData)
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
