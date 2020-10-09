@@ -91,9 +91,9 @@ class _WordDetailScreenState extends State<WordDetailScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).primaryColor,
-      body: Padding(
+      body: Container(
         padding: const EdgeInsets.only(top: 16.0),
+        color: (loading) ? Colors.white : Theme.of(context).primaryColor,
         child: SafeArea(
           child: FutureBuilder<Dictionary>(
             future: wordDetailsFuture,
@@ -103,9 +103,7 @@ class _WordDetailScreenState extends State<WordDetailScreen>
                 return Center(
                   child: Text(
                     "MEANING NOT FOUND",
-                    style: kLargeTextStyle.copyWith(
-                      color: Colors.white,
-                    ),
+                    style: kLargeTextStyle,
                   ),
                 );
               }
@@ -185,7 +183,12 @@ class _WordDetailScreenState extends State<WordDetailScreen>
                     )
                   ],
                 );
-              return Center(child: CircularProgressIndicator());
+              return Center(
+                  child: CircularProgressIndicator(
+                valueColor: AlwaysStoppedAnimation<Color>(
+                  Theme.of(context).primaryColor,
+                ),
+              ));
             },
           ),
         ),
