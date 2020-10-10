@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:my_vocab/Presentation/Screens/home-screen/customized_card.dart';
 import 'package:my_vocab/Presentation/AssetWidgets/search_bar.dart';
 import 'package:my_vocab/Presentation/AssetWidgets/custom_app_bar.dart';
+import 'package:my_vocab/Presentation/Screens/home-screen/horizontal_scroll_card.dart';
 import 'package:my_vocab/Presentation/Screens/welcome_screen.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:my_vocab/constants.dart';
 
 class HomePage extends StatefulWidget {
   static const id = 'Home_Page';
@@ -59,6 +61,38 @@ class _HomePageState extends State<HomePage> {
                 CustomAppBar(),
                 SearchBar(),
                 CustomCard(),
+                SizedBox(
+                  height: 24.0,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.baseline,
+                  children: [
+                    Text(
+                      'History',
+                      style: kAppBarStyle.copyWith(fontSize: 20.0),
+                    ),
+                    Text(
+                      'See all',
+                      style: kSmallTextStyle.copyWith(color: Colors.black45),
+                    )
+                  ],
+                ),
+                SizedBox(
+                  height: 24.0,
+                ),
+                Container(
+                  height: 100,
+                  child: ListView(
+                    scrollDirection: Axis.horizontal,
+                    children: [
+                      HorizontalScrollCard(),
+                      HorizontalScrollCard(),
+                      HorizontalScrollCard(),
+                      HorizontalScrollCard(),
+                    ],
+                  ),
+                ),
               ],
             ),
           ),

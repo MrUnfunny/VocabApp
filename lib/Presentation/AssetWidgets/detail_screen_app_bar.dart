@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import '../../constants.dart';
 import 'action_card.dart';
@@ -66,7 +68,10 @@ class DetailScreenAppBar extends StatelessWidget {
                         color: Colors.deepOrange[400]),
                     child: ActionCard(
                       icon: Icons.content_copy,
-                      onPressed: null,
+                      onPressed: () {
+                        Clipboard.setData(ClipboardData(text: word));
+                        Fluttertoast.showToast(msg: 'Text Copied To Clipboard');
+                      },
                       size: 40,
                     )),
                 Container(

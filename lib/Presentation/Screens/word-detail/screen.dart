@@ -36,7 +36,7 @@ class _WordDetailScreenState extends State<WordDetailScreen>
 
   @override
   void initState() {
-    _tabController = TabController(length: 3, vsync: this);
+    _tabController = TabController(length: 2, vsync: this);
     super.initState();
     wordDetailsFuture = init();
   }
@@ -132,9 +132,9 @@ class _WordDetailScreenState extends State<WordDetailScreen>
                                 Tab(
                                   text: "RELATED",
                                 ),
-                                Tab(
-                                  text: "PHRASES",
-                                ),
+                                // Tab(
+                                //   text: "PHRASES",
+                                // ),
                               ],
                             ),
                             Expanded(
@@ -157,14 +157,14 @@ class _WordDetailScreenState extends State<WordDetailScreen>
                                             wordDetail: snapshot.data,
                                           ),
                                         ),
-                                        Container(
-                                          margin: EdgeInsets.only(top: 16.0),
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(8.0),
-                                            color: Colors.greenAccent,
-                                          ),
-                                        ),
+                                        // Container(
+                                        //   margin: EdgeInsets.only(top: 16.0),
+                                        //   decoration: BoxDecoration(
+                                        //     borderRadius:
+                                        //         BorderRadius.circular(8.0),
+                                        //     color: Colors.greenAccent,
+                                        //   ),
+                                        // ),
                                       ]),
                                 ),
                               ),
