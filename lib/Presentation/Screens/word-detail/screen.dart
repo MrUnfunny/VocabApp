@@ -1,11 +1,13 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:my_vocab/Presentation/AssetWidgets/detail_screen_app_bar.dart';
 import 'package:my_vocab/Presentation/Screens/word-detail/realted_words.dart';
 import 'package:my_vocab/constants.dart';
 import 'package:my_vocab/services/Dictionary/get_meaning.dart';
 import 'package:my_vocab/services/api/datamuse_api.dart';
+import 'package:my_vocab/services/local_databases/history.dart';
 import 'package:my_vocab/services/model/dictionary.dart';
 
 import 'meaning_list.dart';
@@ -48,6 +50,9 @@ class _WordDetailScreenState extends State<WordDetailScreen>
   }
 
   Future<Dictionary> init() async {
+    var a = await HistoryDB().listAll();
+    print(a);
+    print(a.length);
     setState(() {
       loading = true;
     });
@@ -81,11 +86,23 @@ class _WordDetailScreenState extends State<WordDetailScreen>
     setState(() {
       loading = false;
     });
+    await _addToHistory(wordDetail);
     return wordDetail.copyWith(
       rhymes: rhymeList,
       synonynms: synList,
       antonyms: antList,
     );
+  }
+
+  _addToHistory(Dictionary wordDetail) async {
+    final DateFormat formatter = DateFormat('yyyy-MM-dd');
+    Map res = {
+      ...wordDetail.toMap(),
+      ...{'date': '${formatter.format(DateTime.now())}'}
+    };
+    await HistoryDB().add(res);
+
+    print("done");
   }
 
   @override

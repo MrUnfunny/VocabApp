@@ -53,4 +53,15 @@ class Dictionary extends Equatable {
       antonyms: antonyms ?? this.antonyms,
     );
   }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'word': word,
+      'pronunciation': pronunciation,
+      'definitions': definitions?.map((x) => x?.toMap())?.toList(),
+      'rhymes': rhymes,
+      'synonynms': synonynms,
+      'antonyms': antonyms,
+    };
+  }
 }

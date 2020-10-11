@@ -22,6 +22,15 @@ class Definition extends Equatable {
         imageUrl,
       ];
 
+  Map<String, dynamic> toMap() {
+    return {
+      'type': type,
+      'definition': definition,
+      'example': example,
+      'imageUrl': imageUrl,
+    };
+  }
+
   factory Definition.fromJson(json) {
     return Definition(
       definition: json['definition'],

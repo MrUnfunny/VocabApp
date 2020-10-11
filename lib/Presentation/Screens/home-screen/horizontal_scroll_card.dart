@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 
 class HorizontalScrollCard extends StatelessWidget {
+  final String word;
+  final String date;
+
+  const HorizontalScrollCard({Key key, this.word, this.date}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -18,7 +23,7 @@ class HorizontalScrollCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Abstract",
+                word,
                 style: TextStyle(
                     fontFamily: "Montserrat",
                     fontSize: 24.0,
@@ -28,7 +33,7 @@ class HorizontalScrollCard extends StatelessWidget {
               SizedBox(
                 height: 8.0,
               ),
-              Text("data")
+              Text(date),
             ],
           ),
           Icon(

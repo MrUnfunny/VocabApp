@@ -8,6 +8,7 @@ import 'package:my_vocab/Presentation/Screens/home-screen/horizontal_scroll_card
 import 'package:my_vocab/Presentation/Screens/welcome_screen.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:my_vocab/constants.dart';
+import 'package:my_vocab/services/local_databases/history.dart';
 
 class HomePage extends StatefulWidget {
   static const id = 'Home_Page';
@@ -18,6 +19,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   DateTime currentBackPressTime;
+  Future historyWords;
 
   @override
   void initState() {
@@ -29,6 +31,7 @@ class _HomePageState extends State<HomePage> {
     final _auth = FirebaseAuth.instance;
     final user = _auth.currentUser;
     if (user == null) Navigator.pushReplacementNamed(context, WelcomeScreen.id);
+    historyWords = HistoryDB().listAll();
   }
 
   Future<bool> onWillPop() {
@@ -83,15 +86,26 @@ class _HomePageState extends State<HomePage> {
                 ),
                 Container(
                   height: 100,
-                  child: ListView(
-                    scrollDirection: Axis.horizontal,
-                    children: [
-                      HorizontalScrollCard(),
-                      HorizontalScrollCard(),
-                      HorizontalScrollCard(),
-                      HorizontalScrollCard(),
-                    ],
-                  ),
+                  child: FutureBuilder(
+                      future: historyWords,
+                      builder: (context, AsyncSnapshot snapshot) {
+                        if (snapshot.connectionState == ConnectionState.done)
+                          return ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: snapshot.data.length,
+                            itemBuilder: (BuildContext context, int index) =>
+                                HorizontalScrollCard(
+                              word: snapshot
+                                      .data[snapshot.data.length - index - 1]
+                                  ['word'],
+                              date: snapshot
+                                      .data[snapshot.data.length - index - 1]
+                                  ['date'],
+                            ),
+                          );
+                        else
+                          return Container();
+                      }),
                 ),
               ],
             ),
