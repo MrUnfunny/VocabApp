@@ -15,7 +15,7 @@ class WordDetailProvider extends ChangeNotifier {
       wordDetail = Dictionary.fromJson(jsonDecode(res.body));
       setLoading(false);
     } catch (e) {
-      print("@Owlbot meaning fetch in WordDetailProvider: $e");
+      print("@Owlbot meaning fetch failed in WordDetailProvider: $e");
     }
   }
 
@@ -23,4 +23,6 @@ class WordDetailProvider extends ChangeNotifier {
     loading = value;
     notifyListeners();
   }
+
+  setDetail() {}
 }
