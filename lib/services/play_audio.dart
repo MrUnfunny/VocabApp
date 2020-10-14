@@ -6,15 +6,20 @@ class WordAudio {
   Future<bool> playWordAudio(url) async {
     final AudioPlayer audioPlayer = AudioPlayer();
 
-    if (url == null) {
+    try {
+      if (url == null) {
+        return false;
+      }
+      int res = await audioPlayer.play(url);
+
+      if (res == 1) {
+        return true;
+      }
+      return false;
+    } catch (e) {
+      print("@Error occured while playing audio : $e");
       return false;
     }
-    int res = await audioPlayer.play(url);
-
-    if (res == 1) {
-      return true;
-    }
-    return false;
   }
 
   playAudio(String word) async {

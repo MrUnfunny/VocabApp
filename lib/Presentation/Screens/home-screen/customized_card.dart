@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:my_vocab/Presentation/AssetWidgets/action_card.dart';
+import 'package:my_vocab/Presentation/Screens/home-screen/word_of_the_day_card.dart';
 import 'package:my_vocab/Presentation/Screens/word-detail/screen.dart';
 import 'package:my_vocab/constants.dart';
-import 'package:my_vocab/services/Dictionary/get_word_audio.dart';
 import 'package:my_vocab/services/Dictionary/get_word_of_the_day.dart';
 import 'package:my_vocab/services/play_audio.dart';
 import 'package:my_vocab/viewmodels/home_provider.dart';
 import 'package:provider/provider.dart';
+import '';
 
 class CustomCard extends StatelessWidget {
   @override
@@ -73,11 +74,11 @@ class CustomCard extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      ActionCard(
+                      WordOfTheDayCard(
                         icon: Icons.favorite_border,
                         onPressed: null,
                       ),
-                      ActionCard(
+                      WordOfTheDayCard(
                         icon: Icons.content_copy,
                         onPressed: () {
                           Clipboard.setData(ClipboardData(
@@ -86,11 +87,11 @@ class CustomCard extends StatelessWidget {
                               msg: 'Text Copied To Clipboard');
                         },
                       ),
-                      ActionCard(
+                      WordOfTheDayCard(
                         icon: Icons.bookmark_border,
                         onPressed: null,
                       ),
-                      ActionCard(
+                      WordOfTheDayCard(
                         icon: Icons.open_in_new_outlined,
                         onPressed: () => Navigator.push(
                           context,

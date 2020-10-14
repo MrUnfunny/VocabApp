@@ -50,56 +50,34 @@ class DetailScreenAppBar extends StatelessWidget {
           ],
         ),
         Container(
-          child: Container(
-            margin: EdgeInsets.only(top: 32, left: 40, right: 32),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Container(
-                    padding: EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.deepOrange[400]),
-                    child: ActionCard(
-                      icon: Icons.favorite_border,
-                      onPressed: null,
-                      size: 40,
-                    )),
-                Container(
-                    padding: EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.deepOrange[400]),
-                    child: ActionCard(
-                      icon: Icons.content_copy,
-                      onPressed: () {
-                        Clipboard.setData(ClipboardData(text: word));
-                        Fluttertoast.showToast(msg: 'Text Copied To Clipboard');
-                      },
-                      size: 40,
-                    )),
-                Container(
-                    padding: EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.deepOrange[400]),
-                    child: ActionCard(
-                      icon: Icons.border_clear,
-                      onPressed: null,
-                      size: 40,
-                    )),
-                Container(
-                    padding: EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.deepOrange[400]),
-                    child: ActionCard(
-                      icon: Icons.bookmark_border,
-                      onPressed: null,
-                      size: 40,
-                    )),
-              ],
-            ),
+          margin: EdgeInsets.only(top: 32, left: 40, right: 32),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              ActionCard(
+                icon: Icons.favorite_border,
+                onPressed: null,
+                word: 'save',
+              ),
+              ActionCard(
+                icon: Icons.content_copy,
+                onPressed: () {
+                  Clipboard.setData(ClipboardData(text: word));
+                  Fluttertoast.showToast(msg: 'Text Copied To Clipboard');
+                },
+                word: 'copy',
+              ),
+              ActionCard(
+                icon: Icons.border_clear,
+                onPressed: null,
+                word: 'dono',
+              ),
+              ActionCard(
+                icon: Icons.bookmark_border,
+                onPressed: null,
+                word: 'favorite',
+              ),
+            ],
           ),
         )
       ],
