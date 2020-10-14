@@ -8,6 +8,8 @@ import 'package:my_vocab/Presentation/Screens/sign_in_screen.dart';
 import 'package:my_vocab/Presentation/Screens/sign_up_screen.dart';
 import 'package:my_vocab/Presentation/Screens/welcome_screen.dart';
 import 'package:my_vocab/Presentation/Screens/word-detail/screen.dart';
+import 'package:my_vocab/viewmodels/home_provider.dart';
+import 'package:provider/provider.dart';
 
 bool isLoggedIn = false;
 void main() async {
@@ -31,7 +33,10 @@ void main() async {
       ExactAssetPicture(
           SvgPicture.svgStringDecoder, 'Assets/Vectors/welcomeBack.svg'),
       null);
-  runApp(MyApp());
+
+  runApp(MultiProvider(providers: [
+    ChangeNotifierProvider(create: (_) => HomeProvider()),
+  ], child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {

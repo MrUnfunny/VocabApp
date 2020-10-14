@@ -9,6 +9,8 @@ import 'package:my_vocab/services/Dictionary/get_meaning.dart';
 import 'package:my_vocab/services/api/datamuse_api.dart';
 import 'package:my_vocab/services/local_databases/history.dart';
 import 'package:my_vocab/services/model/dictionary.dart';
+import 'package:my_vocab/viewmodels/home_provider.dart';
+import 'package:provider/provider.dart';
 
 import 'meaning_list.dart';
 
@@ -101,6 +103,7 @@ class _WordDetailScreenState extends State<WordDetailScreen>
       ...{'date': '${formatter.format(DateTime.now())}'}
     };
     await HistoryDB().add(res);
+    Provider.of<HomeProvider>(context, listen: false).getHistory();
 
     print("done");
   }
