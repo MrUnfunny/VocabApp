@@ -88,7 +88,9 @@ class _HomePageState extends State<HomePage> {
                             Text(
                               'See all',
                               style: kSmallTextStyle.copyWith(
-                                  color: Colors.black45),
+                                color: Colors.brown.shade600,
+                                fontWeight: FontWeight.w600,
+                              ),
                             )
                           ],
                         ),
