@@ -75,7 +75,7 @@ class _HomePageState extends State<HomePage> {
                         SearchBar(),
                         CustomCard(),
                         SizedBox(
-                          height: 24.0,
+                          height: 8.0,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,

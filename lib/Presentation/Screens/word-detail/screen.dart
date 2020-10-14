@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:my_vocab/Presentation/AssetWidgets/detail_screen_app_bar.dart';
+import 'package:my_vocab/Presentation/AssetWidgets/loading_widget.dart';
 import 'package:my_vocab/Presentation/Screens/word-detail/realted_words.dart';
 import 'package:my_vocab/constants.dart';
 import 'package:my_vocab/services/Dictionary/get_meaning.dart';
@@ -203,12 +204,7 @@ class _WordDetailScreenState extends State<WordDetailScreen>
                     )
                   ],
                 );
-              return Center(
-                  child: CircularProgressIndicator(
-                valueColor: AlwaysStoppedAnimation<Color>(
-                  Theme.of(context).primaryColor,
-                ),
-              ));
+              return LoadingWidget();
             },
           ),
         ),

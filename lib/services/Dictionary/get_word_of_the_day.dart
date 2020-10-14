@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:intl/intl.dart';
-import 'package:my_vocab/services/api/webster_api.dart';
+import 'package:my_vocab/services/api/wordnik.dart';
 
 class WordOfTheDay {
   static final DateTime now = DateTime.now();

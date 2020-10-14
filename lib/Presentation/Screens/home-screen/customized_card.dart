@@ -4,7 +4,9 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:my_vocab/Presentation/AssetWidgets/action_card.dart';
 import 'package:my_vocab/Presentation/Screens/word-detail/screen.dart';
 import 'package:my_vocab/constants.dart';
+import 'package:my_vocab/services/Dictionary/get_word_audio.dart';
 import 'package:my_vocab/services/Dictionary/get_word_of_the_day.dart';
+import 'package:my_vocab/services/play_audio.dart';
 import 'package:my_vocab/viewmodels/home_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -38,9 +40,15 @@ class CustomCard extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                             color: Colors.white),
                       ),
-                      Icon(
-                        Icons.volume_up,
-                        color: Colors.white,
+                      IconButton(
+                        icon: Icon(
+                          Icons.volume_up,
+                          color: Colors.white,
+                        ),
+                        onPressed: () async {
+                          await WordAudio()
+                              .playAudio(homeProvider.wordOfTheDay['word']);
+                        },
                       ),
                     ],
                   ),
