@@ -11,6 +11,7 @@ import 'package:my_vocab/Presentation/Screens/word-detail/screen.dart';
 import 'package:my_vocab/viewmodels/home_provider.dart';
 import 'package:my_vocab/viewmodels/word_detail_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:my_vocab/Presentation/Screens/history-screen/history_screen.dart';
 
 bool isLoggedIn = false;
 void main() async {
@@ -57,6 +58,7 @@ class MyApp extends StatelessWidget {
         SignUpScreen.id: (context) => SignUpScreen(),
         HomePage.id: (context) => HomePage(),
         WordDetailScreen.id: (context) => WordDetailScreen(),
+        HistoryScreen.id: (context) => HistoryScreen(),
       },
     );
   }

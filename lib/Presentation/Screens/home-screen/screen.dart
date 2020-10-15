@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:my_vocab/Presentation/AssetWidgets/loading_widget.dart';
+import 'package:my_vocab/Presentation/Screens/history-screen/history_screen.dart';
 import 'package:my_vocab/Presentation/Screens/home-screen/word_of_the_day_card.dart';
 import 'package:my_vocab/Presentation/AssetWidgets/search_bar.dart';
 import 'package:my_vocab/Presentation/AssetWidgets/custom_app_bar.dart';
@@ -66,16 +67,18 @@ class _HomePageState extends State<HomePage> {
           onWillPop: () => onWillPop(),
           child: (homeProvider.apiRequestStatus == ApiRequestStatus.loaded)
               ? SafeArea(
-                  child: Padding(
+                  child: ListView(
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                    child: ListView(
-                      children: [
-                        CustomAppBar(),
-                        SearchBar(),
-                        CustomCard(),
-                        SizedBox(
-                          height: 8.0,
-                        ),
+                    children: [
+                      CustomAppBar(
+                        title: 'Vocabulary',
+                      ),
+                      SearchBar(),
+                      CustomCard(),
+                      SizedBox(
+                        height: 8.0,
+                      ),
+                      if (homeProvider.historyWords.isNotEmpty)
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           crossAxisAlignment: CrossAxisAlignment.baseline,
@@ -84,37 +87,40 @@ class _HomePageState extends State<HomePage> {
                               'History',
                               style: kAppBarStyle.copyWith(fontSize: 20.0),
                             ),
-                            Text(
-                              'See all',
-                              style: kSmallTextStyle.copyWith(
-                                color: Colors.brown.shade600,
-                                fontWeight: FontWeight.w600,
+                            GestureDetector(
+                              onTap: () => Navigator.pushNamed(
+                                  context, HistoryScreen.id),
+                              child: Text(
+                                'See all',
+                                style: kSmallTextStyle.copyWith(
+                                  color: Colors.brown.shade600,
+                                  fontWeight: FontWeight.w600,
+                                ),
                               ),
                             )
                           ],
                         ),
-                        SizedBox(
-                          height: 24.0,
-                        ),
-                        Container(
-                            height: 100,
-                            child: ListView.builder(
-                              scrollDirection: Axis.horizontal,
-                              itemCount: homeProvider.historyWords.length,
-                              itemBuilder: (BuildContext context, int index) =>
-                                  HorizontalScrollCard(
-                                word: homeProvider.historyWords[
-                                    homeProvider.historyWords.length -
-                                        index -
-                                        1]['word'],
-                                date: homeProvider.historyWords[
-                                    homeProvider.historyWords.length -
-                                        index -
-                                        1]['date'],
-                              ),
-                            )),
-                      ],
-                    ),
+                      SizedBox(
+                        height: 24.0,
+                      ),
+                      Container(
+                          height: 100,
+                          child: ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: homeProvider.historyWords.length,
+                            itemBuilder: (BuildContext context, int index) =>
+                                HorizontalScrollCard(
+                              word: homeProvider.historyWords[
+                                  homeProvider.historyWords.length -
+                                      index -
+                                      1]['word'],
+                              date: homeProvider.historyWords[
+                                  homeProvider.historyWords.length -
+                                      index -
+                                      1]['date'],
+                            ),
+                          )),
+                    ],
                   ),
                 )
               : LoadingWidget(),

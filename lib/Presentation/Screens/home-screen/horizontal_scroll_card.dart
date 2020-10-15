@@ -9,7 +9,7 @@ class HorizontalScrollCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(right: 16.0),
+      margin: EdgeInsets.only(right: 16.0, top: 8.0, bottom: 8.0),
       padding: EdgeInsets.symmetric(horizontal: 16.0),
       width: MediaQuery.of(context).size.width * 0.80,
       decoration: BoxDecoration(

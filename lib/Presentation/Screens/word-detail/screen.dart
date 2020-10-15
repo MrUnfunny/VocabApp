@@ -93,36 +93,34 @@ class _WordDetailScreenState extends State<WordDetailScreen>
                               ),
                               Expanded(
                                 child: Container(
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 16.0),
-                                    child: TabBarView(
-                                        controller: _tabController,
-                                        children: [
-                                          Container(
-                                            margin: EdgeInsets.only(top: 16.0),
-                                            child: MeaningList(
-                                              wordDetail:
-                                                  wordDetailProvider.wordDetail,
-                                            ),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 16.0),
+                                  child: TabBarView(
+                                      controller: _tabController,
+                                      children: [
+                                        Container(
+                                          margin: EdgeInsets.only(top: 16.0),
+                                          child: MeaningList(
+                                            wordDetail:
+                                                wordDetailProvider.wordDetail,
                                           ),
-                                          Container(
-                                            margin: EdgeInsets.only(top: 16.0),
-                                            child: RelatedWords(
-                                              wordDetail:
-                                                  wordDetailProvider.wordDetail,
-                                            ),
+                                        ),
+                                        Container(
+                                          margin: EdgeInsets.only(top: 16.0),
+                                          child: RelatedWords(
+                                            wordDetail:
+                                                wordDetailProvider.wordDetail,
                                           ),
-                                          // Container(
-                                          //   margin: EdgeInsets.only(top: 16.0),
-                                          //   decoration: BoxDecoration(
-                                          //     borderRadius:
-                                          //         BorderRadius.circular(8.0),
-                                          //     color: Colors.greenAccent,
-                                          //   ),
-                                          // ),
-                                        ]),
-                                  ),
+                                        ),
+                                        // Container(
+                                        //   margin: EdgeInsets.only(top: 16.0),
+                                        //   decoration: BoxDecoration(
+                                        //     borderRadius:
+                                        //         BorderRadius.circular(8.0),
+                                        //     color: Colors.greenAccent,
+                                        //   ),
+                                        // ),
+                                      ]),
                                 ),
                               ),
                             ],

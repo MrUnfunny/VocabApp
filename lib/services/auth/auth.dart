@@ -4,6 +4,7 @@ import 'package:flutter_login_facebook/flutter_login_facebook.dart';
 import 'package:my_vocab/Presentation/Screens/home-screen/screen.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:my_vocab/Presentation/Screens/welcome_screen.dart';
+import 'package:my_vocab/services/local_databases/history.dart';
 
 class Auth {
   final _auth = FirebaseAuth.instance;
@@ -97,6 +98,7 @@ class Auth {
     try {
       GoogleSignIn().signOut();
       _auth.signOut();
+      await HistoryDB().clear();
       Navigator.pushReplacementNamed(context, WelcomeScreen.id);
     } catch (e) {
       print('Exception @signout: $e');

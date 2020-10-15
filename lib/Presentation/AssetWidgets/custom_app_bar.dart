@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+
 import 'package:my_vocab/constants.dart';
 import 'package:my_vocab/services/auth/auth.dart';
 
 class CustomAppBar extends StatelessWidget {
+  final String title;
   const CustomAppBar({
     Key key,
+    @required this.title,
   }) : super(key: key);
 
   @override
@@ -15,7 +18,7 @@ class CustomAppBar extends StatelessWidget {
         Container(
           margin: EdgeInsets.symmetric(horizontal: 10.0, vertical: 30.0),
           child: Text(
-            "Vocabulary",
+            this.title,
             style: kAppBarStyle,
           ),
         ),
