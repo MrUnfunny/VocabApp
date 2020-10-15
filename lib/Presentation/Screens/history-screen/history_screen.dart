@@ -54,7 +54,8 @@ class HistoryCard extends StatelessWidget {
       onDismissed: (direction) async {
         await HistoryDB().remove({'word': word});
         Provider.of<HomeProvider>(context, listen: false).getHistory();
-        if ((await HistoryDB().listAll()).isEmpty) Navigator.pop(context);
+        if ((await HistoryDB().listAll()).isEmpty && Navigator.canPop(context))
+          Navigator.pop(context);
       },
       child: Container(
         margin: EdgeInsets.symmetric(vertical: 12.0),

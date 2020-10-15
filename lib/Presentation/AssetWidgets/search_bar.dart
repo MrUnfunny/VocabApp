@@ -73,7 +73,7 @@ class Search extends SearchDelegate {
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    if (query != null)
+    if (query != null && query != '')
       return ListView.builder(
         itemBuilder: (context, index) {
           String queryWord;
@@ -111,7 +111,7 @@ class Search extends SearchDelegate {
 
   @override
   Widget buildResults(BuildContext context) {
-    return null;
+    return buildSuggestions(context);
   }
 }
 
