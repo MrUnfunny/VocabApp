@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:my_vocab/Presentation/AssetWidgets/loading_widget.dart';
-import 'package:my_vocab/Presentation/Screens/home-screen/customized_card.dart';
+import 'package:my_vocab/Presentation/Screens/home-screen/word_of_the_day_card.dart';
 import 'package:my_vocab/Presentation/AssetWidgets/search_bar.dart';
 import 'package:my_vocab/Presentation/AssetWidgets/custom_app_bar.dart';
 import 'package:my_vocab/Presentation/Screens/home-screen/horizontal_scroll_card.dart';
@@ -64,8 +64,7 @@ class _HomePageState extends State<HomePage> {
         ),
         body: WillPopScope(
           onWillPop: () => onWillPop(),
-          child: (Provider.of<HomeProvider>(context).apiRequestStatus ==
-                  ApiRequestStatus.loaded)
+          child: (homeProvider.apiRequestStatus == ApiRequestStatus.loaded)
               ? SafeArea(
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),

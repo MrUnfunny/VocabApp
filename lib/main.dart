@@ -9,6 +9,7 @@ import 'package:my_vocab/Presentation/Screens/sign_up_screen.dart';
 import 'package:my_vocab/Presentation/Screens/welcome_screen.dart';
 import 'package:my_vocab/Presentation/Screens/word-detail/screen.dart';
 import 'package:my_vocab/viewmodels/home_provider.dart';
+import 'package:my_vocab/viewmodels/word_detail_provider.dart';
 import 'package:provider/provider.dart';
 
 bool isLoggedIn = false;
@@ -36,6 +37,7 @@ void main() async {
 
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(create: (_) => HomeProvider()),
+    ChangeNotifierProvider(create: (_) => WordDetailProvider()),
   ], child: MyApp()));
 }
 

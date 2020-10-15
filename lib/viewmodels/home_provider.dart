@@ -21,12 +21,8 @@ class HomeProvider extends ChangeNotifier {
   }
 
   getHistory() async {
-    setApiRequestStatus(ApiRequestStatus.loading);
-
     historyWords = await HistoryDB().listAll();
-    print("called");
-    print(historyWords[historyWords.length - 1]);
-    setApiRequestStatus(ApiRequestStatus.loaded);
+    notifyListeners();
   }
 
   void checkError(Exception e) {
