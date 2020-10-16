@@ -7,6 +7,7 @@ import 'package:my_vocab/services/local_databases/history.dart';
 import 'package:my_vocab/services/model/dictionary.dart';
 import 'package:my_vocab/services/api/owl_bot_api.dart';
 import 'package:my_vocab/services/model/enum/api_request_status.dart';
+import 'package:my_vocab/services/model/functions.dart';
 import 'package:my_vocab/viewmodels/home_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -50,6 +51,7 @@ class WordDetailProvider extends ChangeNotifier {
       setApiStatus(ApiRequestStatus.loaded);
     } catch (e) {
       print("@Owlbot meaning fetch failed in WordDetailProvider: $e");
+      checkError(e);
     }
   }
 
@@ -60,6 +62,12 @@ class WordDetailProvider extends ChangeNotifier {
       ...{'date': '${formatter.format(DateTime.now())}'}
     };
     await HistoryDB().add(res);
+  }
+
+  void checkError(e) {
+    if (Functions.checkConnectionError(e))
+      setApiStatus(ApiRequestStatus.connectionError);
+    setApiStatus(ApiRequestStatus.error);
   }
 
   void setApiStatus(ApiRequestStatus status) {

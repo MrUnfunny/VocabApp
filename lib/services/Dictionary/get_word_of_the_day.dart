@@ -19,11 +19,9 @@ class WordOfTheDay {
       wordOfTheDay['word'] = meaningBody["word"];
       wordOfTheDay['meaning'] = meaningBody['definitions'][0]['text'];
     } else {
-      wordOfTheDay['word'] = "Mk";
-      wordOfTheDay['meaning'] = " meaningBody['definitions'][0]['text']";
+      throw Exception;
     }
-    return wordOfTheDay;
 
-    // return meaning;
+    return wordOfTheDay;
   }
 }

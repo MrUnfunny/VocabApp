@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:my_vocab/Presentation/AssetWidgets/error_widget.dart';
 import 'package:my_vocab/Presentation/AssetWidgets/loading_widget.dart';
 import 'package:my_vocab/Presentation/Screens/history-screen/history_screen.dart';
 import 'package:my_vocab/Presentation/Screens/home-screen/word_of_the_day_card.dart';
@@ -63,11 +64,11 @@ class _HomePageState extends State<HomePage> {
         drawer: Drawer(
           elevation: 20.0,
         ),
-        body: WillPopScope(
-          onWillPop: () => onWillPop(),
-          child: (homeProvider.apiRequestStatus == ApiRequestStatus.loaded)
-              ? SafeArea(
-                  child: ListView(
+        body: SafeArea(
+          child: WillPopScope(
+            onWillPop: () => onWillPop(),
+            child: (homeProvider.apiRequestStatus == ApiRequestStatus.loaded)
+                ? ListView(
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
                     children: [
                       CustomAppBar(
@@ -121,9 +122,11 @@ class _HomePageState extends State<HomePage> {
                             ),
                           )),
                     ],
-                  ),
-                )
-              : LoadingWidget(),
+                  )
+                : (homeProvider.apiRequestStatus == ApiRequestStatus.loading)
+                    ? LoadingWidget()
+                    : ErrorLoadedWidget(),
+          ),
         ),
       ),
     );

@@ -35,6 +35,10 @@ void main() async {
       ExactAssetPicture(
           SvgPicture.svgStringDecoder, 'Assets/Vectors/welcomeBack.svg'),
       null);
+  await precachePicture(
+      ExactAssetPicture(
+          SvgPicture.svgStringDecoder, 'Assets/Vectors/error.svg'),
+      null);
 
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(create: (_) => HomeProvider()),

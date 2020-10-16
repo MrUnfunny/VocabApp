@@ -40,6 +40,7 @@ flutter:
     - Assets/Vectors/welcomeBack.svg
     - Assets/Vectors/SignUp.svg
     - Assets/Vectors/googleLogo.svg
+    - Assets/Vectors/error.svg
     - Assets/images/profile.png
 
   fonts:

@@ -78,13 +78,15 @@ class Search extends SearchDelegate {
         itemBuilder: (context, index) {
           String queryWord;
           return ListTile(
-            onTap: () => Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => WordDetailScreen(
-                        word: queryWord?.trim(),
-                      )),
-            ),
+            onTap: () => (queryWord != null && queryWord != '')
+                ? Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => WordDetailScreen(
+                              word: queryWord?.trim(),
+                            )),
+                  )
+                : null,
             title: FutureBuilder(
               builder: (context, AsyncSnapshot<List<String>> snapshot) {
                 if (snapshot.hasData && index < snapshot.data.length - 1) {

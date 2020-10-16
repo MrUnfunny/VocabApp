@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:my_vocab/Presentation/AssetWidgets/detail_screen_app_bar.dart';
+import 'package:my_vocab/Presentation/AssetWidgets/error_widget.dart';
 import 'package:my_vocab/Presentation/AssetWidgets/loading_widget.dart';
 import 'package:my_vocab/Presentation/Screens/word-detail/realted_words.dart';
 import 'package:my_vocab/services/model/enum/api_request_status.dart';
@@ -137,7 +138,10 @@ class _WordDetailScreenState extends State<WordDetailScreen>
                       )
                     ],
                   )
-                : LoadingWidget(),
+                : (wordDetailProvider.apiRequestStatus ==
+                        ApiRequestStatus.loading)
+                    ? LoadingWidget()
+                    : ErrorLoadedWidget(),
           ),
         ),
       ),

@@ -16,6 +16,7 @@ class HomeProvider extends ChangeNotifier {
       wordOfTheDay = await WordOfTheDay().getMeaning();
       setApiRequestStatus(ApiRequestStatus.loaded);
     } catch (e) {
+      print("@word of the day fetch failed: $e");
       checkError(e);
     }
   }
@@ -25,7 +26,7 @@ class HomeProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void checkError(Exception e) {
+  void checkError(e) {
     if (Functions.checkConnectionError(e))
       setApiRequestStatus(ApiRequestStatus.connectionError);
     setApiRequestStatus(ApiRequestStatus.error);
