@@ -105,15 +105,19 @@ class _SignInScreenState extends State<SignInScreen> {
                   padding: const EdgeInsets.only(right: 30.0, top: 10.0),
                   child: GestureDetector(
                     onTap: () {
-                      FirebaseAuth.instance
-                          .sendPasswordResetEmail(email: email);
+                      if (email == null) {
+                        Scaffold.of(context).showSnackBar(SnackBar(
+                            content:
+                                Text('Enter Email Id for resetting password')));
+                      } else
+                        FirebaseAuth.instance
+                            .sendPasswordResetEmail(email: email);
                     },
                     child: Text(
                       "Forgot Password",
                       textAlign: TextAlign.end,
-                      style: kSmallTextStyle.copyWith(
-                          color: Theme.of(context).primaryColor,
-                          fontWeight: FontWeight.w500),
+                      style:
+                          kSmallTextStyle.copyWith(fontWeight: FontWeight.w500),
                     ),
                   ),
                 ),
