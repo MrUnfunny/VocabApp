@@ -73,37 +73,29 @@ class Search extends SearchDelegate {
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    if (query != null && query != '')
-      return ListView.builder(
-        itemBuilder: (context, index) {
-          String queryWord;
-          return ListTile(
-            onTap: () => (queryWord != null && queryWord != '')
-                ? Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => WordDetailScreen(
-                              word: queryWord?.trim(),
-                            )),
-                  )
-                : null,
-            title: FutureBuilder(
-              builder: (context, AsyncSnapshot<List<String>> snapshot) {
-                if (snapshot.hasData && index < snapshot.data.length - 1) {
-                  queryWord = snapshot.data[index];
-                  return Text(snapshot.data[index]);
-                }
-                return Center(
-                  child: Container(),
-                );
-              },
-              future: searchListFuture(query?.trim()),
-            ),
+    return FutureBuilder(
+      future: searchListFuture(query),
+      builder: (context, snapshot) {
+        if (snapshot.hasData)
+          return ListView.builder(
+            itemBuilder: (context, index) {
+              return ListTile(
+                title: Text(snapshot.data[index]),
+                onTap: () => Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => WordDetailScreen(
+                      word: snapshot.data[index],
+                    ),
+                  ),
+                ),
+              );
+            },
+            itemCount: snapshot.data.length,
           );
-        },
-        itemCount: 20,
-      );
-    return Container();
+        return Container();
+      },
+    );
   }
 
   @override
