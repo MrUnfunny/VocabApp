@@ -5,6 +5,8 @@ import 'package:my_vocab/constants.dart';
 import 'package:my_vocab/Presentation/Screens/word-detail/screen.dart';
 import 'package:my_vocab/services/api/datamuse_api.dart';
 import 'package:http/http.dart';
+import 'package:my_vocab/viewmodels/home_provider.dart';
+import 'package:provider/provider.dart';
 
 class SearchBar extends StatelessWidget {
   @override
@@ -113,7 +115,32 @@ class Search extends SearchDelegate {
               Theme.of(context).primaryColor,
             ),
           );
-        return Container();
+        return Consumer(
+          builder:
+              (BuildContext context, HomeProvider homeProvider, Widget child) =>
+                  ListView.builder(
+            itemBuilder: (context, index) => Dismissible(
+              background: Container(
+                padding: EdgeInsets.symmetric(horizontal: 10.0),
+                color: Colors.red,
+                child: Icon(
+                  Icons.delete,
+                  color: Colors.white,
+                ),
+              ),
+              key: Key(homeProvider.historyWords[index]['word']),
+              child: ListTile(
+                title: Text(homeProvider.historyWords[index]['word']),
+                trailing: IconButton(
+                  icon: Icon(Icons.history),
+                  onPressed: () =>
+                      query = homeProvider.historyWords[index]['word'],
+                ),
+              ),
+            ),
+            itemCount: homeProvider.historyWords.length,
+          ),
+        );
       },
     );
   }
