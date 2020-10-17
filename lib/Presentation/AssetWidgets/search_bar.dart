@@ -77,21 +77,41 @@ class Search extends SearchDelegate {
       future: searchListFuture(query),
       builder: (context, snapshot) {
         if (snapshot.hasData)
-          return ListView.builder(
-            itemBuilder: (context, index) {
-              return ListTile(
-                title: Text(snapshot.data[index]),
-                onTap: () => Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => WordDetailScreen(
-                      word: snapshot.data[index],
-                    ),
+          return Column(
+            children: [
+              if (snapshot.connectionState != ConnectionState.done)
+                LinearProgressIndicator(
+                  backgroundColor: Colors.white,
+                  valueColor: AlwaysStoppedAnimation<Color>(
+                    Theme.of(context).primaryColor,
                   ),
                 ),
-              );
-            },
-            itemCount: snapshot.data.length,
+              Expanded(
+                child: ListView.builder(
+                  itemBuilder: (context, index) {
+                    return ListTile(
+                      title: Text(snapshot.data[index]),
+                      onTap: () => Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => WordDetailScreen(
+                            word: snapshot.data[index],
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                  itemCount: snapshot.data.length,
+                ),
+              ),
+            ],
+          );
+        if (query != '' && !snapshot.hasData)
+          return LinearProgressIndicator(
+            backgroundColor: Colors.white,
+            valueColor: AlwaysStoppedAnimation<Color>(
+              Theme.of(context).primaryColor,
+            ),
           );
         return Container();
       },
