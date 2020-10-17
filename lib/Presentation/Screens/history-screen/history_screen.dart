@@ -8,10 +8,10 @@ class HistoryScreen extends StatelessWidget {
   static final id = 'History_Screen';
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: Colors.white,
-        body: Column(
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: SafeArea(
+        child: Column(
           children: [
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -54,8 +54,6 @@ class HistoryCard extends StatelessWidget {
       onDismissed: (direction) async {
         await HistoryDB().remove({'word': word});
         Provider.of<HomeProvider>(context, listen: false).getHistory();
-        if ((await HistoryDB().listAll()).isEmpty && Navigator.canPop(context))
-          Navigator.pop(context);
       },
       child: Container(
         margin: EdgeInsets.symmetric(vertical: 12.0),
