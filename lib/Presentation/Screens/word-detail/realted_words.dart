@@ -9,7 +9,7 @@ class RelatedWords extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return ListView(
       children: [
         if (wordDetail.synonynms.isNotEmpty)
           WordCard(

@@ -36,7 +36,8 @@ class _WordDetailScreenState extends State<WordDetailScreen>
     SchedulerBinding.instance.addPostFrameCallback((timeStamp) async {
       await Provider.of<WordDetailProvider>(context, listen: false)
           .getDetail(widget.word);
-      Provider.of<HomeProvider>(context, listen: false).getHistory();
+      if (mounted)
+        Provider.of<HomeProvider>(context, listen: false).getHistory();
     });
   }
 

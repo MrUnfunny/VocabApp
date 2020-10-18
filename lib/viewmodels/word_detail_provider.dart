@@ -8,8 +8,6 @@ import 'package:my_vocab/services/model/dictionary.dart';
 import 'package:my_vocab/services/api/owl_bot_api.dart';
 import 'package:my_vocab/services/model/enum/api_request_status.dart';
 import 'package:my_vocab/services/model/functions.dart';
-import 'package:my_vocab/viewmodels/home_provider.dart';
-import 'package:provider/provider.dart';
 
 class WordDetailProvider extends ChangeNotifier {
   Dictionary wordDetail;
@@ -33,6 +31,10 @@ class WordDetailProvider extends ChangeNotifier {
       final synJson = jsonDecode(synRes.body);
       final antJson = jsonDecode(antRes.body);
 
+      rhymeList.clear();
+      synList.clear();
+      antList.clear();
+
       for (var value in rhymeJson) {
         rhymeList.add(value['word']);
       }
@@ -42,12 +44,16 @@ class WordDetailProvider extends ChangeNotifier {
       for (var value in antJson) {
         antList.add(value['word']);
       }
+      print(rhymeList);
+      print(rhymeJson);
       wordDetail = wordDetail.copyWith(
         rhymes: rhymeList,
         synonynms: synList,
         antonyms: antList,
       );
+
       await addToHistory(wordDetail);
+
       setApiStatus(ApiRequestStatus.loaded);
     } catch (e) {
       print("@Owlbot meaning fetch failed in WordDetailProvider: $e");
