@@ -33,7 +33,7 @@ class HorizontalScrollCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  word,
+                  "${word[0].toUpperCase()}${word.substring(1)}",
                   style: TextStyle(
                       fontFamily: "Montserrat",
                       fontSize: 24.0,
