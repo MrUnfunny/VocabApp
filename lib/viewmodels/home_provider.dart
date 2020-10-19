@@ -22,7 +22,7 @@ class HomeProvider extends ChangeNotifier {
   }
 
   getHistory() async {
-    historyWords = await HistoryDB().listAll();
+    historyWords = (await HistoryDB().listAll()).reversed.toList();
     notifyListeners();
   }
 

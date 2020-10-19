@@ -29,12 +29,8 @@ class HistoryScreen extends StatelessWidget {
                     itemCount: homeProvider.historyWords.length,
                     itemBuilder: (BuildContext context, int index) {
                       return HistoryCard(
-                        word: homeProvider.historyWords[
-                                homeProvider.historyWords.length - index - 1]
-                            ['word'],
-                        date: homeProvider.historyWords[
-                                homeProvider.historyWords.length - index - 1]
-                            ['date'],
+                        word: homeProvider.historyWords[index]['word'],
+                        date: homeProvider.historyWords[index]['date'],
                       );
                     },
                   );
