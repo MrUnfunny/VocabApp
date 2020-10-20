@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:my_vocab/Presentation/AssetWidgets/error_widget.dart';
 import 'package:my_vocab/Presentation/AssetWidgets/loading_widget.dart';
+import 'package:my_vocab/Presentation/AssetWidgets/navbar.dart';
 import 'package:my_vocab/Presentation/Screens/history-screen/history_screen.dart';
 import 'package:my_vocab/Presentation/Screens/home-screen/word_of_the_day_card.dart';
 import 'package:my_vocab/Presentation/AssetWidgets/search_bar.dart';
@@ -121,6 +122,9 @@ class _HomePageState extends State<HomePage> {
                     ? LoadingWidget()
                     : ErrorLoadedWidget(),
           ),
+        ),
+        bottomNavigationBar: NavBar(
+          currentIndex: 0,
         ),
       ),
     );

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:my_vocab/Presentation/AssetWidgets/custom_app_bar.dart';
+import 'package:my_vocab/Presentation/AssetWidgets/navbar.dart';
 import 'package:my_vocab/services/local_databases/history.dart';
 import 'package:my_vocab/viewmodels/home_provider.dart';
 import 'package:provider/provider.dart';
@@ -8,7 +9,7 @@ import 'package:provider/provider.dart';
 final svgAsset = 'Assets/Vectors/empty.svg';
 
 class HistoryScreen extends StatelessWidget {
-  static final id = 'History_Screen';
+  static const id = 'History_Screen';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,6 +54,9 @@ class HistoryScreen extends StatelessWidget {
             ),
           ],
         ),
+      ),
+      bottomNavigationBar: NavBar(
+        currentIndex: 1,
       ),
     );
   }
