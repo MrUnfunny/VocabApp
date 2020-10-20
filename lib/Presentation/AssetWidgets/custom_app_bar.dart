@@ -5,8 +5,10 @@ import 'package:my_vocab/services/auth/auth.dart';
 
 class CustomAppBar extends StatelessWidget {
   final String title;
+  final bool isTextWhite;
   const CustomAppBar({
     Key key,
+    this.isTextWhite = false,
     @required this.title,
   }) : super(key: key);
 
@@ -19,7 +21,9 @@ class CustomAppBar extends StatelessWidget {
           margin: EdgeInsets.symmetric(horizontal: 10.0, vertical: 30.0),
           child: Text(
             this.title,
-            style: kAppBarStyle,
+            style: (isTextWhite)
+                ? kAppBarStyle.copyWith(color: Colors.white)
+                : kAppBarStyle,
           ),
         ),
         GestureDetector(

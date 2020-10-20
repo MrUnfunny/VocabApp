@@ -12,27 +12,39 @@ class HistoryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).primaryColor,
       body: SafeArea(
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: CustomAppBar(title: 'History'),
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: CustomAppBar(
+                title: 'History',
+                isTextWhite: true,
+              ),
             ),
             Expanded(
               child: Consumer(builder: (BuildContext context,
                   HomeProvider homeProvider, Widget child) {
                 if (homeProvider.historyWords.isNotEmpty)
-                  return ListView.builder(
-                    padding: EdgeInsets.symmetric(horizontal: 16.0),
-                    itemCount: homeProvider.historyWords.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return HistoryCard(
-                        word: homeProvider.historyWords[index]['word'],
-                        date: homeProvider.historyWords[index]['date'],
-                      );
-                    },
+                  return Container(
+                    padding: EdgeInsets.only(top: 30),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(30),
+                        topRight: Radius.circular(30),
+                      ),
+                    ),
+                    child: ListView.builder(
+                      itemCount: homeProvider.historyWords.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return HistoryCard(
+                          word: homeProvider.historyWords[index]['word'],
+                          date: homeProvider.historyWords[index]['date'],
+                        );
+                      },
+                    ),
                   );
                 else {
                   return SvgPicture.asset(svgAsset);
@@ -56,12 +68,8 @@ class HistoryCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Dismissible(
       background: Container(
-        margin: EdgeInsets.symmetric(vertical: 12.0),
+        color: Colors.red,
         padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10.0),
-          color: Colors.red,
-        ),
         child: Icon(
           Icons.delete,
           color: Colors.white,
@@ -73,12 +81,7 @@ class HistoryCard extends StatelessWidget {
         Provider.of<HomeProvider>(context, listen: false).getHistory();
       },
       child: Container(
-        margin: EdgeInsets.symmetric(vertical: 12.0),
-        padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10.0),
-          color: Colors.grey.shade300,
-        ),
+        padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
         child: Row(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

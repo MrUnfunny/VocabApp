@@ -62,7 +62,7 @@ class WordDetailProvider extends ChangeNotifier {
   }
 
   addToHistory(Dictionary wordDetail) async {
-    final DateFormat formatter = DateFormat('dd-MM-yyyy');
+    final DateFormat formatter = DateFormat('yyyy-MM-dd');
     Map res = {
       ...wordDetail.toMap(),
       ...{'date': '${formatter.format(DateTime.now())}'}
