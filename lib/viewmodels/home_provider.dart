@@ -8,6 +8,7 @@ class HomeProvider extends ChangeNotifier {
   Map<String, String> wordOfTheDay;
   ApiRequestStatus apiRequestStatus = ApiRequestStatus.loading;
   List<Map> historyWords;
+  List<Map> favWords;
 
   getWordOfTheDayAndHistory() async {
     setApiRequestStatus(ApiRequestStatus.loading);

@@ -174,7 +174,8 @@ class _SignInScreenState extends State<SignInScreen> {
                         final user =
                             await Auth().signInWithFacebook(context: context);
                         if (user != null)
-                          Navigator.pushReplacementNamed(context, HomePage.id);
+                          Navigator.pushReplacementNamed(
+                              context, HomeScreen.id);
                         print("Exception occurred: User is null");
                       },
                     ),
@@ -193,7 +194,8 @@ class _SignInScreenState extends State<SignInScreen> {
                         final user =
                             await Auth().signInWithGoogle(context: context);
                         if (user != null) {
-                          Navigator.pushReplacementNamed(context, HomePage.id);
+                          Navigator.pushReplacementNamed(
+                              context, HomeScreen.id);
                         }
                       },
                     ),

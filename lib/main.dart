@@ -3,11 +3,14 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:my_vocab/Presentation/Screens/favorites/favorites_screen.dart';
 import 'package:my_vocab/Presentation/Screens/home-screen/screen.dart';
+import 'package:my_vocab/Presentation/Screens/settings/settings_screen.dart';
 import 'package:my_vocab/Presentation/Screens/sign_in_screen.dart';
 import 'package:my_vocab/Presentation/Screens/sign_up_screen.dart';
 import 'package:my_vocab/Presentation/Screens/welcome_screen.dart';
 import 'package:my_vocab/Presentation/Screens/word-detail/screen.dart';
+import 'package:my_vocab/main_screen.dart';
 import 'package:my_vocab/viewmodels/home_provider.dart';
 import 'package:my_vocab/viewmodels/word_detail_provider.dart';
 import 'package:provider/provider.dart';
@@ -54,15 +57,18 @@ class MyApp extends StatelessWidget {
         primaryColor: Color(0xffff4f18),
       ),
       initialRoute: (FirebaseAuth.instance.currentUser != null)
-          ? HomePage.id
+          ? MainScreen.id
           : WelcomeScreen.id,
       routes: {
+        MainScreen.id: (context) => MainScreen(),
         SignInScreen.id: (context) => SignInScreen(),
         WelcomeScreen.id: (context) => WelcomeScreen(),
         SignUpScreen.id: (context) => SignUpScreen(),
-        HomePage.id: (context) => HomePage(),
+        HomeScreen.id: (context) => HomeScreen(),
         WordDetailScreen.id: (context) => WordDetailScreen(),
         HistoryScreen.id: (context) => HistoryScreen(),
+        SettingsScreen.id: (context) => SettingsScreen(),
+        FavScreen.id: (context) => FavScreen(),
       },
     );
   }

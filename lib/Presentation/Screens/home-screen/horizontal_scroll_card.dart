@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:my_vocab/Presentation/Screens/word-detail/screen.dart';
 
-class HorizontalScrollCard extends StatelessWidget {
+class HorizontalScrollCard extends StatefulWidget {
   final String word;
   final String date;
 
   const HorizontalScrollCard({Key key, this.word, this.date}) : super(key: key);
 
+  @override
+  _HorizontalScrollCardState createState() => _HorizontalScrollCardState();
+}
+
+class _HorizontalScrollCardState extends State<HorizontalScrollCard> {
+  IconData _icon = Icons.bookmark_border_outlined;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -14,7 +20,7 @@ class HorizontalScrollCard extends StatelessWidget {
         context,
         MaterialPageRoute(
           builder: (context) => WordDetailScreen(
-            word: word,
+            word: widget.word,
           ),
         ),
       ),
@@ -33,7 +39,7 @@ class HorizontalScrollCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "${word[0].toUpperCase()}${word.substring(1)}",
+                  "${widget.word[0].toUpperCase()}${widget.word.substring(1)}",
                   style: TextStyle(
                       fontFamily: "Montserrat",
                       fontSize: 24.0,
@@ -43,13 +49,22 @@ class HorizontalScrollCard extends StatelessWidget {
                 SizedBox(
                   height: 8.0,
                 ),
-                Text(date),
+                Text(widget.date),
               ],
             ),
-            Icon(
-              Icons.bookmark_border_outlined,
-              size: 34.0,
-              color: Theme.of(context).primaryColor,
+            IconButton(
+              icon: Icon(
+                _icon,
+                size: 34.0,
+                color: Theme.of(context).primaryColor,
+              ),
+              onPressed: () {
+                setState(() {
+                  _icon = (_icon == Icons.bookmark_border_outlined)
+                      ? Icons.bookmark
+                      : Icons.bookmark_border_outlined;
+                });
+              },
             )
           ],
         ),

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:my_vocab/Presentation/AssetWidgets/custom_app_bar.dart';
-import 'package:my_vocab/Presentation/AssetWidgets/navbar.dart';
 import 'package:my_vocab/services/local_databases/history.dart';
 import 'package:my_vocab/viewmodels/home_provider.dart';
 import 'package:provider/provider.dart';
@@ -29,7 +28,7 @@ class HistoryScreen extends StatelessWidget {
                   HomeProvider homeProvider, Widget child) {
                 if (homeProvider.historyWords.isNotEmpty)
                   return Container(
-                    padding: EdgeInsets.only(top: 30),
+                    padding: EdgeInsets.only(top: 5),
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.only(
@@ -38,11 +37,15 @@ class HistoryScreen extends StatelessWidget {
                       ),
                     ),
                     child: ListView.builder(
-                      itemCount: homeProvider.historyWords.length,
+                      itemCount: homeProvider.historyWords.length + 1,
                       itemBuilder: (BuildContext context, int index) {
+                        if (index == 0)
+                          return SizedBox(
+                            height: 10.0,
+                          );
                         return HistoryCard(
-                          word: homeProvider.historyWords[index]['word'],
-                          date: homeProvider.historyWords[index]['date'],
+                          word: homeProvider.historyWords[index - 1]['word'],
+                          date: homeProvider.historyWords[index - 1]['date'],
                         );
                       },
                     ),
@@ -54,9 +57,6 @@ class HistoryScreen extends StatelessWidget {
             ),
           ],
         ),
-      ),
-      bottomNavigationBar: NavBar(
-        currentIndex: 1,
       ),
     );
   }

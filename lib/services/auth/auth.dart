@@ -15,7 +15,7 @@ class Auth {
     try {
       await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
-      Navigator.pushReplacementNamed(context, HomePage.id);
+      Navigator.pushReplacementNamed(context, HomeScreen.id);
     } catch (e) {
       print('Exception @createAccount: $e');
       _showDialog(
@@ -31,7 +31,7 @@ class Auth {
       @required BuildContext context}) async {
     try {
       await _auth.signInWithEmailAndPassword(email: email, password: password);
-      Navigator.pushReplacementNamed(context, HomePage.id);
+      Navigator.pushReplacementNamed(context, HomeScreen.id);
     } catch (e) {
       _showDialog(error: e, context: context);
     }
