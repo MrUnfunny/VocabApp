@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:my_vocab/Presentation/AssetWidgets/custom_app_bar.dart';
+import 'package:my_vocab/constants.dart';
 import 'package:my_vocab/services/local_databases/history.dart';
 import 'package:my_vocab/viewmodels/home_provider.dart';
 import 'package:provider/provider.dart';
@@ -24,36 +25,55 @@ class HistoryScreen extends StatelessWidget {
               ),
             ),
             Expanded(
-              child: Consumer(builder: (BuildContext context,
-                  HomeProvider homeProvider, Widget child) {
-                if (homeProvider.historyWords.isNotEmpty)
-                  return Container(
-                    padding: EdgeInsets.only(top: 5),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(30),
-                        topRight: Radius.circular(30),
-                      ),
-                    ),
-                    child: ListView.builder(
-                      itemCount: homeProvider.historyWords.length + 1,
-                      itemBuilder: (BuildContext context, int index) {
-                        if (index == 0)
-                          return SizedBox(
-                            height: 10.0,
+              child: Container(
+                width: MediaQuery.of(context).size.width,
+                padding: EdgeInsets.only(top: 5),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(30),
+                    topRight: Radius.circular(30),
+                  ),
+                ),
+                child: Consumer(
+                  builder: (BuildContext context, HomeProvider homeProvider,
+                      Widget child) {
+                    if (homeProvider.historyWords.isNotEmpty)
+                      return ListView.builder(
+                        itemCount: homeProvider.historyWords.length + 1,
+                        itemBuilder: (BuildContext context, int index) {
+                          if (index == 0)
+                            return SizedBox(
+                              height: 10.0,
+                            );
+                          return HistoryCard(
+                            word: homeProvider.historyWords[index - 1]['word'],
+                            date: homeProvider.historyWords[index - 1]['date'],
                           );
-                        return HistoryCard(
-                          word: homeProvider.historyWords[index - 1]['word'],
-                          date: homeProvider.historyWords[index - 1]['date'],
-                        );
-                      },
-                    ),
-                  );
-                else {
-                  return SvgPicture.asset(svgAsset);
-                }
-              }),
+                        },
+                      );
+                    else {
+                      return Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Center(
+                            child: SvgPicture.asset(
+                              svgAsset,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 30.0,
+                          ),
+                          Text(
+                            'Nothing Here',
+                            style: kLargeTextStyle,
+                          ),
+                        ],
+                      );
+                    }
+                  },
+                ),
+              ),
             ),
           ],
         ),

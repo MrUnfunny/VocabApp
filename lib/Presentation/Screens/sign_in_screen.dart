@@ -5,9 +5,10 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:my_vocab/Presentation/AssetWidgets/bottom_bar_textfield.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:my_vocab/Presentation/Screens/sign_up_screen.dart';
 import 'package:my_vocab/constants.dart';
 import 'package:my_vocab/Presentation/Screens/home-screen/screen.dart';
-import 'package:my_vocab/Presentation/Screens/sign_up_screen.dart';
+import 'package:my_vocab/main_screen.dart';
 import 'package:my_vocab/services/auth/auth.dart';
 import 'package:my_vocab/services/validators/email.dart';
 import 'package:my_vocab/services/validators/password.dart';
@@ -175,7 +176,7 @@ class _SignInScreenState extends State<SignInScreen> {
                             await Auth().signInWithFacebook(context: context);
                         if (user != null)
                           Navigator.pushReplacementNamed(
-                              context, HomeScreen.id);
+                              context, MainScreen.id);
                         print("Exception occurred: User is null");
                       },
                     ),
@@ -195,7 +196,7 @@ class _SignInScreenState extends State<SignInScreen> {
                             await Auth().signInWithGoogle(context: context);
                         if (user != null) {
                           Navigator.pushReplacementNamed(
-                              context, HomeScreen.id);
+                              context, MainScreen.id);
                         }
                       },
                     ),

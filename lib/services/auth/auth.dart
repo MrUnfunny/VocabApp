@@ -4,6 +4,7 @@ import 'package:flutter_login_facebook/flutter_login_facebook.dart';
 import 'package:my_vocab/Presentation/Screens/home-screen/screen.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:my_vocab/Presentation/Screens/welcome_screen.dart';
+import 'package:my_vocab/main_screen.dart';
 import 'package:my_vocab/services/local_databases/history.dart';
 
 class Auth {
@@ -15,7 +16,7 @@ class Auth {
     try {
       await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
-      Navigator.pushReplacementNamed(context, HomeScreen.id);
+      Navigator.pushReplacementNamed(context, MainScreen.id);
     } catch (e) {
       print('Exception @createAccount: $e');
       _showDialog(

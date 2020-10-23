@@ -26,11 +26,13 @@ dependencies:
   modal_progress_hud: ^0.1.3
   objectdb: ^1.0.10+1
   path_provider: ^1.6.18
+  
   provider: ^4.3.2+2
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  effective_dart: ^1.2.4
 
 flutter:
   uses-material-design: true
