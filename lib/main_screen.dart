@@ -17,7 +17,6 @@ class _MainScreenState extends State<MainScreen>
     with SingleTickerProviderStateMixin {
   final double max = 200.0;
   AnimationController animationController;
-  Animation finalAnimation;
 
   PageController _pageController;
   int _page = 0;
@@ -30,8 +29,6 @@ class _MainScreenState extends State<MainScreen>
       vsync: this,
       duration: Duration(milliseconds: 200),
     );
-    finalAnimation =
-        CurvedAnimation(curve: Curves.easeInCirc, parent: animationController);
   }
 
   @override
@@ -45,8 +42,8 @@ class _MainScreenState extends State<MainScreen>
     return AnimatedBuilder(
       animation: animationController,
       builder: (context, child) {
-        double slide = finalAnimation.value * max;
-        double scale = 1 - (finalAnimation.value * 0.05);
+        double slide = animationController.value * max;
+        double scale = 1 - (animationController.value * 0.1);
         return Stack(
           children: [
             Container(
@@ -56,29 +53,36 @@ class _MainScreenState extends State<MainScreen>
               transform: Matrix4.identity()
                 ..translate(-slide)
                 ..scale(scale),
-              alignment: Alignment.topLeft,
+              alignment: Alignment.centerLeft,
               child: Consumer(
                 builder: (BuildContext context, HomeProvider homeProvider,
                         Widget child) =>
-                    Scaffold(
-                  body: PageView(
-                    physics: NeverScrollableScrollPhysics(),
-                    controller: _pageController,
-                    onPageChanged: (currentPageIndex) {
-                      setState(() {
-                        this._page = currentPageIndex;
-                      });
-                    },
-                    children: [
-                      HomeScreen(),
-                      HistoryScreen(),
-                      FavScreen(),
-                      SettingsScreen(),
-                    ],
-                  ),
-                  bottomNavigationBar:
-                      (homeProvider.apiRequestStatus == ApiRequestStatus.loaded)
-                          ? BottomNavigationBar(
+                    Container(
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(20)),
+                  child: Scaffold(
+                    backgroundColor: Colors.transparent,
+                    body: PageView(
+                      physics: NeverScrollableScrollPhysics(),
+                      controller: _pageController,
+                      onPageChanged: (currentPageIndex) {
+                        setState(() {
+                          this._page = currentPageIndex;
+                        });
+                      },
+                      children: [
+                        HomeScreen(),
+                        HistoryScreen(),
+                        FavScreen(),
+                        SettingsScreen(),
+                      ],
+                    ),
+                    bottomNavigationBar: (homeProvider.apiRequestStatus ==
+                            ApiRequestStatus.loaded)
+                        ? ClipRRect(
+                            borderRadius: BorderRadius.circular(20),
+                            child: BottomNavigationBar(
                               type: BottomNavigationBarType.fixed,
                               currentIndex: _page,
                               onTap: (pageIndex) {
@@ -105,8 +109,10 @@ class _MainScreenState extends State<MainScreen>
                                   label: 'Settings',
                                 )
                               ],
-                            )
-                          : null,
+                            ),
+                          )
+                        : null,
+                  ),
                 ),
               ),
             ),
