@@ -17,6 +17,7 @@ class _MainScreenState extends State<MainScreen>
     with SingleTickerProviderStateMixin {
   final double max = 200.0;
   AnimationController animationController;
+  Animation finalAnimation;
 
   PageController _pageController;
   int _page = 0;
@@ -29,6 +30,8 @@ class _MainScreenState extends State<MainScreen>
       vsync: this,
       duration: Duration(milliseconds: 200),
     );
+    finalAnimation =
+        CurvedAnimation(curve: Curves.easeInCirc, parent: animationController);
   }
 
   @override
@@ -42,8 +45,8 @@ class _MainScreenState extends State<MainScreen>
     return AnimatedBuilder(
       animation: animationController,
       builder: (context, child) {
-        double slide = animationController.value * max;
-        double scale = 1 - (animationController.value * 0.3);
+        double slide = finalAnimation.value * max;
+        double scale = 1 - (finalAnimation.value * 0.05);
         return Stack(
           children: [
             Container(
