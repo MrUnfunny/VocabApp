@@ -13,13 +13,22 @@ class MainScreen extends StatefulWidget {
   _MainScreenState createState() => _MainScreenState();
 }
 
-class _MainScreenState extends State<MainScreen> {
+class _MainScreenState extends State<MainScreen>
+    with SingleTickerProviderStateMixin {
+  final double max = 200.0;
+  AnimationController animationController;
+
   PageController _pageController;
   int _page = 0;
+
   @override
   void initState() {
     super.initState();
     _pageController = PageController(initialPage: 0);
+    animationController = AnimationController(
+      vsync: this,
+      duration: Duration(milliseconds: 200),
+    );
   }
 
   @override
@@ -30,54 +39,85 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer(
-      builder:
-          (BuildContext context, HomeProvider homeProvider, Widget child) =>
-              Scaffold(
-        body: PageView(
-          physics: NeverScrollableScrollPhysics(),
-          controller: _pageController,
-          onPageChanged: (currentPageIndex) {
-            setState(() {
-              this._page = currentPageIndex;
-            });
-          },
+    return AnimatedBuilder(
+      animation: animationController,
+      builder: (context, child) {
+        double slide = animationController.value * max;
+        double scale = 1 - (animationController.value * 0.3);
+        return Stack(
           children: [
-            HomeScreen(),
-            HistoryScreen(),
-            FavScreen(),
-            SettingsScreen(),
-          ],
-        ),
-        bottomNavigationBar:
-            (homeProvider.apiRequestStatus == ApiRequestStatus.loaded)
-                ? BottomNavigationBar(
-                    type: BottomNavigationBarType.fixed,
-                    currentIndex: _page,
-                    onTap: (pageIndex) {
-                      _pageController.jumpToPage(pageIndex);
+            Container(
+              color: Colors.blue,
+            ),
+            Transform(
+              transform: Matrix4.identity()
+                ..translate(-slide)
+                ..scale(scale),
+              alignment: Alignment.topLeft,
+              child: Consumer(
+                builder: (BuildContext context, HomeProvider homeProvider,
+                        Widget child) =>
+                    Scaffold(
+                  body: PageView(
+                    physics: NeverScrollableScrollPhysics(),
+                    controller: _pageController,
+                    onPageChanged: (currentPageIndex) {
+                      setState(() {
+                        this._page = currentPageIndex;
+                      });
                     },
-                    items: [
-                      BottomNavigationBarItem(
-                        icon: Icon(Icons.home),
-                        label: 'Home',
-                      ),
-                      BottomNavigationBarItem(
-                        icon: Icon(Icons.history),
-                        label: 'History',
-                      ),
-                      BottomNavigationBarItem(
-                        icon: Icon(Icons.favorite),
-                        label: 'Fav',
-                      ),
-                      BottomNavigationBarItem(
-                        icon: Icon(Icons.settings),
-                        label: 'Settings',
-                      )
+                    children: [
+                      HomeScreen(),
+                      HistoryScreen(),
+                      FavScreen(),
+                      SettingsScreen(),
                     ],
-                  )
-                : null,
-      ),
+                  ),
+                  bottomNavigationBar:
+                      (homeProvider.apiRequestStatus == ApiRequestStatus.loaded)
+                          ? BottomNavigationBar(
+                              type: BottomNavigationBarType.fixed,
+                              currentIndex: _page,
+                              onTap: (pageIndex) {
+                                if (pageIndex == 3)
+                                  toggleSettings();
+                                else
+                                  _pageController.jumpToPage(pageIndex);
+                              },
+                              items: [
+                                BottomNavigationBarItem(
+                                  icon: Icon(Icons.home),
+                                  label: 'Home',
+                                ),
+                                BottomNavigationBarItem(
+                                  icon: Icon(Icons.history),
+                                  label: 'History',
+                                ),
+                                BottomNavigationBarItem(
+                                  icon: Icon(Icons.favorite),
+                                  label: 'Fav',
+                                ),
+                                BottomNavigationBarItem(
+                                  icon: Icon(Icons.settings),
+                                  label: 'Settings',
+                                )
+                              ],
+                            )
+                          : null,
+                ),
+              ),
+            ),
+          ],
+        );
+      },
     );
+  }
+
+  void toggleSettings() {
+    if (animationController.status == AnimationStatus.completed)
+      animationController.reverse();
+    else {
+      animationController.forward();
+    }
   }
 }

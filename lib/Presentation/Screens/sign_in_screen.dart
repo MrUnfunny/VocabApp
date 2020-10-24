@@ -7,7 +7,6 @@ import 'package:my_vocab/Presentation/AssetWidgets/bottom_bar_textfield.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:my_vocab/Presentation/Screens/sign_up_screen.dart';
 import 'package:my_vocab/constants.dart';
-import 'package:my_vocab/Presentation/Screens/home-screen/screen.dart';
 import 'package:my_vocab/main_screen.dart';
 import 'package:my_vocab/services/auth/auth.dart';
 import 'package:my_vocab/services/validators/email.dart';
