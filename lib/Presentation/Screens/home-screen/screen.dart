@@ -65,7 +65,7 @@ class _HomeScreenState extends State<HomeScreen>
       builder:
           (BuildContext context, HomeProvider homeProvider, Widget child) =>
               Scaffold(
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.grey.shade100,
         drawer: Drawer(
           elevation: 20.0,
         ),

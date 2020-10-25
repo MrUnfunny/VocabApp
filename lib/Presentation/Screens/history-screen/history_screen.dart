@@ -13,77 +13,69 @@ class HistoryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.transparent,
-      body: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20.0),
-          color: Theme.of(context).primaryColor,
-        ),
-        child: SafeArea(
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: CustomAppBar(
-                  title: 'History',
-                  isTextWhite: true,
-                ),
+      backgroundColor: Theme.of(context).primaryColor,
+      body: SafeArea(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: CustomAppBar(
+                title: 'History',
+                isTextWhite: true,
               ),
-              Expanded(
-                child: Container(
-                  width: MediaQuery.of(context).size.width,
-                  padding: EdgeInsets.only(top: 5),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(30),
-                      topRight: Radius.circular(30),
-                    ),
+            ),
+            Expanded(
+              child: Container(
+                width: MediaQuery.of(context).size.width,
+                padding: EdgeInsets.only(top: 5),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(30),
+                    topRight: Radius.circular(30),
                   ),
-                  child: Consumer(
-                    builder: (BuildContext context, HomeProvider homeProvider,
-                        Widget child) {
-                      if (homeProvider.historyWords.isNotEmpty)
-                        return ListView.builder(
-                          itemCount: homeProvider.historyWords.length + 1,
-                          itemBuilder: (BuildContext context, int index) {
-                            if (index == 0)
-                              return SizedBox(
-                                height: 10.0,
-                              );
-                            return HistoryCard(
-                              word: homeProvider.historyWords[index - 1]
-                                  ['word'],
-                              date: homeProvider.historyWords[index - 1]
-                                  ['date'],
+                ),
+                child: Consumer(
+                  builder: (BuildContext context, HomeProvider homeProvider,
+                      Widget child) {
+                    if (homeProvider.historyWords.isNotEmpty)
+                      return ListView.builder(
+                        itemCount: homeProvider.historyWords.length + 1,
+                        itemBuilder: (BuildContext context, int index) {
+                          if (index == 0)
+                            return SizedBox(
+                              height: 10.0,
                             );
-                          },
-                        );
-                      else {
-                        return Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Center(
-                              child: SvgPicture.asset(
-                                svgAsset,
-                              ),
+                          return HistoryCard(
+                            word: homeProvider.historyWords[index - 1]['word'],
+                            date: homeProvider.historyWords[index - 1]['date'],
+                          );
+                        },
+                      );
+                    else {
+                      return Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Center(
+                            child: SvgPicture.asset(
+                              svgAsset,
                             ),
-                            SizedBox(
-                              height: 30.0,
-                            ),
-                            Text(
-                              'Nothing Here',
-                              style: kLargeTextStyle,
-                            ),
-                          ],
-                        );
-                      }
-                    },
-                  ),
+                          ),
+                          SizedBox(
+                            height: 30.0,
+                          ),
+                          Text(
+                            'Nothing Here',
+                            style: kLargeTextStyle,
+                          ),
+                        ],
+                      );
+                    }
+                  },
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
