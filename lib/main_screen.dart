@@ -50,8 +50,18 @@ class _MainScreenState extends State<MainScreen>
         double scale = 1 - (finalAnimation.value * 0.1);
         return Stack(
           children: [
-            Container(
-              color: Colors.black,
+            Scaffold(
+              backgroundColor: Colors.redAccent,
+              body: Transform(
+                transform: Matrix4.identity()..translate(-slide),
+                child: Transform.translate(
+                  offset: Offset(200, 0),
+                  child: Container(
+                    alignment: Alignment.centerRight,
+                    child: SettingsScreen(),
+                  ),
+                ),
+              ),
             ),
             Transform(
               transform: Matrix4.identity()

@@ -5,7 +5,6 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:my_vocab/Presentation/Screens/favorites/favorites_screen.dart';
 import 'package:my_vocab/Presentation/Screens/home-screen/screen.dart';
-import 'package:my_vocab/Presentation/Screens/settings/settings_screen.dart';
 import 'package:my_vocab/Presentation/Screens/sign_in_screen.dart';
 import 'package:my_vocab/Presentation/Screens/sign_up_screen.dart';
 import 'package:my_vocab/Presentation/Screens/welcome_screen.dart';
@@ -67,7 +66,6 @@ class MyApp extends StatelessWidget {
         HomeScreen.id: (context) => HomeScreen(),
         WordDetailScreen.id: (context) => WordDetailScreen(),
         HistoryScreen.id: (context) => HistoryScreen(),
-        SettingsScreen.id: (context) => SettingsScreen(),
         FavScreen.id: (context) => FavScreen(),
       },
     );
