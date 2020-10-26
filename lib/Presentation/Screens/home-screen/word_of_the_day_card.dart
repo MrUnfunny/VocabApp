@@ -74,10 +74,12 @@ class CustomCard extends StatelessWidget {
                     children: [
                       WordOfTheDayCard(
                         icon: Icons.favorite_border,
+                        tooltipMsg: 'save to liked',
                         onPressed: null,
                       ),
                       WordOfTheDayCard(
                         icon: Icons.content_copy,
+                        tooltipMsg: 'Copy to clipboard',
                         onPressed: () {
                           Clipboard.setData(ClipboardData(
                               text: homeProvider.wordOfTheDay['word']));
@@ -87,10 +89,12 @@ class CustomCard extends StatelessWidget {
                       ),
                       WordOfTheDayCard(
                         icon: Icons.bookmark_border,
+                        tooltipMsg: 'Add to Favorites',
                         onPressed: null,
                       ),
                       WordOfTheDayCard(
                         icon: Icons.open_in_new_outlined,
+                        tooltipMsg: 'Go to definition',
                         onPressed: () => Navigator.push(
                           context,
                           MaterialPageRoute(

@@ -24,7 +24,9 @@ class SettingsScreen extends StatelessWidget {
           ),
           itemBuilder: (context, index) {
             return SettingsCard(
-                icon: _iconList[index], title: _stringList[index]);
+              icon: _iconList[index],
+              title: _stringList[index],
+            );
           },
         ),
       ),
@@ -41,31 +43,33 @@ class SettingsCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => print(this.title + ' was tapped'),
-      child: Column(children: [
-        Row(
-          children: [
-            SizedBox(
-              height: 20,
-            ),
-            Icon(
-              this.icon,
-              color: Colors.white,
-            ),
-            SizedBox(
-              width: 30,
-            ),
-            Flexible(
-              child: Text(
-                this.title,
-                style: kLargeTextStyle.copyWith(color: Colors.white),
+      child: Column(
+        children: [
+          Row(
+            children: [
+              SizedBox(
+                height: 20,
               ),
-            ),
-          ],
-        ),
-        SizedBox(
-          height: 10,
-        ),
-      ]),
+              Icon(
+                this.icon,
+                color: Colors.white,
+              ),
+              SizedBox(
+                width: 30,
+              ),
+              Flexible(
+                child: Text(
+                  this.title,
+                  style: kLargeTextStyle.copyWith(color: Colors.white),
+                ),
+              ),
+            ],
+          ),
+          SizedBox(
+            height: 10,
+          ),
+        ],
+      ),
     );
   }
 }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_vocab/Presentation/Screens/favorites/favorites_screen.dart';
+import 'package:my_vocab/Presentation/Screens/favorites_screen/screen.dart';
 import 'package:my_vocab/Presentation/Screens/history-screen/history_screen.dart';
 import 'package:my_vocab/Presentation/Screens/home-screen/screen.dart';
 import 'package:my_vocab/Presentation/Screens/settings/settings_screen.dart';
@@ -125,7 +125,7 @@ class _MainScreenState extends State<MainScreen>
                                 BottomNavigationBarItem(
                                   icon: Icon(Icons.settings),
                                   label: 'Settings',
-                                )
+                                ),
                               ],
                             )
                           : null,

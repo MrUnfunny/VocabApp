@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:my_vocab/services/Dictionary/get_word_of_the_day.dart';
+import 'package:my_vocab/services/local_databases/favorites.dart';
 import 'package:my_vocab/services/local_databases/history.dart';
 import 'package:my_vocab/services/model/enum/api_request_status.dart';
 import 'package:my_vocab/services/model/functions.dart';
@@ -13,13 +14,19 @@ class HomeProvider extends ChangeNotifier {
   getWordOfTheDayAndHistory() async {
     setApiRequestStatus(ApiRequestStatus.loading);
     try {
-      historyWords = await HistoryDB().listAll();
+      historyWords = (await HistoryDB().listAll()).reversed.toList();
+      favWords = (await FavDB().listAll()).reversed.toList();
       wordOfTheDay = await WordOfTheDay().getMeaning();
       setApiRequestStatus(ApiRequestStatus.loaded);
     } catch (e) {
       print("@word of the day fetch failed: $e");
       checkError(e);
     }
+  }
+
+  getFavorites() async {
+    favWords = (await FavDB().listAll()).reversed.toList();
+    notifyListeners();
   }
 
   getHistory() async {

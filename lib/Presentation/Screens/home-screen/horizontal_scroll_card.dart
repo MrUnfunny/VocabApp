@@ -1,26 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:my_vocab/Presentation/Screens/word-detail/screen.dart';
+import 'package:my_vocab/services/local_databases/favorites.dart';
+import 'package:my_vocab/viewmodels/home_provider.dart';
+import 'package:provider/provider.dart';
 
 class HorizontalScrollCard extends StatefulWidget {
-  final String word;
+  final Map word;
   final String date;
+  final IconData icon;
 
-  const HorizontalScrollCard({Key key, this.word, this.date}) : super(key: key);
+  const HorizontalScrollCard({Key key, this.word, this.date, this.icon})
+      : super(key: key);
 
   @override
   _HorizontalScrollCardState createState() => _HorizontalScrollCardState();
 }
 
 class _HorizontalScrollCardState extends State<HorizontalScrollCard> {
-  IconData _icon = Icons.bookmark_border_outlined;
+  IconData _icon;
   @override
   Widget build(BuildContext context) {
+    _icon = widget.icon;
+
     return GestureDetector(
       onTap: () => Navigator.push(
         context,
         MaterialPageRoute(
           builder: (context) => WordDetailScreen(
-            word: widget.word,
+            word: widget.word['word'],
           ),
         ),
       ),
@@ -39,7 +46,7 @@ class _HorizontalScrollCardState extends State<HorizontalScrollCard> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "${widget.word[0].toUpperCase()}${widget.word.substring(1)}",
+                  "${widget.word['word'][0].toUpperCase()}${widget.word['word'].substring(1)}",
                   style: TextStyle(
                       fontFamily: "Montserrat",
                       fontSize: 24.0,
@@ -58,12 +65,15 @@ class _HorizontalScrollCardState extends State<HorizontalScrollCard> {
                 size: 34.0,
                 color: Theme.of(context).primaryColor,
               ),
-              onPressed: () {
-                setState(() {
-                  _icon = (_icon == Icons.bookmark_border_outlined)
-                      ? Icons.bookmark
-                      : Icons.bookmark_border_outlined;
-                });
+              onPressed: () async {
+                if ((await FavDB().check({'word': widget.word['word']}))
+                    .isEmpty)
+                  await FavDB().add(widget.word);
+                else
+                  await FavDB().remove({'word': widget.word['word']});
+
+                Provider.of<HomeProvider>(context, listen: false)
+                    .getFavorites();
               },
             )
           ],
