@@ -11,8 +11,8 @@ import 'package:my_vocab/Presentation/AssetWidgets/custom_app_bar.dart';
 import 'package:my_vocab/Presentation/Screens/home-screen/horizontal_scroll_card.dart';
 import 'package:my_vocab/Presentation/Screens/welcome_screen.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:my_vocab/constants.dart';
-import 'package:my_vocab/services/model/enum/api_request_status.dart';
+import 'package:my_vocab/constants/constants.dart';
+import 'package:my_vocab/model/enum/api_request_status.dart';
 import 'package:my_vocab/viewmodels/home_provider.dart';
 import 'package:provider/provider.dart';
 

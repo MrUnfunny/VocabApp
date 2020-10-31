@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:my_vocab/services/model/dictionary.dart';
+import 'package:my_vocab/model/dictionary.dart';
 import 'package:my_vocab/services/api/owl_bot_api.dart';
 
 class Meaning {

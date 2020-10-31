@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:my_vocab/services/Dictionary/get_word_of_the_day.dart';
 import 'package:my_vocab/services/local_databases/favorites.dart';
 import 'package:my_vocab/services/local_databases/history.dart';
-import 'package:my_vocab/services/model/enum/api_request_status.dart';
-import 'package:my_vocab/services/model/functions.dart';
+import 'package:my_vocab/model/enum/api_request_status.dart';
+import 'package:my_vocab/model/functions.dart';
 
 class HomeProvider extends ChangeNotifier {
   Map<String, String> wordOfTheDay;

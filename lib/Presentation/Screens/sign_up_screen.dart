@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:my_vocab/Presentation/Screens/sign_in_screen.dart';
-import 'package:my_vocab/constants.dart';
+import 'package:my_vocab/constants/constants.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:my_vocab/Presentation/AssetWidgets/bottom_bar_textfield.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';

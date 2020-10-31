@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:my_vocab/constants.dart';
+import 'package:my_vocab/constants/constants.dart';
 
 Map<String, IconData> _settingsCardData = {
-  'Favorite': Icons.favorite_border_outlined,
+  'Favorites': Icons.favorite_border_outlined,
   'Profile': Icons.verified_user_outlined,
   'About': Icons.info_outline_rounded,
   'Licenses': Icons.description_outlined,
@@ -19,8 +19,11 @@ class SettingsScreen extends StatelessWidget {
         height: MediaQuery.of(context).size.height * 0.7,
         child: ListView.separated(
           itemCount: _settingsCardData.length,
-          separatorBuilder: (context, index) => Divider(
-            color: Colors.white,
+          separatorBuilder: (context, index) => Padding(
+            padding: const EdgeInsets.only(bottom: 8.0),
+            child: Divider(
+              color: Colors.white,
+            ),
           ),
           itemBuilder: (context, index) {
             return SettingsCard(
@@ -47,9 +50,6 @@ class SettingsCard extends StatelessWidget {
         children: [
           Row(
             children: [
-              SizedBox(
-                height: 20,
-              ),
               Icon(
                 this.icon,
                 color: Colors.white,
@@ -64,9 +64,6 @@ class SettingsCard extends StatelessWidget {
                 ),
               ),
             ],
-          ),
-          SizedBox(
-            height: 10,
           ),
         ],
       ),

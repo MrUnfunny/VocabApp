@@ -4,10 +4,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
 import 'package:my_vocab/services/api/datamuse_api.dart';
 import 'package:my_vocab/services/local_databases/history.dart';
-import 'package:my_vocab/services/model/dictionary.dart';
+import 'package:my_vocab/model/dictionary.dart';
 import 'package:my_vocab/services/api/owl_bot_api.dart';
-import 'package:my_vocab/services/model/enum/api_request_status.dart';
-import 'package:my_vocab/services/model/functions.dart';
+import 'package:my_vocab/model/enum/api_request_status.dart';
+import 'package:my_vocab/model/functions.dart';
 
 class WordDetailProvider extends ChangeNotifier {
   Dictionary wordDetail;

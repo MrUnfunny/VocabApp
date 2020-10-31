@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:hive/hive.dart';
 import 'package:my_vocab/Presentation/Screens/favorites_screen/screen.dart';
 import 'package:my_vocab/Presentation/Screens/home-screen/screen.dart';
 import 'package:my_vocab/Presentation/Screens/sign_in_screen.dart';
@@ -12,6 +13,7 @@ import 'package:my_vocab/Presentation/Screens/word-detail/screen.dart';
 import 'package:my_vocab/main_screen.dart';
 import 'package:my_vocab/viewmodels/home_provider.dart';
 import 'package:my_vocab/viewmodels/word_detail_provider.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:my_vocab/Presentation/Screens/history-screen/history_screen.dart';
 
@@ -20,6 +22,9 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   await DotEnv().load('.env');
+
+  final directoryPath = await getApplicationDocumentsDirectory();
+  await Hive.init(directoryPath.path);
 
   await precachePicture(
       ExactAssetPicture(

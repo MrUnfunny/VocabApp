@@ -3,7 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:my_vocab/Presentation/AssetWidgets/button.dart';
 import 'package:my_vocab/Presentation/Screens/sign_in_screen.dart';
 import 'package:my_vocab/Presentation/Screens/sign_up_screen.dart';
-import 'package:my_vocab/constants.dart';
+import 'package:my_vocab/constants/constants.dart';
 
 const SVGName = 'Assets/Vectors/bookReading.svg';
 

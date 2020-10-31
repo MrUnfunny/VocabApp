@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:my_vocab/constants.dart';
+import 'package:my_vocab/constants/constants.dart';
 import 'package:my_vocab/Presentation/Screens/word-detail/screen.dart';
 import 'package:my_vocab/services/api/datamuse_api.dart';
 import 'package:http/http.dart';

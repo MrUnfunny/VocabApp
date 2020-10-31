@@ -3,7 +3,7 @@ import 'package:my_vocab/Presentation/Screens/favorites_screen/screen.dart';
 import 'package:my_vocab/Presentation/Screens/history-screen/history_screen.dart';
 import 'package:my_vocab/Presentation/Screens/home-screen/screen.dart';
 import 'package:my_vocab/Presentation/Screens/settings/settings_screen.dart';
-import 'package:my_vocab/services/model/enum/api_request_status.dart';
+import 'package:my_vocab/model/enum/api_request_status.dart';
 import 'package:my_vocab/viewmodels/home_provider.dart';
 import 'package:provider/provider.dart';
 

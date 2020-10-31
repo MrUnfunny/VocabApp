@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:my_vocab/services/play_audio.dart';
 
-import '../../constants.dart';
+import '../../constants/constants.dart';
 import 'action_card.dart';
 
 class DetailScreenAppBar extends StatelessWidget {
