@@ -51,7 +51,7 @@ class _MainScreenState extends State<MainScreen>
         return Stack(
           children: [
             Scaffold(
-              backgroundColor: Colors.redAccent,
+              backgroundColor: Color(0xff2a9d8f),
               body: Transform(
                 transform: Matrix4.identity()..translate(-slide),
                 child: Transform.translate(

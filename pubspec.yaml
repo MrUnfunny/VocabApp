@@ -21,12 +21,10 @@ dependencies:
   flutter_svg: any
   fluttertoast: ^7.1.1
   font_awesome_flutter: ^8.8.1
-  freezed: ^0.12.1
   google_sign_in: ^4.5.3
   hive: ^1.4.4+1
   intl: ^0.16.1
   modal_progress_hud: ^0.1.3
-  objectdb: ^1.0.10+1
   path_provider: ^1.6.18
   provider: ^4.3.2+2
 

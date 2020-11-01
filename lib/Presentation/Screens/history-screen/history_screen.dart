@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:my_vocab/Presentation/AssetWidgets/custom_app_bar.dart';
 import 'package:my_vocab/constants/constants.dart';
-import 'package:my_vocab/services/local_databases/history.dart';
+import 'package:my_vocab/hive/hiveDb.dart';
 import 'package:my_vocab/viewmodels/home_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -101,7 +101,7 @@ class HistoryCard extends StatelessWidget {
       ),
       key: Key(word),
       onDismissed: (direction) async {
-        await HistoryDB().remove({'word': word});
+        HiveDB.instance.remove(word);
         Provider.of<HomeProvider>(context, listen: false).getHistory();
       },
       child: Container(

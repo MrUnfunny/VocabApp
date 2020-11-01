@@ -75,7 +75,7 @@ class CustomCard extends StatelessWidget {
                       WordOfTheDayCard(
                         icon: Icons.favorite_border,
                         tooltipMsg: 'save to liked',
-                        onPressed: null,
+                        onPressed: () => Fluttertoast.showToast(msg: "Liked"),
                       ),
                       WordOfTheDayCard(
                         icon: Icons.content_copy,
@@ -90,7 +90,8 @@ class CustomCard extends StatelessWidget {
                       WordOfTheDayCard(
                         icon: Icons.bookmark_border,
                         tooltipMsg: 'Add to Favorites',
-                        onPressed: null,
+                        onPressed: () => Fluttertoast.showToast(
+                            msg: "Cannot add word of the day to Favorites"),
                       ),
                       WordOfTheDayCard(
                         icon: Icons.open_in_new_outlined,

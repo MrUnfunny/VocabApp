@@ -10,6 +10,7 @@ import 'package:my_vocab/Presentation/Screens/sign_in_screen.dart';
 import 'package:my_vocab/Presentation/Screens/sign_up_screen.dart';
 import 'package:my_vocab/Presentation/Screens/welcome_screen.dart';
 import 'package:my_vocab/Presentation/Screens/word-detail/screen.dart';
+import 'package:my_vocab/hive/hiveDb.dart';
 import 'package:my_vocab/main_screen.dart';
 import 'package:my_vocab/viewmodels/home_provider.dart';
 import 'package:my_vocab/viewmodels/word_detail_provider.dart';
@@ -25,6 +26,7 @@ void main() async {
 
   final directoryPath = await getApplicationDocumentsDirectory();
   await Hive.init(directoryPath.path);
+  await HiveDB.init();
 
   await precachePicture(
       ExactAssetPicture(

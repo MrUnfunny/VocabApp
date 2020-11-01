@@ -6,6 +6,7 @@ Map<String, IconData> _settingsCardData = {
   'Profile': Icons.verified_user_outlined,
   'About': Icons.info_outline_rounded,
   'Licenses': Icons.description_outlined,
+  'Logout': Icons.logout
 };
 
 class SettingsScreen extends StatelessWidget {

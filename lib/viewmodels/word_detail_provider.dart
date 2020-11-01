@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
+import 'package:my_vocab/hive/hiveDb.dart';
 import 'package:my_vocab/services/api/datamuse_api.dart';
-import 'package:my_vocab/services/local_databases/history.dart';
 import 'package:my_vocab/model/dictionary.dart';
 import 'package:my_vocab/services/api/owl_bot_api.dart';
 import 'package:my_vocab/model/enum/api_request_status.dart';
@@ -67,7 +67,7 @@ class WordDetailProvider extends ChangeNotifier {
       ...wordDetail.toMap(),
       ...{'date': '${formatter.format(DateTime.now())}'}
     };
-    await HistoryDB().add(res);
+    HiveDB.instance.put(wordDetail.word, res);
   }
 
   void checkError(e) {

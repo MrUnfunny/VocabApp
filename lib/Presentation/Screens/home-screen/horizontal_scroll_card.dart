@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:my_vocab/Presentation/Screens/word-detail/screen.dart';
-import 'package:my_vocab/services/local_databases/favorites.dart';
 import 'package:my_vocab/viewmodels/home_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -66,11 +65,14 @@ class _HorizontalScrollCardState extends State<HorizontalScrollCard> {
                 color: Theme.of(context).primaryColor,
               ),
               onPressed: () async {
-                if ((await FavDB().check({'word': widget.word['word']}))
-                    .isEmpty)
-                  await FavDB().add(widget.word);
+                if (!Provider.of<HomeProvider>(context, listen: false)
+                    .favWords
+                    .contains(widget.word))
+                  Provider.of<HomeProvider>(context, listen: false)
+                      .addtoFavorites(widget.word);
                 else
-                  await FavDB().remove({'word': widget.word['word']});
+                  Provider.of<HomeProvider>(context, listen: false)
+                      .removeFromFav(widget.word);
 
                 Provider.of<HomeProvider>(context, listen: false)
                     .getFavorites();
