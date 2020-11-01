@@ -49,6 +49,16 @@ class HistoryScreen extends StatelessWidget {
                           return HistoryCard(
                             word: homeProvider.historyWords[index - 1]['word'],
                             date: homeProvider.historyWords[index - 1]['date'],
+                            icon: (homeProvider.favWords.contains(
+                                    homeProvider.historyWords[index - 1]))
+                                ? Icons.bookmark
+                                : Icons.bookmark_outline,
+                            onPressed: (homeProvider.favWords.contains(
+                                    homeProvider.historyWords[index - 1]))
+                                ? () => homeProvider.removeFromFav(
+                                    homeProvider.historyWords[index - 1])
+                                : () => homeProvider.addtoFavorites(
+                                    homeProvider.historyWords[index - 1]),
                           );
                         },
                       );
@@ -85,9 +95,15 @@ class HistoryScreen extends StatelessWidget {
 class HistoryCard extends StatelessWidget {
   final String word;
   final String date;
+  final IconData icon;
+  final Function onPressed;
 
-  HistoryCard({Key key, @required this.word, @required this.date})
-      : super(key: key);
+  HistoryCard({
+    @required this.word,
+    @required this.date,
+    @required this.icon,
+    @required this.onPressed,
+  });
   @override
   Widget build(BuildContext context) {
     return Dismissible(
@@ -128,9 +144,12 @@ class HistoryCard extends StatelessWidget {
                 Text(date),
               ],
             ),
-            Icon(
-              Icons.bookmark_outline,
-              color: Theme.of(context).primaryColor,
+            IconButton(
+              onPressed: onPressed,
+              icon: Icon(
+                icon,
+                color: Theme.of(context).primaryColor,
+              ),
             ),
           ],
         ),
