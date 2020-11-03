@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_login_facebook/flutter_login_facebook.dart';
-import 'package:my_vocab/Presentation/Screens/home-screen/screen.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:my_vocab/Presentation/Screens/welcome_screen.dart';
 import 'package:my_vocab/main_screen.dart';
@@ -31,7 +30,7 @@ class Auth {
       @required BuildContext context}) async {
     try {
       await _auth.signInWithEmailAndPassword(email: email, password: password);
-      Navigator.pushReplacementNamed(context, HomeScreen.id);
+      Navigator.pushReplacementNamed(context, MainScreen.id);
     } catch (e) {
       _showDialog(error: e, context: context);
     }
