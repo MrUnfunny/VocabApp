@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -77,7 +78,7 @@ class _HomeScreenState extends State<HomeScreen>
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
                     children: [
                       CustomAppBar(
-                        title: 'Vocabulary',
+                        title: tr('app-name'),
                       ),
                       SearchBar(),
                       CustomCard(),

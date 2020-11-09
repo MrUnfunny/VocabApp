@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -12,11 +13,12 @@ import 'package:my_vocab/Presentation/Screens/welcome_screen.dart';
 import 'package:my_vocab/Presentation/Screens/word-detail/screen.dart';
 import 'package:my_vocab/hive/hiveDb.dart';
 import 'package:my_vocab/main_screen.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:my_vocab/viewmodels/home_provider.dart';
 import 'package:my_vocab/viewmodels/word_detail_provider.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:provider/provider.dart';
 import 'package:my_vocab/Presentation/Screens/history-screen/history_screen.dart';
+import 'package:provider/provider.dart';
 
 bool isLoggedIn = false;
 void main() async {
@@ -49,16 +51,26 @@ void main() async {
           SvgPicture.svgStringDecoder, 'Assets/Vectors/error.svg'),
       null);
 
-  runApp(MultiProvider(providers: [
-    ChangeNotifierProvider(create: (_) => HomeProvider()),
-    ChangeNotifierProvider(create: (_) => WordDetailProvider()),
-  ], child: MyApp()));
+  runApp(EasyLocalization(
+      path: 'Assets/langs',
+      supportedLocales: [Locale('en', 'US'), Locale('hi', 'IN')],
+      child: MultiProvider(providers: [
+        ChangeNotifierProvider(create: (_) => HomeProvider()),
+        ChangeNotifierProvider(create: (_) => WordDetailProvider()),
+      ], child: MyApp())));
 }
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      localizationsDelegates: <LocalizationsDelegate<dynamic>>[
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        EasyLocalization.of(context).delegate,
+      ],
+      supportedLocales: EasyLocalization.of(context).supportedLocales,
+      locale: EasyLocalization.of(context).locale,
       theme: ThemeData.light().copyWith(
         primaryColor: Color(0xffff4f18),
       ),

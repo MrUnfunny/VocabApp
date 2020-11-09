@@ -105,9 +105,7 @@ class _MainScreenState extends State<MainScreen>
                                   toggleSettings();
                                   isSettingsVisible = !isSettingsVisible;
                                 } else
-                                  _pageController.animateToPage(pageIndex,
-                                      duration: Duration(milliseconds: 500),
-                                      curve: Curves.ease);
+                                  _pageController.jumpToPage(pageIndex);
                               },
                               items: [
                                 BottomNavigationBarItem(
