@@ -23,7 +23,6 @@ dependencies:
   font_awesome_flutter: ^8.8.1
   google_sign_in: ^4.5.3
   hive: ^1.4.4+1
-  i18n: ^1.2.2
   intl: ^0.16.1
   modal_progress_hud: ^0.1.3
   path_provider: ^1.6.18

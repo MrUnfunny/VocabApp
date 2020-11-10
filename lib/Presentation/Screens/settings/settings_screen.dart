@@ -1,9 +1,11 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:my_vocab/constants/constants.dart';
 
 Map<String, IconData> _settingsCardData = {
   'Favorites': Icons.favorite_border_outlined,
   'Profile': Icons.verified_user_outlined,
+  'Languages': Icons.translate,
   'About': Icons.info_outline_rounded,
   'Licenses': Icons.description_outlined,
   'Logout': Icons.logout
@@ -46,7 +48,12 @@ class SettingsCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => print(this.title + ' was tapped'),
+      onTap: () => (title == 'Languages')
+          ? EasyLocalization.of(context).locale =
+              (EasyLocalization.of(context).locale == Locale('hi', 'IN'))
+                  ? Locale('en', 'US')
+                  : Locale('hi', 'IN')
+          : (this.title + ' was tapped'),
       child: Column(
         children: [
           Row(
