@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:my_vocab/constants/constants.dart';
 import 'package:my_vocab/Presentation/Screens/word-detail/screen.dart';
@@ -27,7 +28,7 @@ class SearchBar extends StatelessWidget {
                 ),
                 onPressed: null),
             Text(
-              "Search",
+              tr('search'),
               style: TextStyle(color: kBackgroundColor, fontSize: 17.0),
             ),
           ],

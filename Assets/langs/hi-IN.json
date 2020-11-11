@@ -1,3 +1,15 @@
 {
-    "app-name": "शब्दकोश"
+    "app-name": "शब्दकोश",
+    "word_of_the_day": "आज का शब्द",
+    "history":"उपयोगकर्ता का इतिहास",
+    "favorites":"पसंदीदा",
+    "see_all":"सभी देखें",
+    "search": "खोजें",
+
+    "empty": "खाली",
+
+    "home_bottom_nav": "घर",
+    "history_bottom_nav":"इतिहास",
+    "fav_bottom_nav":"पसंदीदा",
+    "settings_bottom_nav":"सेटिंग"
 }

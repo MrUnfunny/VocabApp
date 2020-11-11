@@ -1,3 +1,15 @@
 {
-    "app-name": "MyVocab"
+    "app-name": "MyVocab",
+    "word_of_the_day": "Word of the day",
+    "history": "History",
+    "favorites":"Favorites",
+    "see_all": "See all",
+    "search": "Search",
+
+    "empty": "Nothing Here",
+
+    "home_bottom_nav": "Home",
+    "history_bottom_nav":"History",
+    "fav_bottom_nav":"fav",
+    "settings_bottom_nav":"Settings"
 }

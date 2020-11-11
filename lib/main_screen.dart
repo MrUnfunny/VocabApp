@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:my_vocab/Presentation/Screens/favorites_screen/screen.dart';
 import 'package:my_vocab/Presentation/Screens/history-screen/history_screen.dart';
@@ -110,19 +111,19 @@ class _MainScreenState extends State<MainScreen>
                               items: [
                                 BottomNavigationBarItem(
                                   icon: Icon(Icons.home),
-                                  label: 'Home',
+                                  label: tr('home_bottom_nav'),
                                 ),
                                 BottomNavigationBarItem(
                                   icon: Icon(Icons.history),
-                                  label: 'History',
+                                  label: tr('history_bottom_nav'),
                                 ),
                                 BottomNavigationBarItem(
                                   icon: Icon(Icons.favorite),
-                                  label: 'Fav',
+                                  label: tr('fav_bottom_nav'),
                                 ),
                                 BottomNavigationBarItem(
                                   icon: Icon(Icons.settings),
-                                  label: 'Settings',
+                                  label: tr('settings_bottom_nav'),
                                 ),
                               ],
                             )

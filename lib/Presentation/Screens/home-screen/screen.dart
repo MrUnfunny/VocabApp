@@ -91,14 +91,14 @@ class _HomeScreenState extends State<HomeScreen>
                           crossAxisAlignment: CrossAxisAlignment.baseline,
                           children: [
                             Text(
-                              'History',
+                              tr('history'),
                               style: kAppBarStyle.copyWith(fontSize: 20.0),
                             ),
                             GestureDetector(
                               onTap: () => Navigator.pushNamed(
                                   context, HistoryScreen.id),
                               child: Text(
-                                'See all',
+                                tr('see_all'),
                                 style: kSmallTextStyle.copyWith(
                                   color: Colors.brown.shade600,
                                   fontWeight: FontWeight.w600,

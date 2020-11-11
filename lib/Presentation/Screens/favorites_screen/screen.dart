@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:my_vocab/Presentation/AssetWidgets/custom_app_bar.dart';
@@ -19,7 +20,7 @@ class FavScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: CustomAppBar(
-                title: 'Favorites',
+                title: tr('favorites'),
                 isTextWhite: true,
               ),
             ),
@@ -64,7 +65,7 @@ class FavScreen extends StatelessWidget {
                             height: 30.0,
                           ),
                           Text(
-                            'Nothing Here',
+                            tr('empty'),
                             style: kLargeTextStyle,
                           ),
                         ],
