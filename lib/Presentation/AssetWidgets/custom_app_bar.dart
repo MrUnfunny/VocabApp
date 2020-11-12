@@ -26,21 +26,15 @@ class CustomAppBar extends StatelessWidget {
                 : kAppBarStyle,
           ),
         ),
-        GestureDetector(
-          onTap: () {
-            print("Signed Out");
-            Auth().signOut(context: context);
-          },
-          child: Container(
-            child: CircleAvatar(
-              radius: 20.0,
-              backgroundImage: (Auth().getProfilePhoto() == null)
-                  ? AssetImage('Assets/images/profile.png')
-                  : NetworkImage(Auth().getProfilePhoto()),
-              backgroundColor: Colors.transparent,
-              onBackgroundImageError: (exception, stackTrace) =>
-                  print("$exception \n $stackTrace"),
-            ),
+        Container(
+          child: CircleAvatar(
+            radius: 20.0,
+            backgroundImage: (Auth().getProfilePhoto() == null)
+                ? AssetImage('Assets/images/profile.png')
+                : NetworkImage(Auth().getProfilePhoto()),
+            backgroundColor: Colors.transparent,
+            onBackgroundImageError: (exception, stackTrace) =>
+                print("$exception \n $stackTrace"),
           ),
         )
       ],

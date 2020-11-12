@@ -1,19 +1,57 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:my_vocab/Presentation/Screens/favorites_screen/screen.dart';
 import 'package:my_vocab/constants/constants.dart';
+import 'package:my_vocab/services/auth/auth.dart';
 
-Map<String, IconData> _settingsCardData = {
-  'Favorites': Icons.favorite_border_outlined,
-  'Profile': Icons.verified_user_outlined,
-  'Languages': Icons.translate,
-  'About': Icons.info_outline_rounded,
-  'Licenses': Icons.description_outlined,
-  'Logout': Icons.logout
-};
+class SettingsScreen extends StatefulWidget {
+  @override
+  _SettingsScreenState createState() => _SettingsScreenState();
+}
 
-class SettingsScreen extends StatelessWidget {
-  final _stringList = _settingsCardData.keys.toList();
-  final _iconList = _settingsCardData.values.toList();
+class _SettingsScreenState extends State<SettingsScreen> {
+  List<Map<String, dynamic>> _settingsCardItems = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _settingsCardItems = [
+      {
+        "icon": Icons.favorite_border_outlined,
+        "title": tr('favorites'),
+        "function": () => Navigator.of(context).pushNamed(FavScreen.id),
+      },
+      {
+        "icon": Icons.verified_user_outlined,
+        "title": tr('profile'),
+        "function": () => print("PRofile was tapped"),
+      },
+      {
+        "icon": Icons.translate,
+        "title": tr('languages'),
+        "function": () => EasyLocalization.of(context).locale =
+            (EasyLocalization.of(context).locale == Locale('hi', 'IN'))
+                ? Locale('en', 'US')
+                : Locale('hi', 'IN'),
+      },
+      {
+        "icon": Icons.info_outline_rounded,
+        "title": tr('about'),
+        "function": () => print("About was tapped"),
+      },
+      {
+        "icon": Icons.description_outlined,
+        "title": tr('licenses'),
+        "function": () => print("Licenses was tapped"),
+      },
+      {
+        "icon": Icons.logout,
+        "title": tr('logout'),
+        "function": () => Auth().signOut(context: context),
+      },
+    ];
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -21,7 +59,7 @@ class SettingsScreen extends StatelessWidget {
         width: MediaQuery.of(context).size.width * 0.5,
         height: MediaQuery.of(context).size.height * 0.7,
         child: ListView.separated(
-          itemCount: _settingsCardData.length,
+          itemCount: _settingsCardItems.length,
           separatorBuilder: (context, index) => Padding(
             padding: const EdgeInsets.only(bottom: 8.0),
             child: Divider(
@@ -30,8 +68,9 @@ class SettingsScreen extends StatelessWidget {
           ),
           itemBuilder: (context, index) {
             return SettingsCard(
-              icon: _iconList[index],
-              title: _stringList[index],
+              icon: _settingsCardItems[index]['icon'],
+              title: _settingsCardItems[index]['title'],
+              onTap: _settingsCardItems[index]['function'],
             );
           },
         ),
@@ -43,17 +82,14 @@ class SettingsScreen extends StatelessWidget {
 class SettingsCard extends StatelessWidget {
   final IconData icon;
   final String title;
+  final Function onTap;
 
-  const SettingsCard({@required this.icon, @required this.title});
+  const SettingsCard(
+      {@required this.icon, @required this.title, @required this.onTap});
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => (title == 'Languages')
-          ? EasyLocalization.of(context).locale =
-              (EasyLocalization.of(context).locale == Locale('hi', 'IN'))
-                  ? Locale('en', 'US')
-                  : Locale('hi', 'IN')
-          : (this.title + ' was tapped'),
+      onTap: onTap,
       child: Column(
         children: [
           Row(
