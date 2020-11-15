@@ -118,7 +118,8 @@ class _HomeScreenState extends State<HomeScreen>
                             itemBuilder: (BuildContext context, int index) =>
                                 HorizontalScrollCard(
                               word: homeProvider.historyWords[index],
-                              date: homeProvider.historyWords[index]['date'],
+                              date: homeProvider.historyWords[index]['date'] ??
+                                  '',
                               icon: (homeProvider.favWords.any((element) =>
                                       element['word'] ==
                                       homeProvider.historyWords[index]['word']))

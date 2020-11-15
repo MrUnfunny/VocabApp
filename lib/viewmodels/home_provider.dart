@@ -9,12 +9,13 @@ class HomeProvider extends ChangeNotifier {
   ApiRequestStatus apiRequestStatus = ApiRequestStatus.loading;
   List<Map> historyWords;
   List<Map> favWords = [];
+  List<String> likedWords = [];
 
   void getWordOfTheDayAndHistory() async {
     setApiRequestStatus(ApiRequestStatus.loading);
     try {
       historyWords = HiveDB.instance.getAll().values.toList();
-      historyWords.sort((a, b) => a['date'].compareTo(b['date']));
+      // historyWords.sort((a, b) => a['date'].compareTo(b['date']));
       print('\n\n\n');
       print(HiveDB.instance.getAll());
       print('\n\n\n');
@@ -22,11 +23,27 @@ class HomeProvider extends ChangeNotifier {
       favWords =
           historyWords.where((element) => element['isFav'] == true).toList();
       wordOfTheDay = await WordOfTheDay().getMeaning();
+      likedWords = HiveDB.instance.getLiked().values.toList();
       setApiRequestStatus(ApiRequestStatus.loaded);
     } catch (e) {
       print("@word of the day fetch failed: $e");
       checkError(e);
     }
+  }
+
+  void getLiked() {
+    likedWords = HiveDB.instance.getLiked().values.toList();
+    notifyListeners();
+  }
+
+  void addtoLiked(String word) {
+    HiveDB.instance.addtoLiked(word, word);
+    getLiked();
+  }
+
+  void removeFromLiked(String word) {
+    HiveDB.instance.removefromLiked(word);
+    getLiked();
   }
 
   void getFavorites() {
@@ -49,14 +66,11 @@ class HomeProvider extends ChangeNotifier {
     getHistory();
   }
 
-  void getHistory() async {
+  void getHistory() {
     historyWords = HiveDB.instance.getAll().values.toList();
     historyWords.sort((a, b) => a['date'].compareTo(b['date']));
     favWords =
         historyWords.where((element) => element['isFav'] == true).toList();
-    print('\n\n\n');
-    print(historyWords);
-    print('\n\n\n');
     notifyListeners();
   }
 

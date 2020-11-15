@@ -7,7 +7,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hive/hive.dart';
 import 'package:my_vocab/Presentation/Screens/favorites_screen/screen.dart';
 import 'package:my_vocab/Presentation/Screens/home-screen/screen.dart';
-import 'package:my_vocab/Presentation/Screens/profile-screen/profile.dart';
+import 'package:my_vocab/Presentation/Screens/like-screen/liked.dart';
 import 'package:my_vocab/Presentation/Screens/sign_in_screen.dart';
 import 'package:my_vocab/Presentation/Screens/sign_up_screen.dart';
 import 'package:my_vocab/Presentation/Screens/welcome_screen.dart';
@@ -87,7 +87,7 @@ class MyApp extends StatelessWidget {
         WordDetailScreen.id: (context) => WordDetailScreen(),
         HistoryScreen.id: (context) => HistoryScreen(),
         FavScreen.id: (context) => FavScreen(),
-        ProfileScreen.id: (context) => ProfileScreen(),
+        LikeScreen.id: (context) => LikeScreen(),
       },
     );
   }

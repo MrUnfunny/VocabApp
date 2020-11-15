@@ -74,9 +74,20 @@ class CustomCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       WordOfTheDayCard(
-                        icon: Icons.favorite_border,
+                        icon: (homeProvider.likedWords
+                                .contains(homeProvider.wordOfTheDay['word']))
+                            ? Icons.favorite
+                            : Icons.favorite_border,
                         tooltipMsg: 'save to liked',
-                        onPressed: () => Fluttertoast.showToast(msg: "Liked"),
+                        onPressed: () {
+                          (!homeProvider.likedWords.contains(
+                            homeProvider.wordOfTheDay['word'],
+                          ))
+                              ? homeProvider
+                                  .addtoLiked(homeProvider.wordOfTheDay['word'])
+                              : homeProvider.removeFromLiked(
+                                  homeProvider.wordOfTheDay['word']);
+                        },
                       ),
                       WordOfTheDayCard(
                         icon: Icons.content_copy,
@@ -91,8 +102,10 @@ class CustomCard extends StatelessWidget {
                       WordOfTheDayCard(
                         icon: Icons.bookmark_border,
                         tooltipMsg: 'Add to Favorites',
-                        onPressed: () => Fluttertoast.showToast(
-                            msg: "Cannot add word of the day to Favorites"),
+                        onPressed: () async {
+                          return Fluttertoast.showToast(
+                              msg: "Cannot add word of the day to Favorites");
+                        },
                       ),
                       WordOfTheDayCard(
                         icon: Icons.open_in_new_outlined,

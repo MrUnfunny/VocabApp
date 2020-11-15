@@ -49,7 +49,9 @@ class HistoryScreen extends StatelessWidget {
                             );
                           return HistoryCard(
                             word: homeProvider.historyWords[index - 1]['word'],
-                            date: homeProvider.historyWords[index - 1]['date'],
+                            date: homeProvider.historyWords[index - 1]
+                                    ['date'] ??
+                                '',
                             icon: (homeProvider.favWords.contains(
                                     homeProvider.historyWords[index - 1]))
                                 ? Icons.bookmark

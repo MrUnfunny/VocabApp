@@ -1,7 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:my_vocab/Presentation/Screens/favorites_screen/screen.dart';
-import 'package:my_vocab/Presentation/Screens/profile-screen/profile.dart';
+import 'package:my_vocab/Presentation/Screens/like-screen/liked.dart';
 import 'package:my_vocab/constants/constants.dart';
 import 'package:my_vocab/services/auth/auth.dart';
 
@@ -19,13 +18,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
     _settingsCardItems = [
       {
         "icon": Icons.favorite_border_outlined,
-        "title": tr('favorites'),
-        "function": () => Navigator.of(context).pushNamed(FavScreen.id),
-      },
-      {
-        "icon": Icons.verified_user_outlined,
-        "title": tr('profile'),
-        "function": () => Navigator.of(context).pushNamed(ProfileScreen.id),
+        "title": tr('like'),
+        "function": () => Navigator.of(context).pushNamed(LikeScreen.id),
       },
       {
         "icon": Icons.translate,
