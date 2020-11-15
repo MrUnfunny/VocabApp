@@ -24,6 +24,8 @@ class _MainScreenState extends State<MainScreen>
   PageController _pageController;
   int _page = 0;
 
+  int lastPageIndex = 0;
+
   @override
   void initState() {
     super.initState();
@@ -52,7 +54,7 @@ class _MainScreenState extends State<MainScreen>
         return Stack(
           children: [
             Scaffold(
-              backgroundColor: Color(0xff2a9d8f),
+              backgroundColor: Color(0xff0C120C),
               body: Transform(
                 transform: Matrix4.identity()..translate(-slide),
                 child: Transform.translate(
@@ -104,9 +106,12 @@ class _MainScreenState extends State<MainScreen>
                               onTap: (pageIndex) {
                                 if (pageIndex == 3) {
                                   toggleSettings();
-                                  isSettingsVisible = !isSettingsVisible;
                                 } else
-                                  _pageController.jumpToPage(pageIndex);
+                                  _pageController.animateToPage(
+                                    pageIndex,
+                                    curve: Curves.bounceIn,
+                                    duration: Duration(milliseconds: 300),
+                                  );
                               },
                               items: [
                                 BottomNavigationBarItem(
@@ -144,6 +149,13 @@ class _MainScreenState extends State<MainScreen>
       animationController.reverse();
     else {
       animationController.forward();
+    }
+    isSettingsVisible = !isSettingsVisible;
+    if (isSettingsVisible) {
+      this.lastPageIndex = this._page;
+      this._page = 3;
+    } else {
+      this._page = this.lastPageIndex;
     }
   }
 }

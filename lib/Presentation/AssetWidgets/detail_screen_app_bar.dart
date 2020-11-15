@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -59,7 +60,7 @@ class DetailScreenAppBar extends StatelessWidget {
               ActionCard(
                 icon: Icons.favorite_border,
                 onPressed: null,
-                word: 'save',
+                word: tr('fav'),
               ),
               ActionCard(
                 icon: Icons.content_copy,

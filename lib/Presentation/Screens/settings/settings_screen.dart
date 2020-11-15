@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:my_vocab/Presentation/Screens/favorites_screen/screen.dart';
+import 'package:my_vocab/Presentation/Screens/profile-screen/profile.dart';
 import 'package:my_vocab/constants/constants.dart';
 import 'package:my_vocab/services/auth/auth.dart';
 
@@ -24,7 +25,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       {
         "icon": Icons.verified_user_outlined,
         "title": tr('profile'),
-        "function": () => print("PRofile was tapped"),
+        "function": () => Navigator.of(context).pushNamed(ProfileScreen.id),
       },
       {
         "icon": Icons.translate,
@@ -57,22 +58,50 @@ class _SettingsScreenState extends State<SettingsScreen> {
     return SafeArea(
       child: Container(
         width: MediaQuery.of(context).size.width * 0.5,
-        height: MediaQuery.of(context).size.height * 0.7,
-        child: ListView.separated(
-          itemCount: _settingsCardItems.length,
-          separatorBuilder: (context, index) => Padding(
-            padding: const EdgeInsets.only(bottom: 8.0),
-            child: Divider(
-              color: Colors.white,
+        height: MediaQuery.of(context).size.height * 0.8,
+        child: Column(
+          children: [
+            CircleAvatar(
+              radius: 50.0,
+              backgroundImage: (Auth().getProfilePhoto() == null)
+                  ? AssetImage('Assets/images/profile.png')
+                  : NetworkImage(Auth().getProfilePhoto()),
+              backgroundColor: Colors.transparent,
+              onBackgroundImageError: (exception, stackTrace) =>
+                  print("$exception \n $stackTrace"),
             ),
-          ),
-          itemBuilder: (context, index) {
-            return SettingsCard(
-              icon: _settingsCardItems[index]['icon'],
-              title: _settingsCardItems[index]['title'],
-              onTap: _settingsCardItems[index]['function'],
-            );
-          },
+            SizedBox(
+              height: 20.0,
+            ),
+            Text(
+              Auth().getUserName(),
+              style: kLargeTextStyle.copyWith(
+                fontSize: 30,
+                color: Colors.white,
+              ),
+            ),
+            SizedBox(
+              height: 40.0,
+            ),
+            Expanded(
+              child: ListView.separated(
+                itemCount: _settingsCardItems.length,
+                separatorBuilder: (context, index) => Padding(
+                  padding: const EdgeInsets.only(bottom: 8.0),
+                  child: Divider(
+                    color: Colors.white,
+                  ),
+                ),
+                itemBuilder: (context, index) {
+                  return SettingsCard(
+                    icon: _settingsCardItems[index]['icon'],
+                    title: _settingsCardItems[index]['title'],
+                    onTap: _settingsCardItems[index]['function'],
+                  );
+                },
+              ),
+            ),
+          ],
         ),
       ),
     );

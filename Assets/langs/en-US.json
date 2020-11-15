@@ -10,11 +10,15 @@
     "about":  "About",
     "licenses": "Licenses",
     "logout": "Logout",
+    "save": "Save",
+    "copy":"Copy",
+    "dono":"DoNo",
+    "fav":"Favorite",
 
     "empty": "Nothing Here",
 
     "home_bottom_nav": "Home",
     "history_bottom_nav":"History",
-    "fav_bottom_nav":"fav",
+    "fav_bottom_nav":"Favorites",
     "settings_bottom_nav":"Settings"
 }

@@ -108,6 +108,11 @@ class Auth {
     return imageUrl;
   }
 
+  String getUserName() {
+    final String username = FirebaseAuth.instance.currentUser.displayName;
+    return username;
+  }
+
   _showDialog({@required error, @required BuildContext context}) {
     if (error.runtimeType == NoSuchMethodError)
       error = "UnIdentified Error!";
