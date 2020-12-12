@@ -43,7 +43,7 @@ class Auth {
       if (account == null) {
         final SnackBar snackBar =
             SnackBar(content: Text("ERROR: Sign In cancelled by user"));
-        Scaffold.of(context).showSnackBar(snackBar);
+        ScaffoldMessenger.of(context).showSnackBar(snackBar);
         return null;
       }
       final GoogleSignInAuthentication googleAuth =
@@ -119,6 +119,6 @@ class Auth {
     else if (error.runtimeType != String)
       error = (error?.message != null) ? error?.message : "UnIdentified Error";
     final SnackBar snackBar = SnackBar(content: Text("ERROR: $error"));
-    Scaffold.of(context).showSnackBar(snackBar);
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 }
