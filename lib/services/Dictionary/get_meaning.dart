@@ -10,10 +10,7 @@ class Meaning {
     final meaningResponse = await owlbotApi.get(word: word);
     try {
       final meaning = Dictionary.fromJson(jsonDecode(meaningResponse.body));
-      print(meaning.props);
-      for (var val in meaning.definitions) {
-        print(val.props);
-      }
+
       return meaning;
     } catch (e) {
       print('@Error in getting meaning: $e');

@@ -2,12 +2,13 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
+
 import 'package:my_vocab/hive/hiveDb.dart';
-import 'package:my_vocab/services/api/datamuse_api.dart';
 import 'package:my_vocab/model/dictionary.dart';
-import 'package:my_vocab/services/api/owl_bot_api.dart';
 import 'package:my_vocab/model/enum/api_request_status.dart';
 import 'package:my_vocab/model/functions.dart';
+import 'package:my_vocab/services/Dictionary/get_meaning.dart';
+import 'package:my_vocab/services/api/datamuse_api.dart';
 
 class WordDetailProvider extends ChangeNotifier {
   Dictionary wordDetail;
@@ -17,8 +18,7 @@ class WordDetailProvider extends ChangeNotifier {
   getDetail(word) async {
     setApiStatus(ApiRequestStatus.loading);
     try {
-      final res = await owlbotApi.get(word: word);
-      wordDetail = Dictionary.fromJson(jsonDecode(res.body));
+      wordDetail = await Meaning().getMeaning(word: word);
 
       final rhymeRes = await datamuseApi
           .get(params: {'rel_rhy': wordDetail.word, "max": 10});
@@ -44,13 +44,6 @@ class WordDetailProvider extends ChangeNotifier {
       for (var value in antJson) {
         antList.add(value['word']);
       }
-      print(rhymeList);
-      print(rhymeJson);
-      wordDetail = wordDetail.copyWith(
-        rhymes: rhymeList,
-        synonynms: synList,
-        antonyms: antList,
-      );
 
       await addToHistory(wordDetail);
 

@@ -68,7 +68,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               height: 20.0,
             ),
             Text(
-              Auth().getUserName(),
+              Auth().getUserName() ?? '',
               style: kLargeTextStyle.copyWith(
                 fontSize: 30,
                 color: Colors.white,

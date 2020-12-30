@@ -133,7 +133,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               password: password,
                               context: context);
                         else
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          Scaffold.of(context).showSnackBar(SnackBar(
                               content: Text(
                                   "Please enter valid Email and Password")));
                         setState(() {

@@ -106,7 +106,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   child: GestureDetector(
                     onTap: () {
                       if (email == null) {
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        Scaffold.of(context).showSnackBar(SnackBar(
                             content:
                                 Text('Enter Email Id for resetting password')));
                       } else
@@ -147,7 +147,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         await Auth().signIn(
                             email: email, password: password, context: context);
                       else
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        Scaffold.of(context).showSnackBar(SnackBar(
                             content:
                                 Text("Please enter valid Email and Password")));
                       setState(() {
