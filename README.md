@@ -21,13 +21,13 @@ MyVocab uses different APIs for different purposes.
 You can directly install the apk file (present in apk folder) on any android device
 
 ## App Screens
-<img src="images/app/signin_screen.png" width="270" height="540" alt="home_screen_without_history"/>
+<p><img src="images/app/signin_screen.png" width="270" height="540" alt="home_screen_without_history"/>
 <img src="images/app/signup_screen.png" width="270" height="540" alt="favorites"/>
-<img src="images/app/home_screen_with_history.png" width="270" height="540" alt="home_screen_with_history"/>
-<img src="images/app/history_screen.png" width="270" height="540" alt="history_screen"/>
+<img src="images/app/home_screen_with_history.png" width="270" height="540" alt="home_screen_with_history"/></p>
+<p><img src="images/app/history_screen.png" width="270" height="540" alt="history_screen"/>
 <img src="images/app/settings.png" width="270" height="540" alt="settings"/>
 <img src="images/app/word_detail.png" width="270" height="540" alt="word_detail"/>
-
+</p>
 #### Building from source
 
 If you do not have the Flutter SDK installed, follow the instructions from the
