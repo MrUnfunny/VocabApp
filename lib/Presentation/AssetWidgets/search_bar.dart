@@ -6,8 +6,10 @@ import 'package:my_vocab/constants/constants.dart';
 import 'package:my_vocab/Presentation/Screens/word-detail/screen.dart';
 import 'package:my_vocab/services/api/datamuse_api.dart';
 import 'package:http/http.dart';
-import 'package:my_vocab/viewmodels/home_provider.dart';
+import 'package:my_vocab/providers/home_provider.dart';
 import 'package:provider/provider.dart';
+
+// Search bar used in HomeScreen
 
 class SearchBar extends StatelessWidget {
   @override

@@ -48,7 +48,7 @@ class MeaningList extends StatelessWidget {
                                   text:
                                       "  ${wordDefinition.definition[0].toUpperCase()}${wordDefinition.definition.substring(1)}",
                                   style: kMeaningTextStyle,
-                                )
+                                ),
                               ],
                             ),
                           ),

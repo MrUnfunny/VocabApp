@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:my_vocab/services/play_audio.dart';
-import 'package:my_vocab/viewmodels/home_provider.dart';
+import 'package:my_vocab/providers/home_provider.dart';
 import 'package:provider/provider.dart';
 
 import '../../constants/constants.dart';

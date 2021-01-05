@@ -7,10 +7,10 @@ import 'package:my_vocab/Presentation/Screens/word-detail/screen.dart';
 import 'package:my_vocab/constants/constants.dart';
 import 'package:my_vocab/services/Dictionary/get_word_of_the_day.dart';
 import 'package:my_vocab/services/play_audio.dart';
-import 'package:my_vocab/viewmodels/home_provider.dart';
+import 'package:my_vocab/providers/home_provider.dart';
 import 'package:provider/provider.dart';
 
-class CustomCard extends StatelessWidget {
+class WordOfTheDayCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer(
@@ -73,7 +73,7 @@ class CustomCard extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      WordOfTheDayCard(
+                      WordOfTheDayIcon(
                         icon: (homeProvider.likedWords
                                 .contains(homeProvider.wordOfTheDay['word']))
                             ? Icons.favorite
@@ -89,7 +89,7 @@ class CustomCard extends StatelessWidget {
                                   homeProvider.wordOfTheDay['word']);
                         },
                       ),
-                      WordOfTheDayCard(
+                      WordOfTheDayIcon(
                         icon: Icons.content_copy,
                         tooltipMsg: 'Copy to clipboard',
                         onPressed: () {
@@ -99,7 +99,7 @@ class CustomCard extends StatelessWidget {
                               msg: 'Text Copied To Clipboard');
                         },
                       ),
-                      WordOfTheDayCard(
+                      WordOfTheDayIcon(
                         icon: Icons.bookmark_border,
                         tooltipMsg: 'Add to Favorites',
                         onPressed: () async {
@@ -107,7 +107,7 @@ class CustomCard extends StatelessWidget {
                               msg: "Cannot add word of the day to Favorites");
                         },
                       ),
-                      WordOfTheDayCard(
+                      WordOfTheDayIcon(
                         icon: Icons.open_in_new_outlined,
                         tooltipMsg: 'Go to definition',
                         onPressed: () => Navigator.push(

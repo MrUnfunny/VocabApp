@@ -15,19 +15,19 @@
       },
       "oauth_client": [
         {
-          "client_id": "187241455481-d5bsdtfjhdk8qkg7hpi4t2029965vs6n.apps.googleusercontent.com",
+          "client_id": "187241455481-882g3s1q7hoki9emf5b7bfuvqgs86djn.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "mohitsingh.my_vocab",
-            "certificate_hash": "3ac60f0d593f8293e2d3a304f4005c1640c9533e"
+            "certificate_hash": "80dbbe7e996d45bffdafb480644d02cf1d0a1c75"
           }
         },
         {
-          "client_id": "187241455481-df2bfe0namg21nnj9109c4d4p144cd29.apps.googleusercontent.com",
+          "client_id": "187241455481-dqakuba83tb57llo1dhnujr9aa2mk7rc.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "mohitsingh.my_vocab",
-            "certificate_hash": "3adbf32e931f1ef7b30c00505831a920abc3b554"
+            "certificate_hash": "4c44c50fac7c542a5730a8fcb8c4e28754bd91cb"
           }
         },
         {

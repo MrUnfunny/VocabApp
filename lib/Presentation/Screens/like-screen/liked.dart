@@ -4,7 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:my_vocab/Presentation/AssetWidgets/custom_app_bar.dart';
 import 'package:my_vocab/Presentation/Screens/favorites_screen/screen.dart';
 import 'package:my_vocab/constants/constants.dart';
-import 'package:my_vocab/viewmodels/home_provider.dart';
+import 'package:my_vocab/providers/home_provider.dart';
 import 'package:provider/provider.dart';
 
 class LikeScreen extends StatelessWidget {

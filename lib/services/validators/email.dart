@@ -1,3 +1,5 @@
+///class for validation of email using regular Expression
+
 class Email {
   String emailAddress;
   Email(this.emailAddress);

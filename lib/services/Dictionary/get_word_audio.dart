@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:my_vocab/services/api/wordnik.dart';
 
+/// gets url for audio file for pronunciation of a word from WordNik Api
 class GetWordAudio {
   Future<String> getAudio({@required String word}) async {
     final meaningResponse =

@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:provider/provider.dart';
+
 import 'package:my_vocab/Presentation/AssetWidgets/detail_screen_app_bar.dart';
 import 'package:my_vocab/Presentation/AssetWidgets/error_widget.dart';
 import 'package:my_vocab/Presentation/AssetWidgets/loading_widget.dart';
 import 'package:my_vocab/Presentation/Screens/word-detail/realted_words.dart';
 import 'package:my_vocab/model/enum/api_request_status.dart';
-import 'package:my_vocab/viewmodels/home_provider.dart';
-import 'package:my_vocab/viewmodels/word_detail_provider.dart';
-import 'package:provider/provider.dart';
+import 'package:my_vocab/providers/home_provider.dart';
+import 'package:my_vocab/providers/word_detail_provider.dart';
 
 import 'meaning_list.dart';
 
@@ -86,9 +87,6 @@ class _WordDetailScreenState extends State<WordDetailScreen>
                                   Tab(
                                     text: "RELATED",
                                   ),
-                                  // Tab(
-                                  //   text: "PHRASES",
-                                  // ),
                                 ],
                               ),
                               Expanded(
@@ -112,14 +110,6 @@ class _WordDetailScreenState extends State<WordDetailScreen>
                                                 wordDetailProvider.wordDetail,
                                           ),
                                         ),
-                                        // Container(
-                                        //   margin: EdgeInsets.only(top: 16.0),
-                                        //   decoration: BoxDecoration(
-                                        //     borderRadius:
-                                        //         BorderRadius.circular(8.0),
-                                        //     color: Colors.greenAccent,
-                                        //   ),
-                                        // ),
                                       ]),
                                 ),
                               ),

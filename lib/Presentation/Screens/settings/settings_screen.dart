@@ -1,8 +1,13 @@
+import 'dart:developer';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+
 import 'package:my_vocab/Presentation/Screens/like-screen/liked.dart';
 import 'package:my_vocab/constants/constants.dart';
 import 'package:my_vocab/services/auth/auth.dart';
+
+import 'settings_card.dart';
 
 class SettingsScreen extends StatefulWidget {
   @override
@@ -62,7 +67,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   : NetworkImage(Auth().getProfilePhoto()),
               backgroundColor: Colors.transparent,
               onBackgroundImageError: (exception, stackTrace) =>
-                  print("$exception \n $stackTrace"),
+                  log("$exception \n $stackTrace"),
             ),
             SizedBox(
               height: 20.0,
@@ -97,42 +102,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ),
           ],
         ),
-      ),
-    );
-  }
-}
-
-class SettingsCard extends StatelessWidget {
-  final IconData icon;
-  final String title;
-  final Function onTap;
-
-  const SettingsCard(
-      {@required this.icon, @required this.title, @required this.onTap});
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Column(
-        children: [
-          Row(
-            children: [
-              Icon(
-                this.icon,
-                color: Colors.white,
-              ),
-              SizedBox(
-                width: 30,
-              ),
-              Flexible(
-                child: Text(
-                  this.title,
-                  style: kLargeTextStyle.copyWith(color: Colors.white),
-                ),
-              ),
-            ],
-          ),
-        ],
       ),
     );
   }

@@ -15,13 +15,12 @@ import 'package:my_vocab/Presentation/Screens/word-detail/screen.dart';
 import 'package:my_vocab/hive/hiveDb.dart';
 import 'package:my_vocab/main_screen.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:my_vocab/viewmodels/home_provider.dart';
-import 'package:my_vocab/viewmodels/word_detail_provider.dart';
+import 'package:my_vocab/providers/home_provider.dart';
+import 'package:my_vocab/providers/word_detail_provider.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:my_vocab/Presentation/Screens/history-screen/history_screen.dart';
 import 'package:provider/provider.dart';
 
-bool isLoggedIn = false;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -31,6 +30,7 @@ void main() async {
   await Hive.init(directoryPath.path);
   await HiveDB.init();
 
+  //caching all vector images so that UI doesn't have to wait for them to load
   await precachePicture(
       ExactAssetPicture(
           SvgPicture.svgStringDecoder, 'Assets/Vectors/bookReading.svg'),
@@ -52,13 +52,19 @@ void main() async {
           SvgPicture.svgStringDecoder, 'Assets/Vectors/error.svg'),
       null);
 
-  runApp(EasyLocalization(
+  runApp(
+    EasyLocalization(
       path: 'Assets/langs',
       supportedLocales: [Locale('en', 'US'), Locale('hi', 'IN')],
-      child: MultiProvider(providers: [
-        ChangeNotifierProvider(create: (_) => HomeProvider()),
-        ChangeNotifierProvider(create: (_) => WordDetailProvider()),
-      ], child: MyApp())));
+      child: MultiProvider(
+        providers: [
+          ChangeNotifierProvider(create: (_) => HomeProvider()),
+          ChangeNotifierProvider(create: (_) => WordDetailProvider()),
+        ],
+        child: MyApp(),
+      ),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {

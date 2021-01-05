@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 
+// This file gets meaning of word from OwlBotApi
 class _OwlBotApi {
   Future<http.Response> get({@required word}) {
     final url = _getUrl(word);

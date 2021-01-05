@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'package:intl/intl.dart';
 import 'package:my_vocab/services/api/wordnik.dart';
 
+///gets Word Of the Day from WordNik Api.
+
 class WordOfTheDay {
   static final DateTime now = DateTime.now();
   static final DateFormat formatter = DateFormat('yyyy-MM-dd');

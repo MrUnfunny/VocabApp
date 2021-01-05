@@ -1,12 +1,16 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
 import 'package:my_vocab/Presentation/Screens/favorites_screen/screen.dart';
 import 'package:my_vocab/Presentation/Screens/history-screen/history_screen.dart';
 import 'package:my_vocab/Presentation/Screens/home-screen/screen.dart';
 import 'package:my_vocab/Presentation/Screens/settings/settings_screen.dart';
 import 'package:my_vocab/model/enum/api_request_status.dart';
-import 'package:my_vocab/viewmodels/home_provider.dart';
-import 'package:provider/provider.dart';
+import 'package:my_vocab/providers/home_provider.dart';
+
+// This is main screen of the app. It contains all screens in a PageView and uses
+// BottomNavBar to toggle among them
 
 class MainScreen extends StatefulWidget {
   static const id = 'MainScreen';
@@ -144,6 +148,8 @@ class _MainScreenState extends State<MainScreen>
     );
   }
 
+  // to keep track of correct tab which was present before moving to settings
+  // and show correct bar in bottomNavBar
   void toggleSettings() {
     if (animationController.status == AnimationStatus.completed)
       animationController.reverse();

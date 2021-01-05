@@ -1,6 +1,10 @@
+import 'dart:developer';
+
 import 'package:audioplayers/audioplayers.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:my_vocab/services/Dictionary/get_word_audio.dart';
+
+//for pronunciation of a word
 
 class WordAudio {
   Future<bool> playWordAudio(url) async {
@@ -17,7 +21,7 @@ class WordAudio {
       }
       return false;
     } catch (e) {
-      print("@Error occured while playing audio : $e");
+      log("@Error occured while playing audio : $e");
       return false;
     }
   }

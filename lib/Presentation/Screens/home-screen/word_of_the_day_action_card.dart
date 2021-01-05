@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class WordOfTheDayCard extends StatelessWidget {
+class WordOfTheDayIcon extends StatelessWidget {
   final IconData icon;
   final Function onPressed;
   final String tooltipMsg;
 
-  const WordOfTheDayCard({
+  const WordOfTheDayIcon({
     Key key,
     @required this.icon,
     @required this.onPressed,

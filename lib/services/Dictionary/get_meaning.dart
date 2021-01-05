@@ -1,8 +1,11 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:my_vocab/model/dictionary.dart';
 import 'package:my_vocab/services/api/owl_bot_api.dart';
+
+///gets meaning of word from Owlbot Api
 
 class Meaning {
   getMeaning({@required word}) async {
@@ -13,7 +16,7 @@ class Meaning {
 
       return meaning;
     } catch (e) {
-      print('@Error in getting meaning: $e');
+      log('@Error in getting meaning: $e');
       return null;
     }
   }

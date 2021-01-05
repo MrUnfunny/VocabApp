@@ -1,6 +1,8 @@
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 
+// This file handles interaction with WordNik Api.
+
 class _WordNikApi {
   Future<http.Response> get({word, Map<String, dynamic> params}) {
     if (params == null) params = {};
