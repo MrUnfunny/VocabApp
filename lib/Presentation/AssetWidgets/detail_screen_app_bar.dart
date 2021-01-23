@@ -6,8 +6,9 @@ import 'package:my_vocab/services/play_audio.dart';
 import 'package:my_vocab/providers/home_provider.dart';
 import 'package:provider/provider.dart';
 
-import '../../constants/constants.dart';
+import '../../constants/configs.dart';
 import 'action_card.dart';
+import 'package:my_vocab/services/utils.dart';
 
 class DetailScreenAppBar extends StatelessWidget {
   final String word;
@@ -34,7 +35,7 @@ class DetailScreenAppBar extends StatelessWidget {
                     if (word != null)
                       Flexible(
                         child: Text(
-                          "${word[0].toUpperCase()}${word.substring(1)}",
+                          capitalize(word),
                           style: kAppBarStyle.copyWith(
                               color: Colors.white, fontSize: 40),
                         ),
@@ -80,9 +81,7 @@ class DetailScreenAppBar extends StatelessWidget {
                 ),
                 ActionCard(
                   icon: Icons.border_clear,
-                  onPressed: () {
-                    print(homeProvider.favWords);
-                  },
+                  onPressed: null,
                   word: 'dono',
                 ),
                 ActionCard(

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'package:my_vocab/constants/configs.dart';
 import 'package:my_vocab/hive/hiveDb.dart';
 import 'package:my_vocab/providers/home_provider.dart';
+import 'package:my_vocab/services/utils.dart';
 
 class HistoryCard extends StatelessWidget {
   final String word;
@@ -20,7 +22,7 @@ class HistoryCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Dismissible(
       background: Container(
-        color: Colors.red,
+        color: kDismissColor,
         padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
         child: Icon(
           Icons.delete,
@@ -43,12 +45,8 @@ class HistoryCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  '${word[0].toUpperCase()}${word.substring(1)}',
-                  style: TextStyle(
-                      fontFamily: "Montserrat",
-                      fontSize: 24.0,
-                      fontWeight: FontWeight.w600,
-                      color: Theme.of(context).primaryColor),
+                  capitalize(word),
+                  style: kCardTextStyle,
                 ),
                 SizedBox(
                   height: 8.0,

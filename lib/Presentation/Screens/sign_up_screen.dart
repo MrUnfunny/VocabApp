@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:my_vocab/Presentation/Screens/sign_in_screen.dart';
-import 'package:my_vocab/constants/constants.dart';
+import 'package:my_vocab/constants/configs.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:my_vocab/Presentation/AssetWidgets/bottom_bar_textfield.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
@@ -71,10 +71,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   },
                   errorText: "Invalid Email",
                   onChanged: (value) {
-                    email = value;
                     if (mounted)
                       setState(() {
-                        print(value);
+                        email = value;
                       });
                   },
                 ),
@@ -94,10 +93,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   },
                   errorText: "Weak Password",
                   onChanged: (value) {
-                    password = value;
                     if (mounted)
                       setState(() {
-                        print(value);
+                        password = value;
                       });
                   },
                 ),
@@ -108,38 +106,33 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   margin:
                       EdgeInsets.symmetric(vertical: 25.0, horizontal: 100.0),
                   child: FlatButton(
-                      padding: EdgeInsets.symmetric(vertical: 10.0),
-                      color: Theme.of(context).primaryColor,
-                      child: Text(
-                        "Sign Up",
-                        style: TextStyle(
-                          fontFamily: 'Montserrat',
-                          fontSize: 18.0,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.white,
-                        ),
+                    padding: EdgeInsets.symmetric(vertical: 10.0),
+                    color: Theme.of(context).primaryColor,
+                    child: Text(
+                      "Sign Up",
+                      style: kLargeTextStyle.copyWith(
+                        color: Colors.white,
                       ),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(50.0),
-                      ),
-                      onPressed: () async {
-                        setState(() {
-                          loading = true;
-                        });
-                        if (Email.validate(email) &&
-                            Password.validate(password))
-                          await Auth().signUp(
-                              email: email,
-                              password: password,
-                              context: context);
-                        else
-                          Scaffold.of(context).showSnackBar(SnackBar(
-                              content: Text(
-                                  "Please enter valid Email and Password")));
-                        setState(() {
-                          loading = false;
-                        });
-                      }),
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(50.0),
+                    ),
+                    onPressed: () async {
+                      setState(() {
+                        loading = true;
+                      });
+                      if (Email.validate(email) && Password.validate(password))
+                        await Auth().signUp(
+                            email: email, password: password, context: context);
+                      else
+                        Scaffold.of(context).showSnackBar(SnackBar(
+                            content:
+                                Text("Please enter valid Email and Password")));
+                      setState(() {
+                        loading = false;
+                      });
+                    },
+                  ),
                 ),
               ],
             ),

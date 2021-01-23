@@ -1,8 +1,9 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:my_vocab/constants/constants.dart';
+import 'package:my_vocab/constants/configs.dart';
 import 'package:my_vocab/Presentation/Screens/word-detail/screen.dart';
 import 'package:my_vocab/services/api/datamuse_api.dart';
 import 'package:http/http.dart';
@@ -19,16 +20,20 @@ class SearchBar extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10.0),
-          border: Border.all(width: 0.5, color: Colors.black12),
+          border: Border.all(
+            width: 0.5,
+            color: kLightBlack,
+          ),
         ),
         child: Row(
           children: [
             IconButton(
-                icon: Icon(
-                  Icons.search,
-                  color: Color(0xffF54A16),
-                ),
-                onPressed: null),
+              icon: Icon(
+                Icons.search,
+                color: Theme.of(context).primaryColor,
+              ),
+              onPressed: () => myShowSearch(context),
+            ),
             Text(
               tr('search'),
               style: TextStyle(color: kBackgroundColor, fontSize: 17.0),
@@ -64,15 +69,8 @@ class Search extends SearchDelegate {
           Icons.search,
           color: Colors.white,
         ),
-        onPressed: () => Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) => WordDetailScreen(
-              word: query?.trim(),
-            ),
-          ),
-        ),
-      )
+        onPressed: () => FocusScope.of(context).unfocus(),
+      ),
     ];
   }
 
@@ -125,7 +123,7 @@ class Search extends SearchDelegate {
             itemBuilder: (context, index) => Dismissible(
               background: Container(
                 padding: EdgeInsets.symmetric(horizontal: 10.0),
-                color: Colors.red,
+                color: kDismissColor,
                 child: Icon(
                   Icons.delete,
                   color: Colors.white,
@@ -133,6 +131,14 @@ class Search extends SearchDelegate {
               ),
               key: Key(homeProvider.historyWords[index]['word']),
               child: ListTile(
+                onTap: () => Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => WordDetailScreen(
+                      word: homeProvider.historyWords[index]['word'],
+                    ),
+                  ),
+                ),
                 title: Text(homeProvider.historyWords[index]['word']),
                 trailing: IconButton(
                   icon: Icon(Icons.history),
@@ -159,6 +165,7 @@ class Search extends SearchDelegate {
   }
 }
 
+///method to get search result from dataMuse api
 Future<List<String>> searchListFuture(String query) async {
   try {
     if (query != '' && query != null) {
@@ -171,7 +178,7 @@ Future<List<String>> searchListFuture(String query) async {
     }
     return null;
   } catch (e) {
-    print("@Error at datamuse api: $e");
+    log("@Error at datamuse api: $e");
     return null;
   }
 }

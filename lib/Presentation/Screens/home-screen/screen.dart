@@ -12,7 +12,7 @@ import 'package:my_vocab/Presentation/AssetWidgets/search_bar.dart';
 import 'package:my_vocab/Presentation/Screens/history-screen/history_screen.dart';
 import 'package:my_vocab/Presentation/Screens/home-screen/horizontal_scroll_card.dart';
 import 'package:my_vocab/Presentation/Screens/home-screen/word_of_the_day_card.dart';
-import 'package:my_vocab/constants/constants.dart';
+import 'package:my_vocab/constants/configs.dart';
 import 'package:my_vocab/model/enum/api_request_status.dart';
 import 'package:my_vocab/providers/home_provider.dart';
 
@@ -33,9 +33,10 @@ class _HomeScreenState extends State<HomeScreen>
   @override
   void initState() {
     super.initState();
-    SchedulerBinding.instance.addPostFrameCallback((_) =>
-        Provider.of<HomeProvider>(context, listen: false)
-            .getWordOfTheDayAndHistory());
+    SchedulerBinding.instance.addPostFrameCallback(
+      (_) => Provider.of<HomeProvider>(context, listen: false)
+          .getWordOfTheDayAndHistory(),
+    );
   }
 
   // implements "press back twice to exit".
@@ -60,9 +61,6 @@ class _HomeScreenState extends State<HomeScreen>
           (BuildContext context, HomeProvider homeProvider, Widget child) =>
               Scaffold(
         backgroundColor: Colors.grey.shade100,
-        drawer: Drawer(
-          elevation: 20.0,
-        ),
         body: SafeArea(
           child: WillPopScope(
             onWillPop: () => onWillPop(),
@@ -89,7 +87,9 @@ class _HomeScreenState extends State<HomeScreen>
                             ),
                             GestureDetector(
                               onTap: () => Navigator.pushNamed(
-                                  context, HistoryScreen.id),
+                                context,
+                                HistoryScreen.id,
+                              ),
                               child: Text(
                                 tr('see_all'),
                                 style: kSmallTextStyle.copyWith(

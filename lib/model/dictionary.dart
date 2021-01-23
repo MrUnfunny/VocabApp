@@ -110,4 +110,9 @@ class Dictionary extends HiveObject {
         synonynms.hashCode ^
         antonyms.hashCode;
   }
+
+  @override
+  String toString() {
+    return 'Dictionary(word: $word, pronunciation: $pronunciation, definitions: $definitions, rhymes: $rhymes, synonynms: $synonynms, antonyms: $antonyms, isFav: $isFav, isLiked: $isLiked)';
+  }
 }

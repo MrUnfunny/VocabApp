@@ -46,6 +46,12 @@ class WordDetailProvider extends ChangeNotifier {
         antList.add(value['word']);
       }
 
+      wordDetail = wordDetail.copyWith(
+        rhymes: rhymeList,
+        synonynms: synList,
+        antonyms: antList,
+      );
+
       await addToHistory(wordDetail);
 
       setApiStatus(ApiRequestStatus.loaded);

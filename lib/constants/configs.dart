@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 
+const kPrimaryColor = 0xffff4f18;
+const kDismissColor = Colors.red;
+const kLightBlack = Colors.black12;
+
 const kSmallTextStyle = TextStyle(
   fontFamily: "Montserrat",
   fontWeight: FontWeight.w400,
   fontSize: 14.0,
-  color: Color(0xddF54A16),
+  color: Color(kPrimaryColor),
 );
 
 const kAppBarStyle = TextStyle(
@@ -17,7 +21,7 @@ const kLargeTextStyle = TextStyle(
   fontFamily: "Montserrat",
   fontWeight: FontWeight.w600,
   fontSize: 20.0,
-  color: Color(0xffff4f18),
+  color: Color(kPrimaryColor),
 );
 
 const kCustomCardWordTextStyle = TextStyle(
@@ -33,3 +37,10 @@ const kMeaningTextStyle = TextStyle(
     fontWeight: FontWeight.w500,
     fontSize: 16,
     color: Colors.black);
+
+const kCardTextStyle = TextStyle(
+  fontFamily: "Montserrat",
+  fontSize: 24.0,
+  fontWeight: FontWeight.w600,
+  color: Color(kPrimaryColor),
+);

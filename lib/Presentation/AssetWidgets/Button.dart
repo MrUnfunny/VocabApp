@@ -8,8 +8,13 @@ class CircularButtonWithoutSplash extends StatelessWidget {
   final int fillColorInHex;
   final Function onTap;
 
-
-  CircularButtonWithoutSplash({this.buttonText, this.topMargin, this.filled, this.fillColorInHex, this.onTap, });
+  CircularButtonWithoutSplash({
+    this.buttonText,
+    this.topMargin,
+    this.filled,
+    this.fillColorInHex,
+    this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +27,7 @@ class CircularButtonWithoutSplash extends StatelessWidget {
             fontFamily: 'Montserrat',
             fontSize: 18.0,
             fontWeight: FontWeight.w500,
-            color: (filled) ? Colors.white: Color(this.fillColorInHex),
+            color: (filled) ? Colors.white : Color(this.fillColorInHex),
           ),
         ),
         width: 300.0,

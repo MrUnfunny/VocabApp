@@ -1,6 +1,8 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 
-import 'package:my_vocab/constants/constants.dart';
+import 'package:my_vocab/constants/configs.dart';
 import 'package:my_vocab/services/auth/auth.dart';
 
 class CustomAppBar extends StatelessWidget {
@@ -34,7 +36,7 @@ class CustomAppBar extends StatelessWidget {
                 : NetworkImage(Auth().getProfilePhoto()),
             backgroundColor: Colors.transparent,
             onBackgroundImageError: (exception, stackTrace) =>
-                print("$exception \n $stackTrace"),
+                log("$exception \n $stackTrace"),
           ),
         )
       ],

@@ -3,7 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:my_vocab/Presentation/AssetWidgets/button.dart';
 import 'package:my_vocab/Presentation/Screens/sign_in_screen.dart';
 import 'package:my_vocab/Presentation/Screens/sign_up_screen.dart';
-import 'package:my_vocab/constants/constants.dart';
+import 'package:my_vocab/constants/configs.dart';
 
 const SVGName = 'Assets/Vectors/bookReading.svg';
 
@@ -52,7 +52,7 @@ class WelcomeScreen extends StatelessWidget {
               buttonText: "Sign In",
               topMargin: 60,
               filled: true,
-              fillColorInHex: 0xffff4f18,
+              fillColorInHex: kPrimaryColor,
               onTap: () {
                 Navigator.pushNamed(context, SignInScreen.id);
               },
@@ -61,7 +61,7 @@ class WelcomeScreen extends StatelessWidget {
               buttonText: "Sign Up",
               topMargin: 20,
               filled: false,
-              fillColorInHex: 0xffff4f18,
+              fillColorInHex: kPrimaryColor,
               onTap: () {
                 Navigator.pushNamed(context, SignUpScreen.id);
               },

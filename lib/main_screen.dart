@@ -38,8 +38,10 @@ class _MainScreenState extends State<MainScreen>
       vsync: this,
       duration: Duration(milliseconds: 200),
     );
-    finalAnimation =
-        CurvedAnimation(parent: animationController, curve: Curves.decelerate);
+    finalAnimation = CurvedAnimation(
+      parent: animationController,
+      curve: Curves.decelerate,
+    );
   }
 
   @override
@@ -65,7 +67,9 @@ class _MainScreenState extends State<MainScreen>
                   offset: Offset(200, 0),
                   child: Container(
                     alignment: Alignment.centerRight,
-                    child: SettingsScreen(),
+                    child: SettingsScreen(
+                      callBackFunction: () => toggleSettings(),
+                    ),
                   ),
                 ),
               ),
@@ -114,7 +118,7 @@ class _MainScreenState extends State<MainScreen>
                                   _pageController.animateToPage(
                                     pageIndex,
                                     curve: Curves.bounceIn,
-                                    duration: Duration(milliseconds: 300),
+                                    duration: Duration(milliseconds: 100),
                                   );
                               },
                               items: [

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:intl/intl.dart';
 import 'package:my_vocab/services/api/wordnik.dart';
@@ -12,7 +13,7 @@ class WordOfTheDay {
 
   getMeaning() async {
     Map<String, String> wordOfTheDay = {};
-    print("@getting meaning for $today");
+    log("@getting meaning for $today");
     final meaningResponse = await wordNikApi
         .get(word: 'words.json/wordOfTheDay', params: {'date': today});
     final meaningBody = jsonDecode(meaningResponse.body);

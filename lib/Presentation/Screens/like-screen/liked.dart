@@ -1,11 +1,13 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
+
 import 'package:my_vocab/Presentation/AssetWidgets/custom_app_bar.dart';
 import 'package:my_vocab/Presentation/Screens/favorites_screen/screen.dart';
-import 'package:my_vocab/constants/constants.dart';
+import 'package:my_vocab/constants/configs.dart';
 import 'package:my_vocab/providers/home_provider.dart';
-import 'package:provider/provider.dart';
+import 'package:my_vocab/services/utils.dart';
 
 class LikeScreen extends StatelessWidget {
   static const id = 'Profile_Screen';
@@ -37,7 +39,6 @@ class LikeScreen extends StatelessWidget {
                 child: Consumer(
                   builder: (BuildContext context, HomeProvider homeProvider,
                       Widget child) {
-                    print(homeProvider.likedWords);
                     if (homeProvider.likedWords.isNotEmpty)
                       return ListView.builder(
                         itemCount: homeProvider.likedWords.length + 1,
@@ -47,7 +48,12 @@ class LikeScreen extends StatelessWidget {
                               height: 10.0,
                             );
                           return ListTile(
-                            title: Text(homeProvider.likedWords[index - 1]),
+                            title: Text(
+                              capitalize(
+                                homeProvider.likedWords[index - 1],
+                              ),
+                              style: kCardTextStyle,
+                            ),
                           );
                         },
                       );

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_vocab/constants/constants.dart';
+import 'package:my_vocab/constants/configs.dart';
 import 'package:my_vocab/model/dictionary.dart';
 
 class RelatedWords extends StatelessWidget {

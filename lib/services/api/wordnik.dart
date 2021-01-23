@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 
@@ -8,7 +10,7 @@ class _WordNikApi {
     if (params == null) params = {};
     params['api_key'] = DotEnv().env['WORDNIK_API_KEY'];
     final url = _getUrl(path: word, params: params);
-    print("URL is: $url");
+    log("URL is: $url");
     return http.get(
       url,
     );

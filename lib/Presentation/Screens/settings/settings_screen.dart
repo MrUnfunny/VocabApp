@@ -2,14 +2,18 @@ import 'dart:developer';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:my_vocab/Presentation/Screens/like-screen/liked.dart';
-import 'package:my_vocab/constants/constants.dart';
+import 'package:my_vocab/constants/configs.dart';
 import 'package:my_vocab/services/auth/auth.dart';
 
 import 'settings_card.dart';
 
 class SettingsScreen extends StatefulWidget {
+  final Function callBackFunction;
+
+  const SettingsScreen({Key key, this.callBackFunction}) : super(key: key);
   @override
   _SettingsScreenState createState() => _SettingsScreenState();
 }
@@ -24,7 +28,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
       {
         "icon": Icons.favorite_border_outlined,
         "title": tr('like'),
-        "function": () => Navigator.of(context).pushNamed(LikeScreen.id),
+        "function": () {
+          widget.callBackFunction();
+          Navigator.of(context).pushNamed(LikeScreen.id);
+        },
       },
       {
         "icon": Icons.translate,
@@ -35,14 +42,20 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 : Locale('hi', 'IN'),
       },
       {
-        "icon": Icons.info_outline_rounded,
-        "title": tr('about'),
-        "function": () => print("About was tapped"),
-      },
-      {
         "icon": Icons.description_outlined,
-        "title": tr('licenses'),
-        "function": () => print("Licenses was tapped"),
+        "title": tr('about'),
+        "function": () {
+          widget.callBackFunction();
+
+          showAboutDialog(
+            context: context,
+            applicationName: "MyVocab",
+            applicationVersion: '0.0.1',
+            applicationIcon: Icon(FontAwesomeIcons.appStore),
+            applicationLegalese:
+                "This is just a simple open source vocabulary app built for practice. For suggestions or to view source code, visit MrUnfunny on Github",
+          );
+        }
       },
       {
         "icon": Icons.logout,

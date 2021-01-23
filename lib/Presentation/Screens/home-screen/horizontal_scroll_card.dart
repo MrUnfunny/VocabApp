@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:my_vocab/Presentation/Screens/word-detail/screen.dart';
+import 'package:my_vocab/constants/configs.dart';
 import 'package:my_vocab/providers/home_provider.dart';
 import 'package:provider/provider.dart';
-
+import 'package:my_vocab/services/utils.dart';
 // This widget is used to show User History on HomeScreen
 
 class HorizontalScrollCard extends StatefulWidget {
@@ -37,8 +38,7 @@ class _HorizontalScrollCardState extends State<HorizontalScrollCard> {
         padding: EdgeInsets.symmetric(horizontal: 16.0),
         width: MediaQuery.of(context).size.width * 0.80,
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10.0),
-            color: Colors.grey.shade300),
+            borderRadius: BorderRadius.circular(10.0), color: kLightBlack),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -47,7 +47,7 @@ class _HorizontalScrollCardState extends State<HorizontalScrollCard> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "${widget.word['word'][0].toUpperCase()}${widget.word['word'].substring(1)}",
+                  capitalize(widget.word['word']),
                   style: TextStyle(
                       fontFamily: "Montserrat",
                       fontSize: 24.0,

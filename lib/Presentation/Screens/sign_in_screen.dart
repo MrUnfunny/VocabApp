@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -6,7 +8,7 @@ import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:my_vocab/Presentation/AssetWidgets/bottom_bar_textfield.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:my_vocab/Presentation/Screens/sign_up_screen.dart';
-import 'package:my_vocab/constants/constants.dart';
+import 'package:my_vocab/constants/configs.dart';
 import 'package:my_vocab/main_screen.dart';
 import 'package:my_vocab/services/auth/auth.dart';
 import 'package:my_vocab/services/validators/email.dart';
@@ -73,11 +75,9 @@ class _SignInScreenState extends State<SignInScreen> {
                   },
                   errorText: "Invalid Email",
                   onChanged: (value) {
-                    email = value;
-                    if (mounted)
-                      setState(() {
-                        print(value);
-                      });
+                    setState(() {
+                      email = value;
+                    });
                   },
                 ),
                 BottomBarTextField(
@@ -91,11 +91,9 @@ class _SignInScreenState extends State<SignInScreen> {
                   inputType: TextInputType.visiblePassword,
                   isPassword: true,
                   onChanged: (value) {
-                    password = value;
-                    if (mounted)
-                      setState(() {
-                        print(value);
-                      });
+                    setState(() {
+                      password = value;
+                    });
                   },
                 ),
                 SizedBox(
@@ -106,9 +104,12 @@ class _SignInScreenState extends State<SignInScreen> {
                   child: GestureDetector(
                     onTap: () {
                       if (email == null) {
-                        Scaffold.of(context).showSnackBar(SnackBar(
+                        Scaffold.of(context).showSnackBar(
+                          SnackBar(
                             content:
-                                Text('Enter Email Id for resetting password')));
+                                Text('Enter Email Id for resetting password'),
+                          ),
+                        );
                       } else
                         FirebaseAuth.instance
                             .sendPasswordResetEmail(email: email);
@@ -116,8 +117,7 @@ class _SignInScreenState extends State<SignInScreen> {
                     child: Text(
                       "Forgot Password",
                       textAlign: TextAlign.end,
-                      style:
-                          kSmallTextStyle.copyWith(fontWeight: FontWeight.w500),
+                      style: kSmallTextStyle,
                     ),
                   ),
                 ),
@@ -147,9 +147,12 @@ class _SignInScreenState extends State<SignInScreen> {
                         await Auth().signIn(
                             email: email, password: password, context: context);
                       else
-                        Scaffold.of(context).showSnackBar(SnackBar(
+                        Scaffold.of(context).showSnackBar(
+                          SnackBar(
                             content:
-                                Text("Please enter valid Email and Password")));
+                                Text("Please enter valid Email and Password"),
+                          ),
+                        );
                       setState(() {
                         loading = false;
                       });
@@ -175,8 +178,10 @@ class _SignInScreenState extends State<SignInScreen> {
                             await Auth().signInWithFacebook(context: context);
                         if (user != null)
                           Navigator.pushReplacementNamed(
-                              context, MainScreen.id);
-                        print("Exception occurred: User is null");
+                            context,
+                            MainScreen.id,
+                          );
+                        log("Exception occurred: User is null");
                       },
                     ),
                     SizedBox(
@@ -184,7 +189,7 @@ class _SignInScreenState extends State<SignInScreen> {
                     ),
                     GestureDetector(
                       child: Padding(
-                        padding: const EdgeInsets.only(top: 10.0),
+                        padding: const EdgeInsets.only(top: 12.0),
                         child: SvgPicture.asset(
                           googleLogo,
                           width: 37.0,
@@ -195,7 +200,9 @@ class _SignInScreenState extends State<SignInScreen> {
                             await Auth().signInWithGoogle(context: context);
                         if (user != null) {
                           Navigator.pushReplacementNamed(
-                              context, MainScreen.id);
+                            context,
+                            MainScreen.id,
+                          );
                         }
                       },
                     ),

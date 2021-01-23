@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_login_facebook/flutter_login_facebook.dart';
@@ -16,7 +18,7 @@ class Auth {
           email: email, password: password);
       Navigator.pushReplacementNamed(context, MainScreen.id);
     } catch (e) {
-      print('Exception @createAccount: $e');
+      log('Exception @createAccount: $e');
       _showDialog(
         error: e,
         context: context,
@@ -53,7 +55,7 @@ class Auth {
       final UserCredential user = await _auth.signInWithCredential(creds);
       return user.user;
     } catch (e) {
-      print("error is $e");
+      log("error is $e");
       _showDialog(error: e, context: context);
       return null;
     }
@@ -79,12 +81,12 @@ class Auth {
 
           break;
         case FacebookLoginStatus.Cancel:
-          print("Exception @facebookLogin ${res.status}");
+          log("Exception @facebookLogin ${res.status}");
           break;
         case FacebookLoginStatus.Error:
           _showDialog(
               context: context, error: "Failed to Sign In via Facebook");
-          print("Exception @facebookLogin ${res.status}");
+          log("Exception @facebookLogin ${res.status}");
           break;
       }
     } catch (e) {
@@ -99,7 +101,7 @@ class Auth {
       _auth.signOut();
       Navigator.pushReplacementNamed(context, WelcomeScreen.id);
     } catch (e) {
-      print('Exception @signout: $e');
+      log('Exception @signout: $e');
     }
   }
 

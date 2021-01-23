@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'package:my_vocab/constants/configs.dart';
 import 'package:my_vocab/providers/home_provider.dart';
+import 'package:my_vocab/services/utils.dart';
 
 class FavCard extends StatelessWidget {
   final Map word;
@@ -13,7 +15,7 @@ class FavCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Dismissible(
       background: Container(
-        color: Colors.red,
+        color: kDismissColor,
         padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
         child: Icon(
           Icons.delete,
@@ -37,12 +39,8 @@ class FavCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  '${word['word'][0].toUpperCase()}${word['word'].substring(1)}',
-                  style: TextStyle(
-                      fontFamily: "Montserrat",
-                      fontSize: 24.0,
-                      fontWeight: FontWeight.w600,
-                      color: Theme.of(context).primaryColor),
+                  capitalize(word['word']),
+                  style: kCardTextStyle,
                 ),
                 SizedBox(
                   height: 8.0,

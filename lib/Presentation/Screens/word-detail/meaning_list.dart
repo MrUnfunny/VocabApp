@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:my_vocab/constants/constants.dart';
+import 'package:my_vocab/constants/configs.dart';
 import 'package:my_vocab/model/definition.dart';
 import 'package:my_vocab/model/dictionary.dart';
+import 'package:my_vocab/services/utils.dart';
 
 class MeaningList extends StatelessWidget {
   final Dictionary wordDetail;
@@ -40,24 +41,24 @@ class MeaningList extends StatelessWidget {
                             text: TextSpan(
                               children: [
                                 TextSpan(
-                                  text: wordDefinition.type,
+                                  text: wordDefinition.type + " ",
                                   style: kMeaningTextStyle.copyWith(
                                       color: Theme.of(context).primaryColor),
                                 ),
                                 TextSpan(
-                                  text:
-                                      "  ${wordDefinition.definition[0].toUpperCase()}${wordDefinition.definition.substring(1)}",
+                                  text: capitalize(wordDefinition.definition),
                                   style: kMeaningTextStyle,
                                 ),
                               ],
                             ),
                           ),
                         ),
-                        if (wordDefinition.example != null)
+                        if (wordDefinition.example != null &&
+                            wordDefinition.example != '')
                           Container(
                             margin: EdgeInsets.symmetric(vertical: 20),
                             child: Text(
-                              '"${wordDefinition.example[0].toUpperCase()}${wordDefinition.example.substring(1)}"',
+                              capitalize(wordDefinition.example),
                               style: kMeaningTextStyle.copyWith(
                                   color: Colors.grey),
                             ),

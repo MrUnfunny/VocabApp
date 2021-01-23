@@ -52,8 +52,11 @@ class _WordDetailScreenState extends State<WordDetailScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       body: Consumer(
-        builder: (BuildContext context, WordDetailProvider wordDetailProvider,
-                Widget child) =>
+        builder: (
+          BuildContext context,
+          WordDetailProvider wordDetailProvider,
+          Widget child,
+        ) =>
             Container(
           padding: const EdgeInsets.only(top: 16.0),
           color:
@@ -61,76 +64,77 @@ class _WordDetailScreenState extends State<WordDetailScreen>
                   ? Theme.of(context).primaryColor
                   : Colors.white,
           child: SafeArea(
-            child: (wordDetailProvider.apiRequestStatus ==
-                    ApiRequestStatus.loaded)
-                ? Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      DetailScreenAppBar(
-                        word: wordDetailProvider.wordDetail.word,
-                      ),
-                      Expanded(
-                        child: Container(
-                          child: Column(
-                            children: [
-                              TabBar(
-                                indicatorSize: TabBarIndicatorSize.tab,
-                                labelColor: Theme.of(context).primaryColor,
-                                unselectedLabelColor: Colors.grey,
-                                indicatorColor: Color(0xddF54A16),
-                                indicatorWeight: 2.0,
-                                controller: _tabController,
-                                tabs: [
-                                  Tab(
-                                    text: "MEANING",
+            child:
+                (wordDetailProvider.apiRequestStatus == ApiRequestStatus.loaded)
+                    ? Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          DetailScreenAppBar(
+                            word: wordDetailProvider.wordDetail.word,
+                          ),
+                          Expanded(
+                            child: Container(
+                              child: Column(
+                                children: [
+                                  TabBar(
+                                    indicatorSize: TabBarIndicatorSize.tab,
+                                    labelColor: Theme.of(context).primaryColor,
+                                    unselectedLabelColor: Colors.grey,
+                                    indicatorColor: Color(0xddF54A16),
+                                    indicatorWeight: 2.0,
+                                    controller: _tabController,
+                                    tabs: [
+                                      Tab(
+                                        text: "MEANING",
+                                      ),
+                                      Tab(
+                                        text: "RELATED",
+                                      ),
+                                    ],
                                   ),
-                                  Tab(
-                                    text: "RELATED",
+                                  Expanded(
+                                    child: Container(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 16.0),
+                                      child: TabBarView(
+                                        controller: _tabController,
+                                        children: [
+                                          Container(
+                                            margin: EdgeInsets.only(top: 16.0),
+                                            child: MeaningList(
+                                              wordDetail:
+                                                  wordDetailProvider.wordDetail,
+                                            ),
+                                          ),
+                                          Container(
+                                            margin: EdgeInsets.only(top: 16.0),
+                                            child: RelatedWords(
+                                              wordDetail:
+                                                  wordDetailProvider.wordDetail,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
                                   ),
                                 ],
                               ),
-                              Expanded(
-                                child: Container(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 16.0),
-                                  child: TabBarView(
-                                      controller: _tabController,
-                                      children: [
-                                        Container(
-                                          margin: EdgeInsets.only(top: 16.0),
-                                          child: MeaningList(
-                                            wordDetail:
-                                                wordDetailProvider.wordDetail,
-                                          ),
-                                        ),
-                                        Container(
-                                          margin: EdgeInsets.only(top: 16.0),
-                                          child: RelatedWords(
-                                            wordDetail:
-                                                wordDetailProvider.wordDetail,
-                                          ),
-                                        ),
-                                      ]),
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(30),
+                                  topRight: Radius.circular(30),
                                 ),
                               ),
-                            ],
-                          ),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(30),
-                              topRight: Radius.circular(30),
+                              margin: EdgeInsets.only(top: 32),
                             ),
-                          ),
-                          margin: EdgeInsets.only(top: 32),
-                        ),
+                          )
+                        ],
                       )
-                    ],
-                  )
-                : (wordDetailProvider.apiRequestStatus ==
-                        ApiRequestStatus.loading)
-                    ? LoadingWidget()
-                    : ErrorLoadedWidget(),
+                    : (wordDetailProvider.apiRequestStatus ==
+                            ApiRequestStatus.loading)
+                        ? LoadingWidget()
+                        : ErrorLoadedWidget(),
           ),
         ),
       ),

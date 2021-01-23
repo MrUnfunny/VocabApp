@@ -20,8 +20,6 @@ class HiveDB {
   }
 
   Map getLiked() {
-    print("called");
-    print(_likedBox.toMap());
     return _likedBox.toMap();
   }
 

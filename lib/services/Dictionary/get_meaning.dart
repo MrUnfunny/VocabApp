@@ -9,7 +9,7 @@ import 'package:my_vocab/services/api/owl_bot_api.dart';
 
 class Meaning {
   getMeaning({@required word}) async {
-    print("@getting meaning for $word");
+    log("@getting meaning for $word");
     final meaningResponse = await owlbotApi.get(word: word);
     try {
       final meaning = Dictionary.fromJson(jsonDecode(meaningResponse.body));

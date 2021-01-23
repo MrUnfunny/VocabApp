@@ -4,7 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
 import 'package:my_vocab/Presentation/AssetWidgets/custom_app_bar.dart';
-import 'package:my_vocab/constants/constants.dart';
+import 'package:my_vocab/constants/configs.dart';
 import 'package:my_vocab/providers/home_provider.dart';
 
 import 'fav_card.dart';
@@ -39,8 +39,7 @@ class FavScreen extends StatelessWidget {
                   ),
                 ),
                 child: Consumer(
-                  builder: (BuildContext context, HomeProvider homeProvider,
-                      Widget child) {
+                  builder: (BuildContext context, HomeProvider homeProvider, Widget child) {
                     if (homeProvider.favWords.isNotEmpty)
                       return ListView.builder(
                         itemCount: homeProvider.favWords.length + 1,
