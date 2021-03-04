@@ -104,7 +104,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   child: GestureDetector(
                     onTap: () {
                       if (email == null) {
-                        Scaffold.of(context).showSnackBar(
+                        ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                             content:
                                 Text('Enter Email Id for resetting password'),
@@ -124,9 +124,19 @@ class _SignInScreenState extends State<SignInScreen> {
                 Container(
                   margin:
                       EdgeInsets.symmetric(vertical: 25.0, horizontal: 100.0),
-                  child: FlatButton(
-                    padding: EdgeInsets.symmetric(vertical: 10.0),
-                    color: Theme.of(context).primaryColor,
+                  child: ElevatedButton(
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all<Color>(
+                          Theme.of(context).primaryColor),
+                      padding: MaterialStateProperty.all<EdgeInsets>(
+                        EdgeInsets.symmetric(vertical: 10.0),
+                      ),
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(50.0),
+                        ),
+                      ),
+                    ),
                     child: Text(
                       "Sign In",
                       style: TextStyle(
@@ -136,9 +146,6 @@ class _SignInScreenState extends State<SignInScreen> {
                         color: Colors.white,
                       ),
                     ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(50.0),
-                    ),
                     onPressed: () async {
                       setState(() {
                         loading = true;
@@ -147,7 +154,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         await Auth().signIn(
                             email: email, password: password, context: context);
                       else
-                        Scaffold.of(context).showSnackBar(
+                        ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                             content:
                                 Text("Please enter valid Email and Password"),

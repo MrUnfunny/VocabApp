@@ -1,8 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart' as DotEnv;
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hive/hive.dart';
 import 'package:my_vocab/Presentation/Screens/favorites_screen/screen.dart';
@@ -15,6 +16,8 @@ import 'package:my_vocab/Presentation/Screens/word-detail/screen.dart';
 import 'package:my_vocab/hive/hiveDb.dart';
 import 'package:my_vocab/main_screen.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:my_vocab/model/definition.dart';
+import 'package:my_vocab/model/dictionary.dart';
 import 'package:my_vocab/providers/home_provider.dart';
 import 'package:my_vocab/providers/word_detail_provider.dart';
 import 'package:path_provider/path_provider.dart';
@@ -24,11 +27,17 @@ import 'package:provider/provider.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  await DotEnv().load('.env');
+  await DotEnv.load(fileName: ".env");
 
-  final directoryPath = await getApplicationDocumentsDirectory();
-  await Hive.init(directoryPath.path);
+  if (!kIsWeb) {
+    final directoryPath = await getApplicationDocumentsDirectory();
+    await Hive.init(directoryPath.path);
+  } else {
+    Hive.registerAdapter<Definition>(DefinitionAdapter());
+    Hive.registerAdapter<Dictionary>(DictionaryAdapter());
+  }
   await HiveDB.init();
+  await EasyLocalization.ensureInitialized();
 
   //caching all vector images so that UI doesn't have to wait for them to load
   await precachePicture(

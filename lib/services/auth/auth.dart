@@ -45,7 +45,7 @@ class Auth {
       if (account == null) {
         final SnackBar snackBar =
             SnackBar(content: Text("ERROR: Sign In cancelled by user"));
-        Scaffold.of(context).showSnackBar(snackBar);
+        ScaffoldMessenger.of(context).showSnackBar(snackBar);
         return null;
       }
       final GoogleSignInAuthentication googleAuth =
@@ -71,7 +71,7 @@ class Auth {
       ]);
 
       switch (res.status) {
-        case FacebookLoginStatus.Success:
+        case FacebookLoginStatus.success:
           final FacebookAccessToken accessToken = res.accessToken;
           final OAuthCredential credentials =
               FacebookAuthProvider.credential(accessToken.token);
@@ -80,10 +80,10 @@ class Auth {
           return user;
 
           break;
-        case FacebookLoginStatus.Cancel:
+        case FacebookLoginStatus.cancel:
           log("Exception @facebookLogin ${res.status}");
           break;
-        case FacebookLoginStatus.Error:
+        case FacebookLoginStatus.error:
           _showDialog(
               context: context, error: "Failed to Sign In via Facebook");
           log("Exception @facebookLogin ${res.status}");
@@ -121,6 +121,6 @@ class Auth {
     else if (error.runtimeType != String)
       error = (error?.message != null) ? error?.message : "UnIdentified Error";
     final SnackBar snackBar = SnackBar(content: Text("ERROR: $error"));
-    Scaffold.of(context).showSnackBar(snackBar);
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 }

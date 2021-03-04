@@ -36,10 +36,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
       {
         "icon": Icons.translate,
         "title": tr('languages'),
-        "function": () => EasyLocalization.of(context).locale =
-            (EasyLocalization.of(context).locale == Locale('hi', 'IN'))
-                ? Locale('en', 'US')
-                : Locale('hi', 'IN'),
+        "function": () => context.setLocale(
+              (EasyLocalization.of(context).locale == Locale('hi', 'IN'))
+                  ? Locale('en', 'US')
+                  : Locale('hi', 'IN'),
+            )
       },
       {
         "icon": Icons.description_outlined,

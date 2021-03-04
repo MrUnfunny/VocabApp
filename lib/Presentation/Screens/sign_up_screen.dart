@@ -105,17 +105,24 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 Container(
                   margin:
                       EdgeInsets.symmetric(vertical: 25.0, horizontal: 100.0),
-                  child: FlatButton(
-                    padding: EdgeInsets.symmetric(vertical: 10.0),
-                    color: Theme.of(context).primaryColor,
+                  child: ElevatedButton(
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all<Color>(
+                          Theme.of(context).primaryColor),
+                      padding: MaterialStateProperty.all<EdgeInsets>(
+                        EdgeInsets.symmetric(vertical: 10.0),
+                      ),
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(50.0),
+                        ),
+                      ),
+                    ),
                     child: Text(
                       "Sign Up",
                       style: kLargeTextStyle.copyWith(
                         color: Colors.white,
                       ),
-                    ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(50.0),
                     ),
                     onPressed: () async {
                       setState(() {
@@ -125,9 +132,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         await Auth().signUp(
                             email: email, password: password, context: context);
                       else
-                        Scaffold.of(context).showSnackBar(SnackBar(
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
                             content:
-                                Text("Please enter valid Email and Password")));
+                                Text("Please enter valid Email and Password"),
+                          ),
+                        );
                       setState(() {
                         loading = false;
                       });

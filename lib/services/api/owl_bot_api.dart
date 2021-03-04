@@ -12,12 +12,12 @@ class _OwlBotApi {
   }
 
   _getUrl(path) {
-    String url = "${DotEnv().env['API_URL']}$path";
+    String url = "${env['API_URL']}$path";
     return Uri.parse(url);
   }
 
   _getHeaders() {
-    final headers = {"Authorization": "Token ${DotEnv().env['API_TOKEN']}"};
+    final headers = {"Authorization": "Token ${env['API_TOKEN']}"};
     return headers;
   }
 }

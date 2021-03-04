@@ -8,7 +8,7 @@ import 'package:http/http.dart' as http;
 class _WordNikApi {
   Future<http.Response> get({word, Map<String, dynamic> params}) {
     if (params == null) params = {};
-    params['api_key'] = DotEnv().env['WORDNIK_API_KEY'];
+    params['api_key'] = env['WORDNIK_API_KEY'];
     final url = _getUrl(path: word, params: params);
     log("URL is: $url");
     return http.get(
@@ -18,7 +18,7 @@ class _WordNikApi {
 
   _getUrl({path, Map<String, dynamic> params = const {}}) {
     String url =
-        "${DotEnv().env['WORDNIK_API_URL']}$path?${_paramsToQueryString(params: params)}";
+        "${env['WORDNIK_API_URL']}$path?${_paramsToQueryString(params: params)}";
 
     return Uri.parse(url);
   }
