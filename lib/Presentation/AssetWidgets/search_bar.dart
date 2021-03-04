@@ -52,7 +52,7 @@ myShowSearch(context) {
 class Search extends SearchDelegate {
   @override
   ThemeData appBarTheme(BuildContext context) {
-    return super.appBarTheme(context).copyWith(
+    return Theme.of(context).copyWith(
         primaryColor: Theme.of(context).primaryColor,
         textTheme: super.appBarTheme(context).textTheme.copyWith(
             headline6: super.appBarTheme(context).textTheme.headline6.copyWith(

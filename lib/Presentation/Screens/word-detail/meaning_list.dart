@@ -21,6 +21,7 @@ class MeaningList extends StatelessWidget {
               padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.baseline,
+                textBaseline: TextBaseline.alphabetic,
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(
