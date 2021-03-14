@@ -6,6 +6,7 @@ import 'package:flutter_login_facebook/flutter_login_facebook.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:my_vocab/Presentation/Screens/welcome_screen.dart';
 import 'package:my_vocab/main_screen.dart';
+import 'package:my_vocab/services/firestore_data.dart';
 
 class Auth {
   final _auth = FirebaseAuth.instance;
@@ -16,6 +17,8 @@ class Auth {
     try {
       await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
+      FirestoreInterface().addUser();
+
       Navigator.pushReplacementNamed(context, MainScreen.id);
     } catch (e) {
       log('Exception @createAccount: $e');
@@ -32,6 +35,8 @@ class Auth {
       @required BuildContext context}) async {
     try {
       await _auth.signInWithEmailAndPassword(email: email, password: password);
+
+      FirestoreInterface().addUser();
       Navigator.pushReplacementNamed(context, MainScreen.id);
     } catch (e) {
       _showDialog(error: e, context: context);

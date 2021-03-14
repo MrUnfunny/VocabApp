@@ -10,6 +10,7 @@ import 'package:my_vocab/model/enum/api_request_status.dart';
 import 'package:my_vocab/model/functions.dart';
 import 'package:my_vocab/services/Dictionary/get_meaning.dart';
 import 'package:my_vocab/services/api/datamuse_api.dart';
+import 'package:my_vocab/services/firestore_data.dart';
 
 class WordDetailProvider extends ChangeNotifier {
   Dictionary wordDetail;
@@ -53,6 +54,8 @@ class WordDetailProvider extends ChangeNotifier {
       );
 
       await addToHistory(wordDetail);
+
+      await FirestoreInterface().addHistoryWords(wordDetail);
 
       setApiStatus(ApiRequestStatus.loaded);
     } catch (e) {

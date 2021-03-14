@@ -10,7 +10,7 @@ dependencies:
   flutter:
     sdk: flutter
   audioplayers: ^0.17.4
-  cupertino_icons: ^1.0.2
+  cloud_firestore: ^1.0.0
   easy_localization: ^3.0.0
   equatable: ^2.0.0
   firebase_auth: ^1.0.0

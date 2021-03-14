@@ -4,13 +4,15 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:modal_progress_hud/modal_progress_hud.dart';
-import 'package:my_vocab/Presentation/AssetWidgets/bottom_bar_textfield.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:modal_progress_hud/modal_progress_hud.dart';
+
+import 'package:my_vocab/Presentation/AssetWidgets/bottom_bar_textfield.dart';
 import 'package:my_vocab/Presentation/Screens/sign_up_screen.dart';
 import 'package:my_vocab/constants/configs.dart';
 import 'package:my_vocab/main_screen.dart';
 import 'package:my_vocab/services/auth/auth.dart';
+import 'package:my_vocab/services/firestore_data.dart';
 import 'package:my_vocab/services/validators/email.dart';
 import 'package:my_vocab/services/validators/password.dart';
 
@@ -183,11 +185,14 @@ class _SignInScreenState extends State<SignInScreen> {
                       onPressed: () async {
                         final user =
                             await Auth().signInWithFacebook(context: context);
-                        if (user != null)
+                        if (user != null) {
                           Navigator.pushReplacementNamed(
                             context,
                             MainScreen.id,
                           );
+
+                          FirestoreInterface().addUser();
+                        }
                         log("Exception occurred: User is null");
                       },
                     ),
@@ -206,6 +211,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         final user =
                             await Auth().signInWithGoogle(context: context);
                         if (user != null) {
+                          FirestoreInterface().addUser();
                           Navigator.pushReplacementNamed(
                             context,
                             MainScreen.id,
