@@ -13,10 +13,11 @@ import 'package:my_vocab/providers/word_detail_provider.dart';
 import 'meaning_list.dart';
 
 class WordDetailScreen extends StatefulWidget {
-  static String id = "WordDetail_Screen";
+  const WordDetailScreen({Key key, this.word});
+
+  static String id = 'WordDetail_Screen';
   final String word;
 
-  const WordDetailScreen({Key key, this.word});
   @override
   _WordDetailScreenState createState() => _WordDetailScreenState();
 }
@@ -26,7 +27,7 @@ class _WordDetailScreenState extends State<WordDetailScreen>
   TabController _tabController;
 
   @override
-  void setState(fn) {
+  void setState(void Function() fn) {
     if (mounted) super.setState(fn);
   }
 
@@ -34,12 +35,15 @@ class _WordDetailScreenState extends State<WordDetailScreen>
   void initState() {
     _tabController = TabController(length: 2, vsync: this);
     super.initState();
-    SchedulerBinding.instance.addPostFrameCallback((timeStamp) async {
-      await Provider.of<WordDetailProvider>(context, listen: false)
-          .getDetail(widget.word);
-      if (mounted)
-        Provider.of<HomeProvider>(context, listen: false).getHistory();
-    });
+    SchedulerBinding.instance.addPostFrameCallback(
+      (timeStamp) async {
+        await Provider.of<WordDetailProvider>(context, listen: false)
+            .getDetail(widget.word);
+        if (mounted) {
+          Provider.of<HomeProvider>(context, listen: false).getHistory();
+        }
+      },
+    );
   }
 
   @override
@@ -64,77 +68,79 @@ class _WordDetailScreenState extends State<WordDetailScreen>
                   ? Theme.of(context).primaryColor
                   : Colors.white,
           child: SafeArea(
-            child:
-                (wordDetailProvider.apiRequestStatus == ApiRequestStatus.loaded)
-                    ? Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          DetailScreenAppBar(
-                            word: wordDetailProvider.wordDetail.word,
+            child: (wordDetailProvider.apiRequestStatus ==
+                    ApiRequestStatus.loaded)
+                ? Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      DetailScreenAppBar(
+                        word: wordDetailProvider.wordDetail.word,
+                      ),
+                      Expanded(
+                        child: Container(
+                          decoration: const BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(30),
+                              topRight: Radius.circular(30),
+                            ),
                           ),
-                          Expanded(
-                            child: Container(
-                              child: Column(
-                                children: [
-                                  TabBar(
-                                    indicatorSize: TabBarIndicatorSize.tab,
-                                    labelColor: Theme.of(context).primaryColor,
-                                    unselectedLabelColor: Colors.grey,
-                                    indicatorColor: Color(0xddF54A16),
-                                    indicatorWeight: 2.0,
-                                    controller: _tabController,
-                                    tabs: [
-                                      Tab(
-                                        text: "MEANING",
-                                      ),
-                                      Tab(
-                                        text: "RELATED",
-                                      ),
-                                    ],
+                          margin: const EdgeInsets.only(top: 32),
+                          child: Column(
+                            children: [
+                              TabBar(
+                                indicatorSize: TabBarIndicatorSize.tab,
+                                labelColor: Theme.of(context).primaryColor,
+                                unselectedLabelColor: Colors.grey,
+                                indicatorColor: const Color(0xddF54A16),
+                                indicatorWeight: 2.0,
+                                controller: _tabController,
+                                tabs: const [
+                                  Tab(
+                                    text: 'MEANING',
                                   ),
-                                  Expanded(
-                                    child: Container(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 16.0),
-                                      child: TabBarView(
-                                        controller: _tabController,
-                                        children: [
-                                          Container(
-                                            margin: EdgeInsets.only(top: 16.0),
-                                            child: MeaningList(
-                                              wordDetail:
-                                                  wordDetailProvider.wordDetail,
-                                            ),
-                                          ),
-                                          Container(
-                                            margin: EdgeInsets.only(top: 16.0),
-                                            child: RelatedWords(
-                                              wordDetail:
-                                                  wordDetailProvider.wordDetail,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
+                                  Tab(
+                                    text: 'RELATED',
                                   ),
                                 ],
                               ),
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(30),
-                                  topRight: Radius.circular(30),
+                              Expanded(
+                                child: Container(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 16.0),
+                                  child: TabBarView(
+                                    controller: _tabController,
+                                    children: [
+                                      Container(
+                                        margin:
+                                            const EdgeInsets.only(top: 16.0),
+                                        child: MeaningList(
+                                          wordDetail:
+                                              wordDetailProvider.wordDetail,
+                                        ),
+                                      ),
+                                      Container(
+                                        margin:
+                                            const EdgeInsets.only(top: 16.0),
+                                        child: RelatedWords(
+                                          wordDetail:
+                                              wordDetailProvider.wordDetail,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
-                              margin: EdgeInsets.only(top: 32),
-                            ),
-                          )
-                        ],
+                            ],
+                          ),
+                        ),
                       )
-                    : (wordDetailProvider.apiRequestStatus ==
-                            ApiRequestStatus.loading)
-                        ? LoadingWidget()
-                        : ErrorLoadedWidget(),
+                    ],
+                  )
+                : (wordDetailProvider.apiRequestStatus ==
+                        ApiRequestStatus.loading)
+                    ? LoadingWidget()
+                    : ErrorLoadedWidget(),
           ),
         ),
       ),

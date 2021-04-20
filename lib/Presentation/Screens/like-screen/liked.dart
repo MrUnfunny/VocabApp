@@ -28,8 +28,8 @@ class LikeScreen extends StatelessWidget {
             Expanded(
               child: Container(
                 width: MediaQuery.of(context).size.width,
-                padding: EdgeInsets.only(top: 5),
-                decoration: BoxDecoration(
+                padding: const EdgeInsets.only(top: 5),
+                decoration: const BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(30),
@@ -39,14 +39,15 @@ class LikeScreen extends StatelessWidget {
                 child: Consumer(
                   builder: (BuildContext context, HomeProvider homeProvider,
                       Widget child) {
-                    if (homeProvider.likedWords.isNotEmpty)
+                    if (homeProvider.likedWords.isNotEmpty) {
                       return ListView.builder(
                         itemCount: homeProvider.likedWords.length + 1,
                         itemBuilder: (BuildContext context, int index) {
-                          if (index == 0)
-                            return SizedBox(
+                          if (index == 0) {
+                            return const SizedBox(
                               height: 10.0,
                             );
+                          }
                           return ListTile(
                             title: Text(
                               capitalize(
@@ -57,7 +58,7 @@ class LikeScreen extends StatelessWidget {
                           );
                         },
                       );
-                    else {
+                    } else {
                       return Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -66,7 +67,7 @@ class LikeScreen extends StatelessWidget {
                               svgAsset,
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 30.0,
                           ),
                           Text(

@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 
 class WordOfTheDayIcon extends StatelessWidget {
-  final IconData icon;
-  final Function onPressed;
-  final String tooltipMsg;
-
   const WordOfTheDayIcon({
     Key key,
     @required this.icon,
@@ -12,15 +8,19 @@ class WordOfTheDayIcon extends StatelessWidget {
     @required this.tooltipMsg,
   });
 
+  final IconData icon;
+  final Function() onPressed;
+  final String tooltipMsg;
+
   @override
   Widget build(BuildContext context) {
     return Tooltip(
-      message: (this.tooltipMsg == null) ? 'default' : this.tooltipMsg,
+      message: (tooltipMsg == null) ? 'default' : tooltipMsg,
       child: IconButton(
-        padding: EdgeInsets.all(0),
+        padding: const EdgeInsets.all(0),
         onPressed: onPressed,
         icon: Icon(
-          this.icon,
+          icon,
           size: 30.0,
           color: Colors.white,
         ),

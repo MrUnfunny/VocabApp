@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:my_vocab/constants/configs.dart';
 
 class SettingsCard extends StatelessWidget {
+  const SettingsCard(
+      {@required this.icon, @required this.title, @required this.onTap});
+
   final IconData icon;
   final String title;
-  final Function onTap;
+  final void Function() onTap;
 
-  const SettingsCard({@required this.icon, @required this.title, @required this.onTap});
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -16,15 +18,15 @@ class SettingsCard extends StatelessWidget {
           Row(
             children: [
               Icon(
-                this.icon,
+                icon,
                 color: Colors.white,
               ),
-              SizedBox(
+              const SizedBox(
                 width: 30,
               ),
               Flexible(
                 child: Text(
-                  this.title,
+                  title,
                   style: kLargeTextStyle.copyWith(color: Colors.white),
                 ),
               ),

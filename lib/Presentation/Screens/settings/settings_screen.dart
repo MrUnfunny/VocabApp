@@ -11,9 +11,10 @@ import 'package:my_vocab/services/auth/auth.dart';
 import 'settings_card.dart';
 
 class SettingsScreen extends StatefulWidget {
+  const SettingsScreen({Key key, this.callBackFunction}) : super(key: key);
+
   final Function callBackFunction;
 
-  const SettingsScreen({Key key, this.callBackFunction}) : super(key: key);
   @override
   _SettingsScreenState createState() => _SettingsScreenState();
 }
@@ -26,42 +27,42 @@ class _SettingsScreenState extends State<SettingsScreen> {
     super.initState();
     _settingsCardItems = [
       {
-        "icon": Icons.favorite_border_outlined,
-        "title": tr('like'),
-        "function": () {
+        'icon': Icons.favorite_border_outlined,
+        'title': tr('like'),
+        'function': () {
           widget.callBackFunction();
           Navigator.of(context).pushNamed(LikeScreen.id);
         },
       },
       {
-        "icon": Icons.translate,
-        "title": tr('languages'),
-        "function": () => context.setLocale(
-              (EasyLocalization.of(context).locale == Locale('hi', 'IN'))
-                  ? Locale('en', 'US')
-                  : Locale('hi', 'IN'),
+        'icon': Icons.translate,
+        'title': tr('languages'),
+        'function': () => context.setLocale(
+              (EasyLocalization.of(context).locale == const Locale('hi', 'IN'))
+                  ? const Locale('en', 'US')
+                  : const Locale('hi', 'IN'),
             )
       },
       {
-        "icon": Icons.description_outlined,
-        "title": tr('about'),
-        "function": () {
+        'icon': Icons.description_outlined,
+        'title': tr('about'),
+        'function': () {
           widget.callBackFunction();
 
           showAboutDialog(
             context: context,
-            applicationName: "MyVocab",
+            applicationName: 'MyVocab',
             applicationVersion: '0.0.1',
-            applicationIcon: Icon(FontAwesomeIcons.appStore),
-            applicationLegalese:
-                "This is just a simple open source vocabulary app built for practice. For suggestions or to view source code, visit MrUnfunny on Github",
+            applicationIcon: const Icon(FontAwesomeIcons.appStore),
+            applicationLegalese: '''
+This is just a simple open source vocabulary app built for practice. For suggestions or to view source code, visit MrUnfunny on Github''',
           );
         }
       },
       {
-        "icon": Icons.logout,
-        "title": tr('logout'),
-        "function": () => Auth().signOut(context: context),
+        'icon': Icons.logout,
+        'title': tr('logout'),
+        'function': () => Auth().signOut(context: context),
       },
     ];
   }
@@ -76,14 +77,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
           children: [
             CircleAvatar(
               radius: 50.0,
-              backgroundImage: (Auth().getProfilePhoto() == null)
-                  ? AssetImage('Assets/images/profile.png')
-                  : NetworkImage(Auth().getProfilePhoto()),
+              backgroundImage: Auth().getProfilePhoto(),
               backgroundColor: Colors.transparent,
               onBackgroundImageError: (exception, stackTrace) =>
-                  log("$exception \n $stackTrace"),
+                  log('$exception \n $stackTrace'),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20.0,
             ),
             Text(
@@ -93,23 +92,24 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 color: Colors.white,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 40.0,
             ),
             Expanded(
               child: ListView.separated(
                 itemCount: _settingsCardItems.length,
-                separatorBuilder: (context, index) => Padding(
-                  padding: const EdgeInsets.only(bottom: 8.0),
+                separatorBuilder: (context, index) => const Padding(
+                  padding: EdgeInsets.only(bottom: 8.0),
                   child: Divider(
                     color: Colors.white,
                   ),
                 ),
                 itemBuilder: (context, index) {
                   return SettingsCard(
-                    icon: _settingsCardItems[index]['icon'],
-                    title: _settingsCardItems[index]['title'],
-                    onTap: _settingsCardItems[index]['function'],
+                    icon: _settingsCardItems[index]['icon'] as IconData,
+                    title: _settingsCardItems[index]['title'] as String,
+                    onTap: _settingsCardItems[index]['function'] as void
+                        Function(),
                   );
                 },
               ),

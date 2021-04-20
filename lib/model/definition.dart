@@ -5,6 +5,22 @@ part 'definition.g.dart';
 
 @HiveType(typeId: kDefinitionHiveType)
 class Definition extends HiveObject {
+  Definition({
+    this.definition,
+    this.example,
+    this.imageUrl,
+    this.type,
+  });
+
+  factory Definition.fromJson(json) {
+    return Definition(
+      definition: json['definition'] as String,
+      type: json['type'] as String,
+      example: json['example'] as String,
+      imageUrl: json['image_url'] as String,
+    );
+  }
+
   @HiveField(0)
   final String type;
   @HiveField(1)
@@ -13,13 +29,6 @@ class Definition extends HiveObject {
   final String example;
   @HiveField(3)
   final String imageUrl;
-
-  Definition({
-    this.definition,
-    this.example,
-    this.imageUrl,
-    this.type,
-  });
 
   List<Object> get props => [
         type,
@@ -37,16 +46,8 @@ class Definition extends HiveObject {
     };
   }
 
-  factory Definition.fromJson(json) {
-    return Definition(
-      definition: json['definition'],
-      type: json['type'],
-      example: json['example'],
-      imageUrl: json['image_url'],
-    );
-  }
-
   @override
+  // ignore: avoid_equals_and_hash_code_on_mutable_classes
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
 
@@ -58,6 +59,7 @@ class Definition extends HiveObject {
   }
 
   @override
+  // ignore: avoid_equals_and_hash_code_on_mutable_classes
   int get hashCode {
     return type.hashCode ^
         definition.hashCode ^

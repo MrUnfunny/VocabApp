@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
-import 'package:my_vocab/hive/hiveDb.dart';
+import 'package:my_vocab/hive/hive_db.dart';
 import 'package:my_vocab/services/Dictionary/get_word_of_the_day.dart';
 import 'package:my_vocab/model/enum/api_request_status.dart';
 import 'package:my_vocab/model/functions.dart';
@@ -16,21 +16,21 @@ class HomeProvider extends ChangeNotifier {
   void getWordOfTheDayAndHistory() async {
     setApiRequestStatus(ApiRequestStatus.loading);
     try {
-      historyWords = HiveDB.instance.getAll().values.toList();
+      historyWords = HiveDB.instance.getAll().values.toList() as List<Map>;
 
       favWords =
           historyWords.where((element) => element['isFav'] == true).toList();
       wordOfTheDay = await WordOfTheDay().getMeaning();
-      likedWords = HiveDB.instance.getLiked().values.toList();
+      likedWords = HiveDB.instance.getLiked().values.toList() as List<String>;
       setApiRequestStatus(ApiRequestStatus.loaded);
-    } catch (e) {
-      log("@word of the day fetch failed: $e");
+    } on Exception catch (e) {
+      log('@word of the day fetch failed: $e');
       checkError(e);
     }
   }
 
   void getLiked() {
-    likedWords = HiveDB.instance.getLiked().values.toList();
+    likedWords = HiveDB.instance.getLiked().values.toList() as List<String>;
     notifyListeners();
   }
 
@@ -50,31 +50,32 @@ class HomeProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void addtoFavorites(Map word) {
+  void addtoFavorites(Map<String, dynamic> word) {
     final _word = word;
     _word['isFav'] = true;
-    HiveDB.instance.put(_word['word'], _word);
+    HiveDB.instance.put(_word['word'] as String, _word);
     getHistory();
   }
 
   void removeFromFav(Map word) {
     final _word = word;
     _word['isFav'] = false;
-    HiveDB.instance.put(_word['word'], _word);
+    HiveDB.instance.put(_word['word'] as String, _word);
     getHistory();
   }
 
   void getHistory() {
-    historyWords = HiveDB.instance.getAll().values.toList();
-    historyWords.sort((a, b) => a['date'].compareTo(b['date']));
+    historyWords = HiveDB.instance.getAll().values.toList() as List<Map>;
+    historyWords.sort((a, b) => a['date'].compareTo(b['date']) as int);
     favWords =
         historyWords.where((element) => element['isFav'] == true).toList();
     notifyListeners();
   }
 
-  void checkError(e) {
-    if (Functions.checkConnectionError(e))
+  void checkError(Exception e) {
+    if (Functions.checkConnectionError(e)) {
       setApiRequestStatus(ApiRequestStatus.connectionError);
+    }
     setApiRequestStatus(ApiRequestStatus.error);
   }
 

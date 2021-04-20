@@ -30,8 +30,8 @@ class HistoryScreen extends StatelessWidget {
             Expanded(
               child: Container(
                 width: MediaQuery.of(context).size.width,
-                padding: EdgeInsets.only(top: 5),
-                decoration: BoxDecoration(
+                padding: const EdgeInsets.only(top: 5),
+                decoration: const BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(30),
@@ -41,18 +41,20 @@ class HistoryScreen extends StatelessWidget {
                 child: Consumer(
                   builder: (BuildContext context, HomeProvider homeProvider,
                       Widget child) {
-                    if (homeProvider.historyWords.isNotEmpty)
+                    if (homeProvider.historyWords.isNotEmpty) {
                       return ListView.builder(
                         itemCount: homeProvider.historyWords.length + 1,
                         itemBuilder: (BuildContext context, int index) {
-                          if (index == 0)
-                            return SizedBox(
+                          if (index == 0) {
+                            return const SizedBox(
                               height: 10.0,
                             );
+                          }
                           return HistoryCard(
-                            word: homeProvider.historyWords[index - 1]['word'],
-                            date: homeProvider.historyWords[index - 1]
-                                    ['date'] ??
+                            word: homeProvider.historyWords[index - 1]['word']
+                                as String,
+                            date: homeProvider.historyWords[index - 1]['date']
+                                    as String ??
                                 '',
                             icon: (homeProvider.favWords.contains(
                                     homeProvider.historyWords[index - 1]))
@@ -63,11 +65,12 @@ class HistoryScreen extends StatelessWidget {
                                 ? () => homeProvider.removeFromFav(
                                     homeProvider.historyWords[index - 1])
                                 : () => homeProvider.addtoFavorites(
-                                    homeProvider.historyWords[index - 1]),
+                                    homeProvider.historyWords[index - 1]
+                                        as Map<String, dynamic>),
                           );
                         },
                       );
-                    else {
+                    } else {
                       return Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -76,7 +79,7 @@ class HistoryScreen extends StatelessWidget {
                               svgAsset,
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 30.0,
                           ),
                           Text(

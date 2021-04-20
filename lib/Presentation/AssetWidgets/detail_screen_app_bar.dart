@@ -2,21 +2,22 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:my_vocab/services/play_audio.dart';
-import 'package:my_vocab/providers/home_provider.dart';
 import 'package:provider/provider.dart';
+
+import 'package:my_vocab/providers/home_provider.dart';
+import 'package:my_vocab/services/play_audio.dart';
+import 'package:my_vocab/services/utils.dart';
 
 import '../../constants/configs.dart';
 import 'action_card.dart';
-import 'package:my_vocab/services/utils.dart';
 
 class DetailScreenAppBar extends StatelessWidget {
-  final String word;
-
   const DetailScreenAppBar({
     this.word,
     Key key,
   }) : super(key: key);
+
+  final String word;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +26,7 @@ class DetailScreenAppBar extends StatelessWidget {
         children: [
           Row(
             children: [
-              BackButton(
+              const BackButton(
                 color: Colors.white,
               ),
               Expanded(
@@ -43,7 +44,7 @@ class DetailScreenAppBar extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(left: 10),
                       child: IconButton(
-                        icon: Icon(
+                        icon: const Icon(
                           Icons.volume_up,
                           size: 32,
                           color: Colors.white,
@@ -57,7 +58,7 @@ class DetailScreenAppBar extends StatelessWidget {
             ],
           ),
           Container(
-            margin: EdgeInsets.only(top: 32, left: 40, right: 32),
+            margin: const EdgeInsets.only(top: 32, left: 40, right: 32),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -79,7 +80,7 @@ class DetailScreenAppBar extends StatelessWidget {
                   },
                   word: 'copy',
                 ),
-                ActionCard(
+                const ActionCard(
                   icon: Icons.border_clear,
                   onPressed: null,
                   word: 'dono',

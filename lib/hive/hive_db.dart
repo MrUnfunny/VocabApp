@@ -1,5 +1,5 @@
-import 'package:hive/hive.dart';
 import 'package:my_vocab/constants/service_constants.dart';
+import 'package:hive/hive.dart';
 
 class HiveDB {
   static Box<Map> _box;
@@ -23,15 +23,15 @@ class HiveDB {
     return _likedBox.toMap();
   }
 
-  void addtoLiked(key, String value) {
+  void addtoLiked(String key, String value) {
     _likedBox.put(key, value);
   }
 
-  void removefromLiked(key) {
+  void removefromLiked(String key) {
     _likedBox.delete(key);
   }
 
-  void put(key, Map value) {
+  void put(String key, Map value) {
     _box.put(key, value);
   }
 

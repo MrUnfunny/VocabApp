@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
 class ActionCard extends StatelessWidget {
-  final IconData icon;
-  final Function onPressed;
-  final String word;
-
   const ActionCard({
     Key key,
     this.icon,
     this.onPressed,
     this.word,
   }) : super(key: key);
+
+  final IconData icon;
+  final void Function() onPressed;
+  final String word;
 
   @override
   Widget build(BuildContext context) {
@@ -20,16 +20,16 @@ class ActionCard extends StatelessWidget {
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           color: Colors.deepOrange[400]),
-      padding: EdgeInsets.all(10),
+      padding: const EdgeInsets.all(10),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Flexible(
             child: IconButton(
-              padding: EdgeInsets.all(0),
+              padding: const EdgeInsets.all(0),
               onPressed: onPressed,
               icon: Icon(
-                this.icon,
+                icon,
                 size: 32.0,
                 color: Colors.white,
               ),
@@ -38,7 +38,10 @@ class ActionCard extends StatelessWidget {
           Flexible(
             child: Text(
               word,
-              style: TextStyle(color: Colors.white, fontSize: 14),
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 14,
+              ),
             ),
           ),
         ],

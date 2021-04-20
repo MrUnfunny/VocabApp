@@ -11,7 +11,7 @@ class GetWordAudio {
     final meaningBody = jsonDecode(meaningResponse.body);
 
     if (meaningResponse.statusCode == 200) {
-      return meaningBody[0]['fileUrl'];
+      return meaningBody[0]['fileUrl'] as String;
     } else {
       return null;
     }

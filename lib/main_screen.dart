@@ -9,8 +9,8 @@ import 'package:my_vocab/Presentation/Screens/settings/settings_screen.dart';
 import 'package:my_vocab/model/enum/api_request_status.dart';
 import 'package:my_vocab/providers/home_provider.dart';
 
-// This is main screen of the app. It contains all screens in a PageView and uses
-// BottomNavBar to toggle among them
+// This is main screen of the app. It contains all screens in a PageView and
+// uses BottomNavBar to toggle among them
 
 class MainScreen extends StatefulWidget {
   static const id = 'MainScreen';
@@ -36,7 +36,7 @@ class _MainScreenState extends State<MainScreen>
     _pageController = PageController(initialPage: 0);
     animationController = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: 200),
+      duration: const Duration(milliseconds: 200),
     );
     finalAnimation = CurvedAnimation(
       parent: animationController,
@@ -55,20 +55,20 @@ class _MainScreenState extends State<MainScreen>
     return AnimatedBuilder(
       animation: finalAnimation,
       builder: (context, child) {
-        double slide = finalAnimation.value * max;
-        double scale = 1 - (finalAnimation.value * 0.1);
+        var slide = finalAnimation.value * max as double;
+        var scale = 1 - (finalAnimation.value * 0.1 as double);
         return Stack(
           children: [
             Scaffold(
-              backgroundColor: Color(0xff0C120C),
+              backgroundColor: const Color(0xff0C120C),
               body: Transform(
                 transform: Matrix4.identity()..translate(-slide),
                 child: Transform.translate(
-                  offset: Offset(200, 0),
+                  offset: const Offset(200, 0),
                   child: Container(
                     alignment: Alignment.centerRight,
                     child: SettingsScreen(
-                      callBackFunction: () => toggleSettings(),
+                      callBackFunction: toggleSettings,
                     ),
                   ),
                 ),
@@ -87,23 +87,24 @@ class _MainScreenState extends State<MainScreen>
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(20)),
                   child: ClipRRect(
-                    borderRadius:
-                        BorderRadius.circular(20 * finalAnimation.value),
+                    borderRadius: BorderRadius.circular(
+                      20 * (finalAnimation.value as double),
+                    ),
                     child: Scaffold(
                       backgroundColor: Colors.transparent,
                       body: PageView(
-                        physics: NeverScrollableScrollPhysics(),
+                        physics: const NeverScrollableScrollPhysics(),
                         controller: _pageController,
                         onPageChanged: (currentPageIndex) {
                           setState(() {
-                            this._page = currentPageIndex;
+                            _page = currentPageIndex;
                           });
                         },
                         children: [
                           HomeScreen(),
                           HistoryScreen(),
                           FavScreen(),
-                          SettingsScreen(),
+                          const SettingsScreen(),
                         ],
                       ),
                       bottomNavigationBar: (homeProvider.apiRequestStatus ==
@@ -114,28 +115,29 @@ class _MainScreenState extends State<MainScreen>
                               onTap: (pageIndex) {
                                 if (pageIndex == 3) {
                                   toggleSettings();
-                                } else
+                                } else {
                                   _pageController.animateToPage(
                                     pageIndex,
                                     curve: Curves.bounceIn,
-                                    duration: Duration(milliseconds: 100),
+                                    duration: const Duration(milliseconds: 100),
                                   );
+                                }
                               },
                               items: [
                                 BottomNavigationBarItem(
-                                  icon: Icon(Icons.home),
+                                  icon: const Icon(Icons.home),
                                   label: tr('home_bottom_nav'),
                                 ),
                                 BottomNavigationBarItem(
-                                  icon: Icon(Icons.history),
+                                  icon: const Icon(Icons.history),
                                   label: tr('history_bottom_nav'),
                                 ),
                                 BottomNavigationBarItem(
-                                  icon: Icon(Icons.favorite),
+                                  icon: const Icon(Icons.favorite),
                                   label: tr('fav_bottom_nav'),
                                 ),
                                 BottomNavigationBarItem(
-                                  icon: Icon(Icons.settings),
+                                  icon: const Icon(Icons.settings),
                                   label: tr('settings_bottom_nav'),
                                 ),
                               ],
@@ -155,17 +157,17 @@ class _MainScreenState extends State<MainScreen>
   // to keep track of correct tab which was present before moving to settings
   // and show correct bar in bottomNavBar
   void toggleSettings() {
-    if (animationController.status == AnimationStatus.completed)
+    if (animationController.status == AnimationStatus.completed) {
       animationController.reverse();
-    else {
+    } else {
       animationController.forward();
     }
     isSettingsVisible = !isSettingsVisible;
     if (isSettingsVisible) {
-      this.lastPageIndex = this._page;
-      this._page = 3;
+      lastPageIndex = _page;
+      _page = 3;
     } else {
-      this._page = this.lastPageIndex;
+      _page = lastPageIndex;
     }
   }
 }

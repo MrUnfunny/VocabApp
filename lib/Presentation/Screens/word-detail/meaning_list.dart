@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:my_vocab/constants/configs.dart';
-import 'package:my_vocab/model/definition.dart';
 import 'package:my_vocab/model/dictionary.dart';
 import 'package:my_vocab/services/utils.dart';
 
 class MeaningList extends StatelessWidget {
+  const MeaningList({Key key, this.wordDetail}) : super(key: key);
+
   final Dictionary wordDetail;
 
-  const MeaningList({Key key, this.wordDetail}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
       itemCount: wordDetail.definitions.length,
       itemBuilder: (context, index) {
-        final Definition wordDefinition = wordDetail.definitions[index];
+        final wordDefinition = wordDetail.definitions[index];
 
         return Column(
           children: [
@@ -42,7 +42,7 @@ class MeaningList extends StatelessWidget {
                             text: TextSpan(
                               children: [
                                 TextSpan(
-                                  text: wordDefinition.type + " ",
+                                  text: '${wordDefinition.type} ',
                                   style: kMeaningTextStyle.copyWith(
                                       color: Theme.of(context).primaryColor),
                                 ),
@@ -57,7 +57,7 @@ class MeaningList extends StatelessWidget {
                         if (wordDefinition.example != null &&
                             wordDefinition.example != '')
                           Container(
-                            margin: EdgeInsets.symmetric(vertical: 20),
+                            margin: const EdgeInsets.symmetric(vertical: 20),
                             child: Text(
                               capitalize(wordDefinition.example),
                               style: kMeaningTextStyle.copyWith(
@@ -72,7 +72,7 @@ class MeaningList extends StatelessWidget {
                 ],
               ),
             ),
-            Divider(
+            const Divider(
               thickness: 1,
             ),
           ],

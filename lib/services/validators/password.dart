@@ -1,12 +1,13 @@
 ///simple validation of password based on length.
 
 class Password {
-  String password;
   Password(this.password);
 
-  static validate(password) {
+  String password;
+
+  static bool validate(String password) {
     if (password != null && password != '') {
-      if (password.length >= 6) {
+      if (password.length >= 6 != null) {
         return true;
       }
       return false;

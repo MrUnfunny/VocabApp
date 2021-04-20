@@ -16,8 +16,8 @@ class WordOfTheDayCard extends StatelessWidget {
     return Consumer(
       builder: (BuildContext context, HomeProvider homeProvider, Widget child) {
         return Container(
-          padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 16.0),
-          margin: EdgeInsets.symmetric(vertical: 20.0),
+          padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 16.0),
+          margin: const EdgeInsets.symmetric(vertical: 20.0),
           width: MediaQuery.of(context).size.width,
           decoration: BoxDecoration(
             color: Theme.of(context).primaryColor,
@@ -32,15 +32,15 @@ class WordOfTheDayCard extends StatelessWidget {
                 children: [
                   Text(
                     tr('word_of_the_day'),
-                    style: TextStyle(
-                      fontFamily: "Montserrat",
+                    style: const TextStyle(
+                      fontFamily: 'Montserrat',
                       fontSize: 24.0,
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
                     ),
                   ),
                   IconButton(
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.volume_up,
                       color: Colors.white,
                     ),
@@ -51,7 +51,7 @@ class WordOfTheDayCard extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 16.0,
               ),
               Text(
@@ -61,14 +61,14 @@ class WordOfTheDayCard extends StatelessWidget {
                   fontSize: 18.0,
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               Text(
                 homeProvider.wordOfTheDay['meaning'],
                 style: kCustomCardWordTextStyle.copyWith(fontSize: 16.0),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Row(
@@ -104,7 +104,7 @@ class WordOfTheDayCard extends StatelessWidget {
                     tooltipMsg: 'Add to Favorites',
                     onPressed: () async {
                       return Fluttertoast.showToast(
-                          msg: "Cannot add word of the day to Favorites");
+                          msg: 'Cannot add word of the day to Favorites');
                     },
                   ),
                   WordOfTheDayIcon(

@@ -41,12 +41,12 @@ class _HomeScreenState extends State<HomeScreen>
 
   // implements "press back twice to exit".
   Future<bool> onWillPop() {
-    DateTime now = DateTime.now();
+    var now = DateTime.now();
     if (currentBackPressTime == null ||
-        now.difference(currentBackPressTime) > Duration(seconds: 2)) {
+        now.difference(currentBackPressTime) > const Duration(seconds: 2)) {
       currentBackPressTime = now;
       Fluttertoast.showToast(
-        msg: "Press back again to exit",
+        msg: 'Press back again to exit',
       );
       return Future.value(false);
     }
@@ -63,7 +63,7 @@ class _HomeScreenState extends State<HomeScreen>
         backgroundColor: Colors.grey.shade100,
         body: SafeArea(
           child: WillPopScope(
-            onWillPop: () => onWillPop(),
+            onWillPop: onWillPop,
             child: (homeProvider.apiRequestStatus == ApiRequestStatus.loaded)
                 ? ListView(
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -73,7 +73,7 @@ class _HomeScreenState extends State<HomeScreen>
                       ),
                       SearchBar(),
                       WordOfTheDayCard(),
-                      SizedBox(
+                      const SizedBox(
                         height: 8.0,
                       ),
                       if (homeProvider.historyWords.isNotEmpty)
@@ -101,7 +101,7 @@ class _HomeScreenState extends State<HomeScreen>
                             )
                           ],
                         ),
-                      SizedBox(
+                      const SizedBox(
                         height: 18.0,
                       ),
                       Container(
@@ -112,8 +112,9 @@ class _HomeScreenState extends State<HomeScreen>
                           itemBuilder: (BuildContext context, int index) =>
                               HorizontalScrollCard(
                             word: homeProvider.historyWords[index],
-                            date:
-                                homeProvider.historyWords[index]['date'] ?? '',
+                            date: homeProvider.historyWords[index]['date']
+                                    as String ??
+                                '',
                             icon: (homeProvider.favWords.any((element) =>
                                     element['word'] ==
                                     homeProvider.historyWords[index]['word']))

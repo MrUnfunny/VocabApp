@@ -5,51 +5,51 @@ import 'package:my_vocab/Presentation/Screens/sign_in_screen.dart';
 import 'package:my_vocab/Presentation/Screens/sign_up_screen.dart';
 import 'package:my_vocab/constants/configs.dart';
 
-const SVGName = 'Assets/Vectors/bookReading.svg';
+const svgName = 'Assets/Vectors/bookReading.svg';
 
 class WelcomeScreen extends StatelessWidget {
-  static String id = "Welcome_Screen";
+  static String id = 'Welcome_Screen';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
         child: ListView(
-          padding: EdgeInsets.symmetric(horizontal: 8.0),
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
           children: <Widget>[
-            SizedBox(
+            const SizedBox(
               height: 100.0,
             ),
             Container(
               child: Center(
                 child: SvgPicture.asset(
-                  SVGName,
+                  svgName,
                   width: 300,
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20.0,
             ),
-            Text(
-              "Keep Track of All Your Vocabulary",
+            const Text(
+              'Keep Track of All Your Vocabulary',
               textAlign: TextAlign.center,
               style: kLargeTextStyle,
             ),
             Container(
-              padding: EdgeInsets.only(
+              padding: const EdgeInsets.only(
                 top: 15.0,
                 left: 50.0,
                 right: 50.0,
                 bottom: 5.0,
               ),
-              child: Text(
-                "Vocabulary is a matter of word building as well as word using",
+              child: const Text(
+                'Vocabulary is a matter of word building as well as word using',
                 textAlign: TextAlign.center,
                 style: kSmallTextStyle,
               ),
             ),
             CircularButtonWithoutSplash(
-              buttonText: "Sign In",
+              buttonText: 'Sign In',
               topMargin: 60,
               filled: true,
               fillColorInHex: kPrimaryColor,
@@ -58,7 +58,7 @@ class WelcomeScreen extends StatelessWidget {
               },
             ),
             CircularButtonWithoutSplash(
-              buttonText: "Sign Up",
+              buttonText: 'Sign Up',
               topMargin: 20,
               filled: false,
               fillColorInHex: kPrimaryColor,

@@ -10,11 +10,11 @@ import 'package:my_vocab/services/auth/auth.dart';
 import 'package:my_vocab/services/validators/email.dart';
 import 'package:my_vocab/services/validators/password.dart';
 
-const SignUpSVG = 'Assets/Vectors/SignUp.svg';
+const signUpSVG = 'Assets/Vectors/SignUp.svg';
 const googleLogo = 'Assets/Vectors/googleLogo.svg';
 
 class SignUpScreen extends StatefulWidget {
-  static String id = "SignUp_Screen";
+  static String id = 'SignUp_Screen';
 
   @override
   _SignUpScreenState createState() => _SignUpScreenState();
@@ -36,27 +36,27 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 Padding(
                   padding: const EdgeInsets.only(top: 20.0, right: 30.0),
                   child: GestureDetector(
-                    child: Text(
-                      "Sign In",
-                      style: kSmallTextStyle,
-                      textAlign: TextAlign.end,
-                    ),
                     onTap: () {
                       Navigator.pushReplacementNamed(context, SignInScreen.id);
                     },
+                    child: const Text(
+                      'Sign In',
+                      style: kSmallTextStyle,
+                      textAlign: TextAlign.end,
+                    ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 50.0,
                 ),
                 Center(
                   child: SvgPicture.asset(
-                    SignUpSVG,
+                    signUpSVG,
                     width: 350.0,
                   ),
                 ),
                 BottomBarTextField(
-                  text: "Enter your email",
+                  text: 'Enter your email',
                   icon: Icon(
                     FontAwesomeIcons.envelope,
                     color: Theme.of(context).primaryColor,
@@ -65,21 +65,22 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   horMargin: 30.0,
                   inputType: TextInputType.emailAddress,
                   isPassword: false,
-                  validator: (value) {
+                  validator: (String value) {
                     if (value != null) return Email.validate(value);
                     return true;
                   },
-                  errorText: "Invalid Email",
-                  onChanged: (value) {
-                    if (mounted)
+                  errorText: 'Invalid Email',
+                  onChanged: (String value) {
+                    if (mounted) {
                       setState(() {
                         email = value;
                       });
+                    }
                   },
                 ),
                 BottomBarTextField(
                   inputType: TextInputType.visiblePassword,
-                  text: "Enter your password",
+                  text: 'Enter your password',
                   icon: Icon(
                     FontAwesomeIcons.lock,
                     color: Theme.of(context).primaryColor,
@@ -87,30 +88,33 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   verMargin: 0.0,
                   horMargin: 30.0,
                   isPassword: true,
-                  validator: (value) {
+                  validator: (String value) {
                     if (value != null) return Password.validate(value);
                     return true;
                   },
-                  errorText: "Weak Password",
-                  onChanged: (value) {
-                    if (mounted)
+                  errorText: 'Weak Password',
+                  onChanged: (String value) {
+                    if (mounted) {
                       setState(() {
                         password = value;
                       });
+                    }
                   },
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10.0,
                 ),
                 Container(
-                  margin:
-                      EdgeInsets.symmetric(vertical: 25.0, horizontal: 100.0),
+                  margin: const EdgeInsets.symmetric(
+                    vertical: 25.0,
+                    horizontal: 100.0,
+                  ),
                   child: ElevatedButton(
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all<Color>(
                           Theme.of(context).primaryColor),
                       padding: MaterialStateProperty.all<EdgeInsets>(
-                        EdgeInsets.symmetric(vertical: 10.0),
+                        const EdgeInsets.symmetric(vertical: 10.0),
                       ),
                       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                         RoundedRectangleBorder(
@@ -118,30 +122,32 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
                       ),
                     ),
-                    child: Text(
-                      "Sign Up",
-                      style: kLargeTextStyle.copyWith(
-                        color: Colors.white,
-                      ),
-                    ),
                     onPressed: () async {
                       setState(() {
                         loading = true;
                       });
-                      if (Email.validate(email) && Password.validate(password))
+                      if (Email.validate(email) &&
+                          Password.validate(password)) {
                         await Auth().signUp(
                             email: email, password: password, context: context);
-                      else
+                      } else {
                         ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
+                          const SnackBar(
                             content:
-                                Text("Please enter valid Email and Password"),
+                                Text('Please enter valid Email and Password'),
                           ),
                         );
+                      }
                       setState(() {
                         loading = false;
                       });
                     },
+                    child: Text(
+                      'Sign Up',
+                      style: kLargeTextStyle.copyWith(
+                        color: Colors.white,
+                      ),
+                    ),
                   ),
                 ),
               ],

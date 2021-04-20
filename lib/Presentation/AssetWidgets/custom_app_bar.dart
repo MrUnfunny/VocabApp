@@ -6,13 +6,14 @@ import 'package:my_vocab/constants/configs.dart';
 import 'package:my_vocab/services/auth/auth.dart';
 
 class CustomAppBar extends StatelessWidget {
-  final String title;
-  final bool isTextWhite;
   const CustomAppBar({
     Key key,
     this.isTextWhite = false,
     @required this.title,
   }) : super(key: key);
+
+  final String title;
+  final bool isTextWhite;
 
   @override
   Widget build(BuildContext context) {
@@ -20,9 +21,9 @@ class CustomAppBar extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Container(
-          margin: EdgeInsets.symmetric(horizontal: 10.0, vertical: 30.0),
+          margin: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 30.0),
           child: Text(
-            this.title,
+            title,
             style: (isTextWhite)
                 ? kAppBarStyle.copyWith(color: Colors.white)
                 : kAppBarStyle,
@@ -31,12 +32,11 @@ class CustomAppBar extends StatelessWidget {
         Container(
           child: CircleAvatar(
             radius: 20.0,
-            backgroundImage: (Auth().getProfilePhoto() == null)
-                ? AssetImage('Assets/images/profile.png')
-                : NetworkImage(Auth().getProfilePhoto()),
+            backgroundImage: Auth().getProfilePhoto(),
+            // backgroundImage: NetworkImage(Auth().getProfilePhoto()),
             backgroundColor: Colors.transparent,
             onBackgroundImageError: (exception, stackTrace) =>
-                log("$exception \n $stackTrace"),
+                log('$exception \n $stackTrace'),
           ),
         )
       ],

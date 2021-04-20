@@ -6,14 +6,13 @@ import 'package:intl/intl.dart';
 import 'package:my_vocab/model/dictionary.dart';
 
 class FirestoreInterface {
-  FirebaseFirestore firestoreInstance;
-  static final FirestoreInterface _instance = FirestoreInterface._();
-
   FirestoreInterface._() {
     firestoreInstance = FirebaseFirestore.instance;
   }
-
   factory FirestoreInterface() => _instance;
+
+  FirebaseFirestore firestoreInstance;
+  static final FirestoreInterface _instance = FirestoreInterface._();
 
   void addUser() {
     firestoreInstance
@@ -27,8 +26,8 @@ class FirestoreInterface {
   }
 
   Future<void> addHistoryWords(Dictionary word) async {
-    final DateFormat formatter = DateFormat('yyyy-MM-dd');
-    Map<String, dynamic> wordDetail = {
+    final formatter = DateFormat('yyyy-MM-dd');
+    var wordDetail = <String, dynamic>{
       ...word.toMap(),
       ...{'date': '${formatter.format(DateTime.now())}'}
     };
@@ -41,8 +40,8 @@ class FirestoreInterface {
   }
 
   Future<void> addLikedWords(Dictionary word) async {
-    final DateFormat formatter = DateFormat('yyyy-MM-dd');
-    Map wordDetail = {
+    final formatter = DateFormat('yyyy-MM-dd');
+    var wordDetail = {
       ...word.toMap(),
       ...{'date': '${formatter.format(DateTime.now())}'}
     };
@@ -55,8 +54,8 @@ class FirestoreInterface {
   }
 
   Future<void> addFavoriteWords(Dictionary word) async {
-    final DateFormat formatter = DateFormat('yyyy-MM-dd');
-    Map wordDetail = {
+    final formatter = DateFormat('yyyy-MM-dd');
+    var wordDetail = {
       ...word.toMap(),
       ...{'date': '${formatter.format(DateTime.now())}'}
     };

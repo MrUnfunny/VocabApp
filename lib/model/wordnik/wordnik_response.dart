@@ -2,21 +2,6 @@ import 'package:equatable/equatable.dart';
 import 'package:my_vocab/model/wordnik/related_words.dart';
 
 class WordNikResponse extends Equatable {
-  final String id;
-  final String partOfSpeech;
-  final String attributionText;
-  final String sourceDictionary;
-  final String text;
-  final String sequence;
-  final int score;
-  final String word;
-  final List<RelatedWords> relatedWords;
-  final List<String> exampleUses;
-  final List<String> textProns;
-  final List<String> notes;
-  final String attributionUrl;
-  final String wordnikUrl;
-
   WordNikResponse({
     this.id,
     this.partOfSpeech,
@@ -34,6 +19,40 @@ class WordNikResponse extends Equatable {
     this.wordnikUrl,
   });
 
+  factory WordNikResponse.fromJson(json) {
+    return WordNikResponse(
+      id: json['id'] as String,
+      partOfSpeech: json['partOfSpeech'] as String,
+      attributionText: json['attributionText'] as String,
+      sourceDictionary: json['sourceDictionary'] as String,
+      text: json['text'] as String,
+      sequence: json['sequence'] as String,
+      word: json['word'] as String,
+      attributionUrl: json['attributionUrl'] as String,
+      wordnikUrl: json['wordnikUrl'] as String,
+      score: json['score'] as int,
+      relatedWords: json['relatedWords'] as List<RelatedWords>,
+      exampleUses: json['exampleUses'] as List<String>,
+      textProns: json['textProns'] as List<String>,
+      notes: json['notes'] as List<String>,
+    );
+  }
+
+  final String id;
+  final String partOfSpeech;
+  final String attributionText;
+  final String sourceDictionary;
+  final String text;
+  final String sequence;
+  final int score;
+  final String word;
+  final List<RelatedWords> relatedWords;
+  final List<String> exampleUses;
+  final List<String> textProns;
+  final List<String> notes;
+  final String attributionUrl;
+  final String wordnikUrl;
+
   List<Object> get props => [
         id,
         partOfSpeech,
@@ -50,23 +69,4 @@ class WordNikResponse extends Equatable {
         attributionUrl,
         wordnikUrl,
       ];
-
-  factory WordNikResponse.fromJson(json) {
-    return WordNikResponse(
-      id: json['id'],
-      partOfSpeech: json['partOfSpeech'],
-      attributionText: json['attributionText'],
-      sourceDictionary: json['sourceDictionary'],
-      text: json['text'],
-      sequence: json['sequence'],
-      score: json['score'],
-      word: json['word'],
-      relatedWords: json['relatedWords'],
-      exampleUses: json['exampleUses'],
-      textProns: json['textProns'],
-      notes: json['notes'],
-      attributionUrl: json['attributionUrl'],
-      wordnikUrl: json['wordnikUrl'],
-    );
-  }
 }

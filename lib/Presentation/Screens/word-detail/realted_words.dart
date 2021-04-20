@@ -3,9 +3,9 @@ import 'package:my_vocab/constants/configs.dart';
 import 'package:my_vocab/model/dictionary.dart';
 
 class RelatedWords extends StatelessWidget {
-  final Dictionary wordDetail;
-
   const RelatedWords({Key key, this.wordDetail}) : super(key: key);
+
+  final Dictionary wordDetail;
 
   @override
   Widget build(BuildContext context) {
@@ -14,17 +14,17 @@ class RelatedWords extends StatelessWidget {
         if (wordDetail.synonynms.isNotEmpty)
           WordCard(
             wordList: wordDetail.synonynms.join(' , '),
-            wordType: "Synonyms",
+            wordType: 'Synonyms',
           ),
         if (wordDetail.antonyms.isNotEmpty)
           WordCard(
             wordList: wordDetail.antonyms.join(' , '),
-            wordType: "Antonyms",
+            wordType: 'Antonyms',
           ),
         if (wordDetail.rhymes.isNotEmpty)
           WordCard(
             wordList: wordDetail.rhymes.join(' , '),
-            wordType: "Rhyming Words",
+            wordType: 'Rhyming Words',
           ),
       ],
     );
@@ -32,15 +32,15 @@ class RelatedWords extends StatelessWidget {
 }
 
 class WordCard extends StatelessWidget {
+  const WordCard({Key key, this.wordList, this.wordType}) : super(key: key);
+
   final String wordList;
   final String wordType;
-
-  const WordCard({Key key, this.wordList, this.wordType}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(bottom: 16.0),
+      padding: const EdgeInsets.only(bottom: 16.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -52,7 +52,7 @@ class WordCard extends StatelessWidget {
                 fontWeight: FontWeight.w600,
                 color: Theme.of(context).primaryColor),
           ),
-          SizedBox(
+          const SizedBox(
             height: 16.0,
           ),
           if (wordList.length > 0)
@@ -60,10 +60,10 @@ class WordCard extends StatelessWidget {
               wordList,
               style: kMeaningTextStyle,
             ),
-          SizedBox(
+          const SizedBox(
             height: 16.0,
           ),
-          Divider(),
+          const Divider(),
         ],
       ),
     );

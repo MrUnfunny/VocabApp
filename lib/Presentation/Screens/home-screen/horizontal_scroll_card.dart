@@ -7,12 +7,11 @@ import 'package:my_vocab/services/utils.dart';
 // This widget is used to show User History on HomeScreen
 
 class HorizontalScrollCard extends StatefulWidget {
+  const HorizontalScrollCard({Key key, this.word, this.date, this.icon});
+
   final Map word;
   final String date;
   final IconData icon;
-
-  const HorizontalScrollCard({Key key, this.word, this.date, this.icon})
-      : super(key: key);
 
   @override
   _HorizontalScrollCardState createState() => _HorizontalScrollCardState();
@@ -29,13 +28,13 @@ class _HorizontalScrollCardState extends State<HorizontalScrollCard> {
         context,
         MaterialPageRoute(
           builder: (context) => WordDetailScreen(
-            word: widget.word['word'],
+            word: widget.word['word'] as String,
           ),
         ),
       ),
       child: Container(
-        margin: EdgeInsets.only(right: 16.0, top: 8.0, bottom: 8.0),
-        padding: EdgeInsets.symmetric(horizontal: 16.0),
+        margin: const EdgeInsets.only(right: 16.0, top: 8.0, bottom: 8.0),
+        padding: const EdgeInsets.symmetric(horizontal: 16.0),
         width: MediaQuery.of(context).size.width * 0.80,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10.0), color: kLightBlack),
@@ -47,14 +46,14 @@ class _HorizontalScrollCardState extends State<HorizontalScrollCard> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  capitalize(widget.word['word']),
+                  capitalize(widget.word['word'] as String),
                   style: TextStyle(
-                      fontFamily: "Montserrat",
+                      fontFamily: 'Montserrat',
                       fontSize: 24.0,
                       fontWeight: FontWeight.w600,
                       color: Theme.of(context).primaryColor),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 8.0,
                 ),
                 Text(widget.date),
@@ -69,12 +68,13 @@ class _HorizontalScrollCardState extends State<HorizontalScrollCard> {
               onPressed: () async {
                 if (!Provider.of<HomeProvider>(context, listen: false)
                     .favWords
-                    .contains(widget.word))
+                    .contains(widget.word)) {
                   Provider.of<HomeProvider>(context, listen: false)
-                      .addtoFavorites(widget.word);
-                else
+                      .addtoFavorites(widget.word as Map<String, dynamic>);
+                } else {
                   Provider.of<HomeProvider>(context, listen: false)
                       .removeFromFav(widget.word);
+                }
 
                 Provider.of<HomeProvider>(context, listen: false)
                     .getFavorites();

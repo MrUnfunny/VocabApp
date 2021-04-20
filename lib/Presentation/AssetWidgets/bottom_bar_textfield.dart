@@ -1,16 +1,6 @@
 import 'package:flutter/material.dart';
 
 class BottomBarTextField extends StatefulWidget {
-  final String text;
-  final Icon icon;
-  final double horMargin;
-  final double verMargin;
-  final TextInputType inputType;
-  final bool isPassword;
-  final Function onChanged;
-  final Function validator;
-  final String errorText;
-
   BottomBarTextField(
       {this.icon,
       this.horMargin,
@@ -21,6 +11,16 @@ class BottomBarTextField extends StatefulWidget {
       this.validator,
       this.errorText,
       @required this.onChanged});
+
+  final String text;
+  final Icon icon;
+  final double horMargin;
+  final double verMargin;
+  final TextInputType inputType;
+  final bool isPassword;
+  final Function onChanged;
+  final bool Function(String) validator;
+  final String errorText;
 
   @override
   _BottomBarTextFieldState createState() => _BottomBarTextFieldState();
@@ -47,7 +47,7 @@ class _BottomBarTextFieldState extends State<BottomBarTextField> {
       child: TextFormField(
         controller: controller,
         onChanged: (value) {
-          this.widget.onChanged(value);
+          widget.onChanged(value);
         },
         decoration: InputDecoration(
           hintText: widget.text,
@@ -55,7 +55,7 @@ class _BottomBarTextFieldState extends State<BottomBarTextField> {
               (widget.validator != null && !widget.validator(controller?.text))
                   ? widget.errorText
                   : null,
-          prefixIcon: this.widget.icon,
+          prefixIcon: widget.icon,
           suffix: (iconVisibility)
               ? (visibleIcon)
                   ? GestureDetector(
@@ -83,7 +83,11 @@ class _BottomBarTextFieldState extends State<BottomBarTextField> {
               : null,
         ),
         keyboardType: widget.inputType,
-        obscureText: (widget.isPassword) ? (visibleIcon) ? false : true : false,
+        obscureText: (widget.isPassword)
+            ? (visibleIcon)
+                ? false
+                : true
+            : false,
         onTap: () {
           setState(() {
             if (widget.isPassword == true) {

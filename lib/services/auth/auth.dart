@@ -10,17 +10,19 @@ import 'package:my_vocab/services/firestore_data.dart';
 
 class Auth {
   final _auth = FirebaseAuth.instance;
-  signUp(
-      {@required email,
-      @required password,
+  Future<void> signUp(
+      {@required String email,
+      @required String password,
       @required BuildContext context}) async {
     try {
       await _auth.createUserWithEmailAndPassword(
-          email: email, password: password);
+        email: email,
+        password: password,
+      );
       FirestoreInterface().addUser();
 
-      Navigator.pushReplacementNamed(context, MainScreen.id);
-    } catch (e) {
+      await Navigator.pushReplacementNamed(context, MainScreen.id);
+    } on Exception catch (e) {
       log('Exception @createAccount: $e');
       _showDialog(
         error: e,
@@ -29,44 +31,45 @@ class Auth {
     }
   }
 
-  signIn(
-      {@required email,
-      @required password,
+  Future<void> signIn(
+      {@required String email,
+      @required String password,
       @required BuildContext context}) async {
     try {
       await _auth.signInWithEmailAndPassword(email: email, password: password);
 
       FirestoreInterface().addUser();
-      Navigator.pushReplacementNamed(context, MainScreen.id);
-    } catch (e) {
+      await Navigator.pushReplacementNamed(context, MainScreen.id);
+    } on Exception catch (e) {
       _showDialog(error: e, context: context);
     }
   }
 
-  signInWithGoogle({@required BuildContext context}) async {
+  Future<User> signInWithGoogle({@required BuildContext context}) async {
     try {
-      final GoogleSignIn googleSignIn = GoogleSignIn();
-      final GoogleSignInAccount account = await googleSignIn.signIn();
+      final googleSignIn = GoogleSignIn();
+      final account = await googleSignIn.signIn();
       if (account == null) {
-        final SnackBar snackBar =
-            SnackBar(content: Text("ERROR: Sign In cancelled by user"));
+        final snackBar =
+            const SnackBar(content: Text('ERROR: Sign In cancelled by user'));
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
         return null;
       }
-      final GoogleSignInAuthentication googleAuth =
-          await account.authentication;
-      final OAuthCredential creds = GoogleAuthProvider.credential(
+      final googleAuth = await account.authentication;
+      final creds = GoogleAuthProvider.credential(
           accessToken: googleAuth.accessToken, idToken: googleAuth.idToken);
-      final UserCredential user = await _auth.signInWithCredential(creds);
+      final user = await _auth.signInWithCredential(creds);
       return user.user;
-    } catch (e) {
-      log("error is $e");
+    } on Exception catch (e) {
+      log('error is $e');
       _showDialog(error: e, context: context);
       return null;
     }
   }
 
-  signInWithFacebook({@required BuildContext context}) async {
+  // ignore: missing_return
+  Future<UserCredential> signInWithFacebook(
+      {@required BuildContext context}) async {
     try {
       final fb = FacebookLogin();
 
@@ -77,55 +80,58 @@ class Auth {
 
       switch (res.status) {
         case FacebookLoginStatus.success:
-          final FacebookAccessToken accessToken = res.accessToken;
-          final OAuthCredential credentials =
+          final accessToken = res.accessToken;
+          final credentials =
               FacebookAuthProvider.credential(accessToken.token);
-          final UserCredential user =
-              await _auth.signInWithCredential(credentials);
+          final user = await _auth.signInWithCredential(credentials);
           return user;
 
           break;
         case FacebookLoginStatus.cancel:
-          log("Exception @facebookLogin ${res.status}");
+          log('Exception @facebookLogin ${res.status}');
           break;
         case FacebookLoginStatus.error:
           _showDialog(
-              context: context, error: "Failed to Sign In via Facebook");
-          log("Exception @facebookLogin ${res.status}");
+              context: context, error: 'Failed to Sign In via Facebook');
+          log('Exception @facebookLogin ${res.status}');
           break;
       }
-    } catch (e) {
+    } on Exception catch (e) {
       _showDialog(error: e, context: context);
       return null;
     }
   }
 
-  signOut({@required BuildContext context}) async {
+  Future<void> signOut({@required BuildContext context}) async {
     try {
-      GoogleSignIn().signOut();
-      _auth.signOut();
-      Navigator.pushReplacementNamed(context, WelcomeScreen.id);
-    } catch (e) {
+      await GoogleSignIn().signOut();
+      await _auth.signOut();
+      await Navigator.pushReplacementNamed(context, WelcomeScreen.id);
+    } on Exception catch (e) {
       log('Exception @signout: $e');
     }
   }
 
-  String getProfilePhoto() {
-    final String imageUrl = FirebaseAuth.instance.currentUser.photoURL;
-    return imageUrl;
+  ImageProvider<Object> getProfilePhoto() {
+    final imageUrl = FirebaseAuth.instance.currentUser.photoURL;
+    if (imageUrl == null) {
+      return const AssetImage('Assets/images/profile.png');
+    }
+    return NetworkImage(imageUrl);
   }
 
   String getUserName() {
-    final String username = FirebaseAuth.instance.currentUser.displayName;
+    final username = FirebaseAuth.instance.currentUser.displayName;
     return username;
   }
 
   _showDialog({@required error, @required BuildContext context}) {
-    if (error.runtimeType == NoSuchMethodError)
-      error = "UnIdentified Error!";
-    else if (error.runtimeType != String)
-      error = (error?.message != null) ? error?.message : "UnIdentified Error";
-    final SnackBar snackBar = SnackBar(content: Text("ERROR: $error"));
+    if (error.runtimeType == NoSuchMethodError) {
+      error = 'UnIdentified Error!';
+    } else if (error.runtimeType != String) {
+      error = (error?.message != null) ? error?.message : 'UnIdentified Error';
+    }
+    final snackBar = SnackBar(content: Text('ERROR: $error'));
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 }

@@ -4,7 +4,7 @@ import 'dart:developer';
 import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
 
-import 'package:my_vocab/hive/hiveDb.dart';
+import 'package:my_vocab/hive/hive_db.dart';
 import 'package:my_vocab/model/dictionary.dart';
 import 'package:my_vocab/model/enum/api_request_status.dart';
 import 'package:my_vocab/model/functions.dart';
@@ -17,21 +17,33 @@ class WordDetailProvider extends ChangeNotifier {
   ApiRequestStatus apiRequestStatus = ApiRequestStatus.loading;
   List<String> rhymeList = [], synList = [], antList = [];
 
-  getDetail(word) async {
+  Future<void> getDetail(String word) async {
     setApiStatus(ApiRequestStatus.loading);
     try {
       wordDetail = await Meaning().getMeaning(word: word);
 
-      final rhymeRes = await datamuseApi
-          .get(params: {'rel_rhy': wordDetail.word, "max": 10});
-      final synRes = await datamuseApi
-          .get(params: {'rel_syn': wordDetail.word, "max": 10});
-      final antRes = await datamuseApi
-          .get(params: {'rel_ant': wordDetail.word, "max": 10});
+      final rhymeRes = await datamuseApi.get(params: {
+        'rel_rhy': wordDetail.word,
+        'max': 10,
+      });
 
-      final rhymeJson = jsonDecode(rhymeRes.body);
-      final synJson = jsonDecode(synRes.body);
-      final antJson = jsonDecode(antRes.body);
+      final synRes = await datamuseApi.get(
+        params: {
+          'rel_syn': wordDetail.word,
+          'max': 10,
+        },
+      );
+
+      final antRes = await datamuseApi.get(
+        params: {
+          'rel_ant': wordDetail.word,
+          'max': 10,
+        },
+      );
+
+      final rhymeJson = jsonDecode(rhymeRes.body) as List<Map<String, String>>;
+      final synJson = jsonDecode(synRes.body) as List<Map<String, String>>;
+      final antJson = jsonDecode(antRes.body) as List<Map<String, String>>;
 
       rhymeList.clear();
       synList.clear();
@@ -58,24 +70,25 @@ class WordDetailProvider extends ChangeNotifier {
       await FirestoreInterface().addHistoryWords(wordDetail);
 
       setApiStatus(ApiRequestStatus.loaded);
-    } catch (e) {
-      log("@Owlbot meaning fetch failed in WordDetailProvider: $e");
+    } on Exception catch (e) {
+      log('@Owlbot meaning fetch failed in WordDetailProvider: $e');
       checkError(e);
     }
   }
 
-  addToHistory(Dictionary wordDetail) async {
-    final DateFormat formatter = DateFormat('yyyy-MM-dd');
-    Map res = {
+  Future<void> addToHistory(Dictionary wordDetail) async {
+    final formatter = DateFormat('yyyy-MM-dd');
+    var res = {
       ...wordDetail.toMap(),
       ...{'date': '${formatter.format(DateTime.now())}'}
     };
     HiveDB.instance.put(wordDetail.word, res);
   }
 
-  void checkError(e) {
-    if (Functions.checkConnectionError(e))
+  void checkError(Exception e) {
+    if (Functions.checkConnectionError(e)) {
       setApiStatus(ApiRequestStatus.connectionError);
+    }
     setApiStatus(ApiRequestStatus.error);
   }
 

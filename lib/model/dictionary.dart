@@ -8,6 +8,29 @@ part 'dictionary.g.dart';
 
 @HiveType(typeId: kDictionaryHiveType)
 class Dictionary extends HiveObject {
+  Dictionary({
+    this.word,
+    this.pronunciation,
+    this.definitions,
+    this.rhymes,
+    this.synonynms,
+    this.antonyms,
+    this.isFav = false,
+    this.isLiked = false,
+  });
+
+  factory Dictionary.fromJson(json) {
+    return Dictionary(
+      word: json['word'] as String,
+      pronunciation: json['pronunciation'] as String,
+      definitions: List<Definition>.from(
+        (json['definitions'] as List<String>).map(
+          (definition) => Definition.fromJson(definition),
+        ),
+      ),
+    );
+  }
+
   @HiveField(0)
   final String word;
   @HiveField(1)
@@ -25,17 +48,6 @@ class Dictionary extends HiveObject {
   @HiveField(7)
   final bool isLiked;
 
-  Dictionary({
-    this.word,
-    this.pronunciation,
-    this.definitions,
-    this.rhymes,
-    this.synonynms,
-    this.antonyms,
-    this.isFav = false,
-    this.isLiked = false,
-  });
-
   List<Object> get props {
     return [
       word,
@@ -45,18 +57,6 @@ class Dictionary extends HiveObject {
       synonynms,
       antonyms,
     ];
-  }
-
-  factory Dictionary.fromJson(json) {
-    return Dictionary(
-      word: json['word'],
-      pronunciation: json['pronunciation'],
-      definitions: List<Definition>.from(
-        json['definitions'].map(
-          (definition) => Definition.fromJson(definition),
-        ),
-      ),
-    );
   }
 
   Dictionary copyWith({
@@ -89,6 +89,7 @@ class Dictionary extends HiveObject {
   }
 
   @override
+  // ignore: avoid_equals_and_hash_code_on_mutable_classes
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
 
@@ -102,6 +103,7 @@ class Dictionary extends HiveObject {
   }
 
   @override
+  // ignore: avoid_equals_and_hash_code_on_mutable_classes
   int get hashCode {
     return word.hashCode ^
         pronunciation.hashCode ^
@@ -113,6 +115,7 @@ class Dictionary extends HiveObject {
 
   @override
   String toString() {
-    return 'Dictionary(word: $word, pronunciation: $pronunciation, definitions: $definitions, rhymes: $rhymes, synonynms: $synonynms, antonyms: $antonyms, isFav: $isFav, isLiked: $isLiked)';
+    return '''
+Dictionary(word: $word, pronunciation: $pronunciation, definitions: $definitions, rhymes: $rhymes, synonynms: $synonynms, antonyms: $antonyms, isFav: $isFav, isLiked: $isLiked)''';
   }
 }

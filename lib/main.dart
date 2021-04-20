@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart' as DotEnv;
+import 'package:flutter_dotenv/flutter_dotenv.dart' as dot_env;
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hive/hive.dart';
@@ -18,7 +18,7 @@ import 'package:my_vocab/Presentation/Screens/sign_in_screen.dart';
 import 'package:my_vocab/Presentation/Screens/sign_up_screen.dart';
 import 'package:my_vocab/Presentation/Screens/welcome_screen.dart';
 import 'package:my_vocab/Presentation/Screens/word-detail/screen.dart';
-import 'package:my_vocab/hive/hiveDb.dart';
+import 'package:my_vocab/hive/hive_db.dart';
 import 'package:my_vocab/main_screen.dart';
 import 'package:my_vocab/model/definition.dart';
 import 'package:my_vocab/model/dictionary.dart';
@@ -30,12 +30,12 @@ import 'services/firestore_data.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  await DotEnv.load(fileName: ".env");
+  await dot_env.load(fileName: '.env');
   FirestoreInterface();
 
   if (!kIsWeb) {
     final directoryPath = await getApplicationDocumentsDirectory();
-    await Hive.init(directoryPath.path);
+    Hive.init(directoryPath.path);
   } else {
     Hive.registerAdapter<Definition>(DefinitionAdapter());
     Hive.registerAdapter<Dictionary>(DictionaryAdapter());
@@ -68,7 +68,7 @@ void main() async {
   runApp(
     EasyLocalization(
       path: 'Assets/langs',
-      supportedLocales: [Locale('en', 'US'), Locale('hi', 'IN')],
+      supportedLocales: const [Locale('en', 'US'), Locale('hi', 'IN')],
       child: MultiProvider(
         providers: [
           ChangeNotifierProvider(create: (_) => HomeProvider()),
@@ -92,7 +92,7 @@ class MyApp extends StatelessWidget {
       supportedLocales: EasyLocalization.of(context).supportedLocales,
       locale: EasyLocalization.of(context).locale,
       theme: ThemeData.light().copyWith(
-        primaryColor: Color(0xffff4f18),
+        primaryColor: const Color(0xffff4f18),
       ),
       initialRoute: (FirebaseAuth.instance.currentUser != null)
           ? MainScreen.id
@@ -103,7 +103,7 @@ class MyApp extends StatelessWidget {
         WelcomeScreen.id: (context) => WelcomeScreen(),
         SignUpScreen.id: (context) => SignUpScreen(),
         HomeScreen.id: (context) => HomeScreen(),
-        WordDetailScreen.id: (context) => WordDetailScreen(),
+        WordDetailScreen.id: (context) => const WordDetailScreen(),
         HistoryScreen.id: (context) => HistoryScreen(),
         FavScreen.id: (context) => FavScreen(),
         LikeScreen.id: (context) => LikeScreen(),

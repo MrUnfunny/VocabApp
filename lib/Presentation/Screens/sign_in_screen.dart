@@ -16,11 +16,11 @@ import 'package:my_vocab/services/firestore_data.dart';
 import 'package:my_vocab/services/validators/email.dart';
 import 'package:my_vocab/services/validators/password.dart';
 
-const SVGName = 'Assets/Vectors/welcomeBack.svg';
+const svgName = 'Assets/Vectors/welcomeBack.svg';
 const googleLogo = 'Assets/Vectors/googleLogo.svg';
 
 class SignInScreen extends StatefulWidget {
-  static String id = "SignIn_Screen";
+  static String id = 'SignIn_Screen';
 
   @override
   _SignInScreenState createState() => _SignInScreenState();
@@ -42,27 +42,27 @@ class _SignInScreenState extends State<SignInScreen> {
                 Padding(
                   padding: const EdgeInsets.only(top: 20.0, right: 30.0),
                   child: GestureDetector(
-                    child: Text(
-                      "Sign Up",
-                      style: kSmallTextStyle,
-                      textAlign: TextAlign.end,
-                    ),
                     onTap: () {
                       Navigator.pushReplacementNamed(context, SignUpScreen.id);
                     },
+                    child: const Text(
+                      'Sign Up',
+                      style: kSmallTextStyle,
+                      textAlign: TextAlign.end,
+                    ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 30.0,
                 ),
                 Center(
                   child: SvgPicture.asset(
-                    SVGName,
+                    svgName,
                     width: 400.0,
                   ),
                 ),
                 BottomBarTextField(
-                  text: "Enter your email",
+                  text: 'Enter your email',
                   icon: Icon(
                     FontAwesomeIcons.envelope,
                     color: Theme.of(context).primaryColor,
@@ -71,19 +71,19 @@ class _SignInScreenState extends State<SignInScreen> {
                   horMargin: 30.0,
                   inputType: TextInputType.emailAddress,
                   isPassword: false,
-                  validator: (value) {
+                  validator: (String value) {
                     if (value != null) return Email.validate(value);
                     return true;
                   },
-                  errorText: "Invalid Email",
-                  onChanged: (value) {
+                  errorText: 'Invalid Email',
+                  onChanged: (String value) {
                     setState(() {
                       email = value;
                     });
                   },
                 ),
                 BottomBarTextField(
-                  text: "Enter your password",
+                  text: 'Enter your password',
                   icon: Icon(
                     FontAwesomeIcons.lock,
                     color: Theme.of(context).primaryColor,
@@ -92,13 +92,13 @@ class _SignInScreenState extends State<SignInScreen> {
                   horMargin: 30.0,
                   inputType: TextInputType.visiblePassword,
                   isPassword: true,
-                  onChanged: (value) {
+                  onChanged: (String value) {
                     setState(() {
                       password = value;
                     });
                   },
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10.0,
                 ),
                 Padding(
@@ -107,31 +107,36 @@ class _SignInScreenState extends State<SignInScreen> {
                     onTap: () {
                       if (email == null) {
                         ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
+                          const SnackBar(
                             content:
                                 Text('Enter Email Id for resetting password'),
                           ),
                         );
-                      } else
+                      } else {
                         FirebaseAuth.instance
                             .sendPasswordResetEmail(email: email);
+                      }
                     },
-                    child: Text(
-                      "Forgot Password",
+                    child: const Text(
+                      'Forgot Password',
                       textAlign: TextAlign.end,
                       style: kSmallTextStyle,
                     ),
                   ),
                 ),
                 Container(
-                  margin:
-                      EdgeInsets.symmetric(vertical: 25.0, horizontal: 100.0),
+                  margin: const EdgeInsets.symmetric(
+                    vertical: 25.0,
+                    horizontal: 100.0,
+                  ),
                   child: ElevatedButton(
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all<Color>(
                           Theme.of(context).primaryColor),
                       padding: MaterialStateProperty.all<EdgeInsets>(
-                        EdgeInsets.symmetric(vertical: 10.0),
+                        const EdgeInsets.symmetric(
+                          vertical: 10.0,
+                        ),
                       ),
                       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                         RoundedRectangleBorder(
@@ -139,8 +144,28 @@ class _SignInScreenState extends State<SignInScreen> {
                         ),
                       ),
                     ),
-                    child: Text(
-                      "Sign In",
+                    onPressed: () async {
+                      setState(() {
+                        loading = true;
+                      });
+                      if (Email.validate(email) &&
+                          Password.validate(password)) {
+                        await Auth().signIn(
+                            email: email, password: password, context: context);
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content:
+                                Text('Please enter valid Email and Password'),
+                          ),
+                        );
+                      }
+                      setState(() {
+                        loading = false;
+                      });
+                    },
+                    child: const Text(
+                      'Sign In',
                       style: TextStyle(
                         fontFamily: 'Montserrat',
                         fontSize: 18.0,
@@ -148,28 +173,10 @@ class _SignInScreenState extends State<SignInScreen> {
                         color: Colors.white,
                       ),
                     ),
-                    onPressed: () async {
-                      setState(() {
-                        loading = true;
-                      });
-                      if (Email.validate(email) && Password.validate(password))
-                        await Auth().signIn(
-                            email: email, password: password, context: context);
-                      else
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content:
-                                Text("Please enter valid Email and Password"),
-                          ),
-                        );
-                      setState(() {
-                        loading = false;
-                      });
-                    },
                   ),
                 ),
-                Text(
-                  "Or Sign In via",
+                const Text(
+                  'Or Sign In via',
                   textAlign: TextAlign.center,
                   style: kSmallTextStyle,
                 ),
@@ -186,20 +193,31 @@ class _SignInScreenState extends State<SignInScreen> {
                         final user =
                             await Auth().signInWithFacebook(context: context);
                         if (user != null) {
-                          Navigator.pushReplacementNamed(
+                          await Navigator.pushReplacementNamed(
                             context,
                             MainScreen.id,
                           );
 
                           FirestoreInterface().addUser();
                         }
-                        log("Exception occurred: User is null");
+                        log('Exception occurred: User is null');
                       },
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 10.0,
                     ),
                     GestureDetector(
+                      onTap: () async {
+                        final user =
+                            await Auth().signInWithGoogle(context: context);
+                        if (user != null) {
+                          FirestoreInterface().addUser();
+                          await Navigator.pushReplacementNamed(
+                            context,
+                            MainScreen.id,
+                          );
+                        }
+                      },
                       child: Padding(
                         padding: const EdgeInsets.only(top: 12.0),
                         child: SvgPicture.asset(
@@ -207,17 +225,6 @@ class _SignInScreenState extends State<SignInScreen> {
                           width: 37.0,
                         ),
                       ),
-                      onTap: () async {
-                        final user =
-                            await Auth().signInWithGoogle(context: context);
-                        if (user != null) {
-                          FirestoreInterface().addUser();
-                          Navigator.pushReplacementNamed(
-                            context,
-                            MainScreen.id,
-                          );
-                        }
-                      },
                     ),
                   ],
                 ),
