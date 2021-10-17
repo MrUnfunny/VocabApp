@@ -2,9 +2,9 @@ import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:my_vocab/hive/hive_db.dart';
-import 'package:my_vocab/services/Dictionary/get_word_of_the_day.dart';
 import 'package:my_vocab/model/enum/api_request_status.dart';
-import 'package:my_vocab/model/functions.dart';
+import 'package:my_vocab/model/functions.dart' as utils;
+import 'package:my_vocab/services/Dictionary/get_word_of_the_day.dart';
 
 class HomeProvider extends ChangeNotifier {
   Map<String, String> wordOfTheDay;
@@ -73,7 +73,7 @@ class HomeProvider extends ChangeNotifier {
   }
 
   void checkError(Exception e) {
-    if (Functions.checkConnectionError(e)) {
+    if (utils.checkConnectionError(e)) {
       setApiRequestStatus(ApiRequestStatus.connectionError);
     }
     setApiRequestStatus(ApiRequestStatus.error);

@@ -24,7 +24,7 @@ class Dictionary extends HiveObject {
       word: json['word'] as String,
       pronunciation: json['pronunciation'] as String,
       definitions: List<Definition>.from(
-        (json['definitions'] as List<String>).map(
+        (json['definitions'] as List<dynamic>).map(
           (definition) => Definition.fromJson(definition),
         ),
       ),

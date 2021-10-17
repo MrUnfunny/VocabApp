@@ -3,12 +3,11 @@ import 'dart:developer';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
 import 'package:my_vocab/Presentation/Screens/word-detail/screen.dart';
 import 'package:my_vocab/constants/configs.dart';
 import 'package:my_vocab/providers/home_provider.dart';
 import 'package:my_vocab/services/api/datamuse_api.dart';
+import 'package:provider/provider.dart';
 
 // Search bar used in HomeScreen
 

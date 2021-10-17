@@ -7,9 +7,6 @@ import 'package:flutter_dotenv/flutter_dotenv.dart' as dot_env;
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hive/hive.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:provider/provider.dart';
-
 import 'package:my_vocab/Presentation/Screens/favorites_screen/screen.dart';
 import 'package:my_vocab/Presentation/Screens/history-screen/history_screen.dart';
 import 'package:my_vocab/Presentation/Screens/home-screen/screen.dart';
@@ -24,6 +21,8 @@ import 'package:my_vocab/model/definition.dart';
 import 'package:my_vocab/model/dictionary.dart';
 import 'package:my_vocab/providers/home_provider.dart';
 import 'package:my_vocab/providers/word_detail_provider.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:provider/provider.dart';
 
 import 'services/firestore_data.dart';
 
