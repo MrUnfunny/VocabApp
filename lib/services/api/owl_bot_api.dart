@@ -12,12 +12,12 @@ class _OwlBotApi {
   }
 
   Uri _getUrl(path) {
-    var url = "${env['API_URL']}$path";
+    var url = "${dotenv.env['API_URL']}$path";
     return Uri.parse(url);
   }
 
   Map<String, String> _getHeaders() {
-    final headers = {'Authorization': "Token ${env['API_TOKEN']}"};
+    final headers = {'Authorization': "Token ${dotenv.env['API_TOKEN']}"};
     return headers;
   }
 }

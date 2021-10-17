@@ -110,6 +110,7 @@ class _MainScreenState extends State<MainScreen>
                               ApiRequestStatus.loaded)
                           ? BottomNavigationBar(
                               type: BottomNavigationBarType.fixed,
+                              selectedItemColor: Theme.of(context).primaryColor,
                               currentIndex: _page,
                               onTap: (pageIndex) {
                                 if (pageIndex == 3) {

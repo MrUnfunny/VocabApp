@@ -12,7 +12,7 @@ class _DataMuseApi {
 
   Uri _getUrl({path, Map<String, dynamic> params = const {}}) {
     var url = """
-${env['DATAMUSE_API_URL']}$path?${_paramsToQueryString(params: params)}""";
+${dotenv.env['DATAMUSE_API_URL']}$path?${_paramsToQueryString(params: params)}""";
 
     return Uri.parse(url);
   }

@@ -53,6 +53,15 @@ class Search extends SearchDelegate {
   ThemeData appBarTheme(BuildContext context) {
     return Theme.of(context).copyWith(
       primaryColor: Theme.of(context).primaryColor,
+      appBarTheme: AppBarTheme(
+        color: Theme.of(context).primaryColor,
+      ),
+      inputDecorationTheme: Theme.of(context).inputDecorationTheme.copyWith(
+            focusedBorder: InputBorder.none,
+          ),
+      textSelectionTheme: Theme.of(context).textSelectionTheme.copyWith(
+            cursorColor: Colors.white,
+          ),
       textTheme: super.appBarTheme(context).textTheme.copyWith(
             headline6: super.appBarTheme(context).textTheme.headline6.copyWith(
                   fontWeight: FontWeight.normal,

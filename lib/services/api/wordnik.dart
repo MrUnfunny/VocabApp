@@ -11,7 +11,7 @@ class _WordNikApi {
     Map<String, dynamic> params,
   }) async {
     if (params == null) params = {};
-    params['api_key'] = env['WORDNIK_API_KEY'];
+    params['api_key'] = dotenv.env['WORDNIK_API_KEY'];
     final url = _getUrl(path: word, params: params);
     log('URL is: $url');
     return http.get(
@@ -21,7 +21,7 @@ class _WordNikApi {
 
   Uri _getUrl({path, Map<String, dynamic> params = const {}}) {
     var url = """
-${env['WORDNIK_API_URL']}$path?${_paramsToQueryString(params: params)}""";
+${dotenv.env['WORDNIK_API_URL']}$path?${_paramsToQueryString(params: params)}""";
 
     return Uri.parse(url);
   }
