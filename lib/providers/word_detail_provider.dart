@@ -7,7 +7,7 @@ import 'package:intl/intl.dart';
 import 'package:my_vocab/hive/hive_db.dart';
 import 'package:my_vocab/model/dictionary.dart';
 import 'package:my_vocab/model/enum/api_request_status.dart';
-import 'package:my_vocab/model/functions.dart';
+import 'package:my_vocab/model/functions.dart' as utils;
 import 'package:my_vocab/services/Dictionary/get_meaning.dart';
 import 'package:my_vocab/services/api/datamuse_api.dart';
 import 'package:my_vocab/services/firestore_data.dart';
@@ -41,22 +41,22 @@ class WordDetailProvider extends ChangeNotifier {
         },
       );
 
-      final rhymeJson = jsonDecode(rhymeRes.body) as List<Map<String, String>>;
-      final synJson = jsonDecode(synRes.body) as List<Map<String, String>>;
-      final antJson = jsonDecode(antRes.body) as List<Map<String, String>>;
+      final rhymeJson = jsonDecode(rhymeRes.body);
+      final synJson = jsonDecode(synRes.body);
+      final antJson = jsonDecode(antRes.body);
 
       rhymeList.clear();
       synList.clear();
       antList.clear();
 
       for (var value in rhymeJson) {
-        rhymeList.add(value['word']);
+        rhymeList.add(value['word'] as String);
       }
       for (var value in synJson) {
-        synList.add(value['word']);
+        synList.add(value['word'] as String);
       }
       for (var value in antJson) {
-        antList.add(value['word']);
+        antList.add(value['word'] as String);
       }
 
       wordDetail = wordDetail.copyWith(
@@ -86,7 +86,7 @@ class WordDetailProvider extends ChangeNotifier {
   }
 
   void checkError(Exception e) {
-    if (Functions.checkConnectionError(e)) {
+    if (utils.checkConnectionError(e)) {
       setApiStatus(ApiRequestStatus.connectionError);
     }
     setApiStatus(ApiRequestStatus.error);

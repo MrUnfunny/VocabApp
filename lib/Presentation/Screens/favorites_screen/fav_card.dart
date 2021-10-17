@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
 import 'package:my_vocab/constants/configs.dart';
 import 'package:my_vocab/providers/home_provider.dart';
 import 'package:my_vocab/services/utils.dart';
+import 'package:provider/provider.dart';
 
 class FavCard extends StatelessWidget {
   FavCard({Key key, @required this.word, @required this.date});

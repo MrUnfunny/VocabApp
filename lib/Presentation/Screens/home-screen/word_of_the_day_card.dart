@@ -2,13 +2,12 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:provider/provider.dart';
-
 import 'package:my_vocab/Presentation/Screens/home-screen/word_of_the_day_action_card.dart';
 import 'package:my_vocab/Presentation/Screens/word-detail/screen.dart';
 import 'package:my_vocab/constants/configs.dart';
 import 'package:my_vocab/providers/home_provider.dart';
 import 'package:my_vocab/services/play_audio.dart';
+import 'package:provider/provider.dart';
 
 class WordOfTheDayCard extends StatelessWidget {
   @override

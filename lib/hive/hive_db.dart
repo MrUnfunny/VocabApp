@@ -1,5 +1,5 @@
-import 'package:my_vocab/constants/service_constants.dart';
 import 'package:hive/hive.dart';
+import 'package:my_vocab/constants/service_constants.dart';
 
 class HiveDB {
   static Box<Map> _box;

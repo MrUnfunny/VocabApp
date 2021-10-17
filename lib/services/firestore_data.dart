@@ -66,4 +66,12 @@ class FirestoreInterface {
         .add(wordDetail)
         .then((value) => log('Fav word added'));
   }
+
+  void deleteHistoryWord(String word) {
+    firestoreInstance
+        .collection(FirebaseAuth.instance.currentUser.uid)
+        .doc('words')
+        .collection('historyWords')
+        .where(word);
+  }
 }

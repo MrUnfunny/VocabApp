@@ -1,13 +1,12 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
 import 'package:my_vocab/Presentation/Screens/favorites_screen/screen.dart';
 import 'package:my_vocab/Presentation/Screens/history-screen/history_screen.dart';
 import 'package:my_vocab/Presentation/Screens/home-screen/screen.dart';
 import 'package:my_vocab/Presentation/Screens/settings/settings_screen.dart';
 import 'package:my_vocab/model/enum/api_request_status.dart';
 import 'package:my_vocab/providers/home_provider.dart';
+import 'package:provider/provider.dart';
 
 // This is main screen of the app. It contains all screens in a PageView and
 // uses BottomNavBar to toggle among them

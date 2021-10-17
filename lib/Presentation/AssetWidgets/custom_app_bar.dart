@@ -33,7 +33,6 @@ class CustomAppBar extends StatelessWidget {
           child: CircleAvatar(
             radius: 20.0,
             backgroundImage: Auth().getProfilePhoto(),
-            // backgroundImage: NetworkImage(Auth().getProfilePhoto()),
             backgroundColor: Colors.transparent,
             onBackgroundImageError: (exception, stackTrace) =>
                 log('$exception \n $stackTrace'),

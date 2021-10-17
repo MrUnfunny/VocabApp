@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
 import 'package:my_vocab/constants/configs.dart';
 import 'package:my_vocab/hive/hive_db.dart';
 import 'package:my_vocab/providers/home_provider.dart';
 import 'package:my_vocab/services/utils.dart';
+import 'package:provider/provider.dart';
 
 class HistoryCard extends StatelessWidget {
   HistoryCard({

@@ -23,7 +23,7 @@ ${env['DATAMUSE_API_URL']}$path?${_paramsToQueryString(params: params)}""";
     if (params == null) return prefix;
 
     params.forEach((String key, dynamic value) {
-      var queryKey = prefix.length > 0 ? '$prefix[$key]' : key;
+      var queryKey = prefix.isNotEmpty ? '$prefix[$key]' : key;
       if (value is String || value is num || value is DateTime) {
         segments.add('$queryKey=$value');
       }

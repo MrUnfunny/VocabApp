@@ -2,11 +2,10 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:provider/provider.dart';
-
 import 'package:my_vocab/providers/home_provider.dart';
 import 'package:my_vocab/services/play_audio.dart';
 import 'package:my_vocab/services/utils.dart';
+import 'package:provider/provider.dart';
 
 import '../../constants/configs.dart';
 import 'action_card.dart';

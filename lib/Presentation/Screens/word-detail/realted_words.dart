@@ -55,7 +55,7 @@ class WordCard extends StatelessWidget {
           const SizedBox(
             height: 16.0,
           ),
-          if (wordList.length > 0)
+          if (wordList.isNotEmpty)
             Text(
               wordList,
               style: kMeaningTextStyle,

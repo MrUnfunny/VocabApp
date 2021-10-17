@@ -3,8 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:provider/provider.dart';
-
 import 'package:my_vocab/Presentation/AssetWidgets/custom_app_bar.dart';
 import 'package:my_vocab/Presentation/AssetWidgets/error_widget.dart';
 import 'package:my_vocab/Presentation/AssetWidgets/loading_widget.dart';
@@ -15,6 +13,7 @@ import 'package:my_vocab/Presentation/Screens/home-screen/word_of_the_day_card.d
 import 'package:my_vocab/constants/configs.dart';
 import 'package:my_vocab/model/enum/api_request_status.dart';
 import 'package:my_vocab/providers/home_provider.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   static const id = 'Home_Page';
